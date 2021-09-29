@@ -1,0 +1,233 @@
+{% extends 'progame/layouts/ajuda_base.html' %}
+{% load static %}
+
+{% block css %}
+{% endblock %}
+
+{% block header %}
+<h5 class="subtitulos">
+    Aqui você pode encontrar tudo sobre a usabilidade do sistema.
+    <!-- Bem vindo a central de ajuda do ProGame! -->
+    <br>
+    <!-- Aqui você poderá encontrar todas as informações a respeito da usabilidade da plataforma -->
+</h5>
+{% endblock %}
+
+{% block content %}
+<div class="todos-links">
+    <div class="container">
+
+        <!-- Primeiros passos -->
+        <div>
+            <a href="{% url 'progame:primeiros_passos' %}">
+                <h4 class="titulos">
+                    Primeiros passos
+                </h4>
+            </a>
+            <div class="d-flex flex-column">
+                <a href="{% url 'progame:primeiros_passos' %}#item-1">
+                    Introdução
+                </a>
+
+                <a href="{% url 'progame:primeiros_passos' %}#item-2">
+                    Criar uma conta
+                </a>
+
+                <a href="{% url 'progame:primeiros_passos' %}#item-3">
+                    Escolher tipo de usuário
+                </a>
+
+                <!-- <a href="{% url 'progame:primeiros_passos' %}#item-2">
+                        Cadastro
+                    </a>
+                    <div class="d-flex flex-column">
+                        <a class="sub-link" href="{% url 'progame:primeiros_passos' %}#item-2-1">
+                            Criar uma conta
+                        </a>
+                        <a class="sub-link" href="{% url 'progame:primeiros_passos' %}#item-2-2">
+                            Escolher tipo de usuário
+                        </a>
+                    </div> -->
+
+                <a href="{% url 'progame:primeiros_passos' %}#item-4">
+                    Entrar na minha conta
+                </a>
+
+                <!-- <a href="{% url 'progame:primeiros_passos' %}#item-5">
+                        Esqueci minha senha
+                    </a> -->
+
+                <a href="{% url 'progame:primeiros_passos' %}#item-6">
+                    Ver perfil
+                </a>
+
+                <a href="{% url 'progame:primeiros_passos' %}#item-7">
+                    Editar dados pessoais
+                </a>
+            </div>
+        </div>
+
+        <!-- Turmas e alunos -->
+        <div>
+            <a href="{% url 'progame:turmas_e_alunos' %}">
+                <h4 class="titulos">
+                    Turmas e alunos
+                </h4>
+            </a>
+            <div class="d-flex flex-column">
+                <a href="{% url 'progame:turmas_e_alunos' %}#item-1">
+                    Turmas e Alunos
+                </a>
+                <a href="{% url 'progame:turmas_e_alunos' %}#item-2">
+                    Criar turma (professor)
+                </a>
+                <a href="{% url 'progame:turmas_e_alunos' %}#item-3">
+                    Página da turma
+                </a>
+                <a href="{% url 'progame:turmas_e_alunos' %}#item-4">
+                    Editar informações da turma (professor)
+                </a>
+                <a href="{% url 'progame:turmas_e_alunos' %}#item-5">
+                    Código da turma
+                </a>
+                <a href="{% url 'progame:turmas_e_alunos' %}#item-6">
+                    Adicionar alunos em uma turma (professor)
+                </a>
+                <a href="{% url 'progame:turmas_e_alunos' %}#item-7">
+                    Participar de uma turma (aluno)
+                </a>
+                <a href="{% url 'progame:turmas_e_alunos' %}#item-8">
+                    Adicionar links do Github e Discord à turma (professor)
+                </a>
+            </div>
+        </div>
+
+        <!-- Módulos -->
+        <div>
+            <a href="{% url 'progame:modulos' %}">
+                <h4 class="titulos">
+                    Módulos
+                </h4>
+            </a>
+            <div class="d-flex flex-column">
+                <a href="{% url 'progame:modulos' %}#item-1">
+                    O que são módulos
+                </a>
+                <a href="{% url 'progame:modulos' %}#item-2">
+                    Acessar um módulo
+                </a>
+                <a href="{% url 'progame:modulos' %}#item-3">
+                    Criar um módulo (professor)
+                </a>
+                <a href="{% url 'progame:modulos' %}#item-4">
+                    Página do módulo
+                </a>
+                <a href="{% url 'progame:modulos' %}#item-5">
+                    Níveis do módulo e a taxonomia de bloom
+                </a>
+                <a href="{% url 'progame:modulos' %}#item-6">
+                    Cadastrar links de estudo (professor)
+                </a>
+                <a href="{% url 'progame:modulos' %}#item-7">
+                    Bloquear e desbloquear quiz (professor)
+                </a>
+                <a href="{% url 'progame:modulos' %}#item-8">
+                    Adicionar questões (professor)
+                </a>
+                <a href="{% url 'progame:modulos' %}#item-9">
+                    Importar questões (professor)
+                </a>
+                <a href="{% url 'progame:modulos' %}#item-10">
+                    Editar uma questão (professor)
+                </a>
+            </div>
+        </div>
+
+        <!-- Quizzes, Pontuações e Conquistas -->
+        <div>
+            <a href="{% url 'progame:quizzes' %}">
+                <h4 class="titulos">
+                    Quizzes, Pontuações e Conquistas
+                </h4>
+            </a>
+            <div class="d-flex flex-column">
+                <a href="{% url 'progame:quizzes' %}#item-1">
+                    O que são quizzes
+                </a>
+                <a href="{% url 'progame:quizzes' %}#item-2">
+                    Como responder a um quiz (aluno)
+                </a>
+                <a href="{% url 'progame:quizzes' %}#item-3">
+                    Tela do quiz (aluno)
+                </a>
+                <a href="{% url 'progame:quizzes' %}#item-4">
+                    Como são calculados os pontos
+                </a>
+                <a href="{% url 'progame:quizzes' %}#item-5">
+                    Resultados do quiz
+                </a>
+                <a href="{% url 'progame:quizzes' %}#item-6">
+                    O que são conquistas
+                </a>
+            </div>
+        </div>
+
+        <!-- Rankings -->
+        <div>
+            <a href="{% url 'progame:rankings' %}">
+                <h4 class="titulos">
+                    Rankings
+                </h4>
+            </a>
+            <div class="d-flex flex-column">
+                <a href="{% url 'progame:rankings' %}#item-1">
+                    O que são rankings
+                </a>
+                <a href="{% url 'progame:rankings' %}#item-2">
+                    Ranking da turma
+                </a>
+                <a href="{% url 'progame:rankings' %}#item-3">
+                    Ranking do módulo
+                </a>
+            </div>
+        </div>
+
+        <!-- Estatisticas da turma -->
+        <div>
+            <a href="{% url 'progame:estatisticas' %}">
+                <h4 class="titulos">
+                    Estatisticas da turma (professor)
+                </h4>
+            </a>
+            <div class="d-flex flex-column">
+                <a href="{% url 'progame:estatisticas' %}#item-1">
+                    O que são estatísticas da turma
+                </a>
+                <a href="{% url 'progame:estatisticas' %}#item-2">
+                    Tela de estatísticas da turma
+                </a>
+                <a href="{% url 'progame:estatisticas' %}#item-3">
+                    Tela de listagem de alunos
+                </a>
+                <a href="{% url 'progame:estatisticas' %}#item-4">
+                    Tela de estatísticas do aluno
+                </a>
+                <a href="{% url 'progame:estatisticas' %}#item-5">
+                    Tela de listagem de módulos
+                </a>
+                <a href="{% url 'progame:estatisticas' %}#item-6">
+                    Tela de estatísticas do módulo
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+
+{% block footer %}{% endblock %}
+
+
+{% block scripts %}
+{% endblock %}

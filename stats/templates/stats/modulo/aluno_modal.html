@@ -1,0 +1,143 @@
+<!-- Modal Aluno - Modulo -->
+<div class="modal fade" id="alunoModal" tabindex="-1" role="dialog" aria-labelledby="alunoModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="_spinner" style="display: none">
+                    <div class="spinner-grow text-light" role="status" style="width: 3rem; height: 3rem;">
+                        <span class="sr-only">Carregando informações...</span>
+                    </div>
+                    <p class="text-muted mt-3">Carregando informações...</p>
+                </div>
+
+                <div class="_header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="m-infos">
+                        <h3 class="titulos" id="alunoModalTitle">
+                            Nome do aluno
+                        </h3>
+                        <h5 class="subtitulos">
+                            1500 pontos
+                        </h5>
+                        <h6 class="subtitulos-2">
+                            Nível do aluno no módulo:
+                        </h6>
+                    </div>
+                    <div class="nivel-modulo">
+                        <h1>1</h1>
+                        <span>LEMBRAR</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="m-header">
+                    <div>
+                        <!-- <i class="fas fa-angle-double-right mr-2"></i> -->
+                        <span>Questões com dificuldade (nível em adamento)</span>
+                    </div>
+                    <a href="#" class="text-danger">
+                        <i class="fas fa-file-pdf"></i>
+                    </a>
+                </div>
+
+                <div class="tabela tabela-com-dificuldade">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead class="thead">
+                            <tr>
+                                <th scope="col">Questão</th>
+                                <th scope="col">Nível</th>
+                                <th scope="col">Erros</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">Questão do nível em andamento do aluno?</th>
+                                <td>2</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Questão do nível em andamento do aluno?</th>
+                                <td>2</td>
+                                <td>2</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="m-header">
+                    <div>
+                        <!-- <i class="fas fa-angle-double-right mr-2"></i> -->
+                        <span>Questões em que esteve com difilculdade (níveis concluídos)</span>
+                    </div>
+                    <a href="#" class="text-danger">
+                        <i class="fas fa-file-pdf"></i>
+                    </a>
+                </div>
+
+                <div class="tabela tabela-esteve-com-dificuldade">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead class="thead">
+                            <tr>
+                                <th scope="col">Questão</th>
+                                <th scope="col">Nível</th>
+                                <th scope="col">Erros</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr>
+                                <th scope="row">Questão de níveis concluídos em que o aluno teve dúvida?</th>
+                                <td>1</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Questão de níveis concluídos em que o aluno teve dúvida?</th>
+                                <td>1</td>
+                                <td>2</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="m-header">
+                    <div>
+                        <!-- <i class="fas fa-angle-double-right mr-2"></i> -->
+                        <span>Histórico de tentativas</span>
+                    </div>
+                    <a href="#" class="text-danger">
+                        <i class="fas fa-file-pdf"></i>
+                    </a>
+                </div>
+
+                <div class="tabela tabela-tentativas tabela-tentativas-base" style="display: none">
+                    <div class="t-header">
+                        <span>Quiz nível 1: Lembrar</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead class="thead">
+                            <tr>
+                                <th scope="col">Tentativa</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Acertos</th>
+                                <th scope="col">Erros</th>
+                                <th scope="col">Pontuação</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

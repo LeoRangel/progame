@@ -1,0 +1,167 @@
+
+
+.coluna-nav-pill{
+    /* margin: 10px 0; */
+    /* padding: 15px; */
+    width: 100%;
+    /* max-width: 500px; */
+
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, +50%);
+
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border:  var(--borda-1);
+    border-right: none;
+    border-left: none;
+}    
+.coluna-conteudo-nav-pill{
+    /* margin: 0; */
+    width: 100%;
+    margin-top: 20px;
+}    
+
+
+/* Muda estilo do Bootstrap pills */
+.nav-pills {
+    background-color: white;
+    width: 100%;
+    /* border-radius: var(--borda-raio-padrao); */
+    /* box-shadow: var(--sombra-1); */
+    /* border:  var(--borda-1); */
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0;
+    grid-area: auto;
+    overflow: hidden;
+
+    max-width: 500px;
+}
+.nav-pills .nav-link {
+    width: 100%;
+    color: rgba(0,0,0,0.6);
+    border-radius: 0;
+    /* padding: 20px; */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1em;
+    overflow-x: hidden;
+    /* border-right: var(--borda-1); */
+    font-weight: 500;
+    background-color: white !important;
+}
+
+.nav-pills .nav-link:last-child {
+    /* border-right: none !important; */
+}
+.nav-pills .nav-link:hover {
+    color: rgba(0,0,0,0.8);
+    background-color: rgb(250, 250, 250);
+}
+
+.nav-pills .nav-link.active {
+    /* background-color: white; */
+    /* background-color: var(--cor-primaria); */
+    background-color: white !important;
+    border-bottom: 5px solid;
+    border-color: var(--cor-primaria);
+    /* color: var(--cor-primaria); */
+    color: rgba(0,0,0,0.6);
+    /* color: white; */
+    font-weight: bold;
+    /* border-right: 1px solid rgba(0, 0, 0, 0.062); */
+    /* border-left: none; */
+    /* border-bottom: 2px solid black; */
+}
+.aluno-nivel-0 .nav-pills .nav-link.active {
+    /* background-color: rgba(0, 0, 0, 0.2) !important; */
+    /* background-color: rgba(0, 0, 0, 0.7) !important; */
+    /* background-color: var(--cor-nivel-0) !important; */
+    border-color: var(--cor-nivel-0) !important;
+    /* color: var(--cor-nivel-0) !important; */
+    color: rgba(0, 0, 0, 0.7);
+}
+.aluno-nivel-1 .nav-pills .nav-link.active {
+    /* background-color: var(--cor-nivel-1) !important; */
+    border-color: var(--cor-nivel-1) !important;
+    /* color: var(--cor-nivel-1) !important; */
+}
+.aluno-nivel-2 .nav-pills .nav-link.active {
+    /* background-color: var(--cor-nivel-2) !important; */
+    border-color: var(--cor-nivel-2) !important;
+    /* color: var(--cor-nivel-2) !important; */
+}
+.aluno-nivel-3 .nav-pills .nav-link.active {
+    /* background-color: var(--cor-nivel-3) !important; */
+    border-color: var(--cor-nivel-3) !important;
+    /* color: var(--cor-nivel-3) !important; */
+}
+.aluno-nivel-4 .nav-pills .nav-link.active {
+    /* background-color: var(--cor-nivel-4) !important; */
+    border-color: var(--cor-nivel-4) !important;
+    /* color: var(--cor-nivel-4) !important; */
+}
+.aluno-nivel-5 .nav-pills .nav-link.active {
+    /* background-color: var(--cor-nivel-5) !important; */
+    border-color: var(--cor-nivel-5) !important;
+    /* color: var(--cor-nivel-5) !important; */
+}
+.aluno-nivel-6 .nav-pills .nav-link.active {
+    /* background-color: var(--cor-nivel-6) !important; */
+    border-color: var(--cor-nivel-6) !important;
+    /* color: var(--cor-nivel-6) !important; */
+}
+
+.nav-pills .nav-link i{
+    font-size: 2.3em;
+    margin-bottom: 5px;
+}
+.coluna-conteudo-nav-pill{
+    /* padding: 20px 0; */
+}
+
+
+
+
+@media(max-width: 768px) {
+
+    .oa-opcoes #accordion .btn-link .numero {
+        padding: 18px 30px;
+    }
+
+    /* .nav-pills {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 0;
+        grid-area: auto;
+    }
+    .nav-pills .nav-link {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border-right: 1px solid rgba(0, 0, 0, 0.062);
+        font-size: .8em;
+        overflow-x: hidden;
+    }
+    .nav-pills .nav-link.active {
+        border-right: 1px solid rgba(0, 0, 0, 0.062);
+        border-bottom: 2px solid black;
+    }
+    .nav-pills .nav-link i{
+        font-size: 2.3em;
+        margin-bottom: 5px;
+    }
+    .coluna-conteudo-nav-pill{
+        padding: 20px 0;
+    } */
+}

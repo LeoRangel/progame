@@ -1,0 +1,14 @@
+.home-header {
+    height: 500px;
+    background-color: rgba(29,128,217, 0.8);
+}
+
+.home-header h1,
+.home-header p,
+.home-header span {
+    color: #fff;
+}
+
+.home-header h1 {
+    font-size: 3em;
+}

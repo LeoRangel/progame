@@ -1,0 +1,119 @@
+{% load static %}
+{% load ausers_tags %}
+{% load progame_tags %}
+
+{% if turma|check_professor:request %}
+    {% include 'progame/modulo/modal/modulo_delete_modal.html' with modulo=object %}
+    {% include 'progame/includes/codigo_modal.html' %}
+{% endif %}
+
+<div class="p-top-options">
+    <div>
+        <a href="{% url 'progame:turma_detail_view' turma.uuid %}" class="btn-voltar">
+            <i class="fas fa-arrow-left mr-3"></i>
+            Voltar
+        </a>
+    </div>
+    <div class="botoes">
+        {% if request.user.is_professor %}
+            <a href="{{ object.get_estatisticas_url }}" class="btn btn-sm btn-padrao-2 estats_turma mr-1">
+                <i class="fas fa-chart-bar mr-1"></i>
+                Estatísticas
+            </a>
+            <a class="btn btn-sm btn-padrao-2 editar_turma mr-1"
+            href="{% url 'progame:modulo_update_view' object.uuid %}">
+                <i class="fas fa-pencil-alt mr-1"></i>
+                Editar
+            </a>
+            <button class="btn btn-sm btn-padrao-2" data-toggle="modal" data-target="#modulo-delete-modal">
+                <i class="fas fa-trash-alt mr-1"></i>
+                Remover
+            </button>
+        {% endif %}
+    </div>
+    {% if request.user.is_professor %}
+        <div class="botoes-dropdown dropdown">
+            <div class="opcoes-dropdown" style="cursor: pointer" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-fw ml-1"></i>
+            </div>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                <a href="{{ object.get_estatisticas_url }}" class="dropdown-item" type="button">
+                    <i class="fas fa-chart-bar mr-1"></i>
+                    Estatísticas
+                </a>
+                <a class="dropdown-item" type="button" href="{% url 'progame:modulo_update_view' object.uuid %}">
+                    <i class="fas fa-pencil-alt mr-1"></i>
+                    Editar
+                </a>
+                <button class="dropdown-item" data-toggle="modal" data-target="#modulo-delete-modal">
+                    <i class="fas fa-trash-alt mr-1"></i>
+                    Remover
+                </button>
+            </div>
+        </div>
+    {% endif %}
+</div>
+<div class="header-oa {% if request.user.is_aluno %}aluno-nivel-{{ request.user.aluno|get_nivel_no_modulo:object }}{% endif %}"
+data-nivel-aluno="{% if request.user.is_aluno %}{{ request.user.aluno|get_nivel_no_modulo:object }}{% endif %}" data-uuid="{{ turma.uuid }}" data-uuidmodulo="{{ object.uuid }}" 
+data-usuario="{% if request.user.is_aluno %}aluno{% else %}professor{% endif %}" id="header">
+    <div class="header-oa-infos" {% if request.user.is_professor %}style="margin-bottom: 0 !important;"{% endif %}>
+
+        {% if request.user.is_aluno %}
+            <span class="titulos span-modulo mb-2
+            bg-nivel-{{ request.user.aluno|get_nivel_no_modulo:object }}"
+            >
+                Status: 
+                {% if request.user.aluno|get_nivel_no_modulo:object >= 1 and request.user.aluno|get_nivel_no_modulo:object < 6 %}
+                    em andamento
+                {% elif request.user.aluno|get_nivel_no_modulo:object == 6 %}
+                    concluído
+                {% else %}
+                não iniciado        
+                {% endif %}
+            </span>
+        {% endif %}
+        
+        <h2 class="titulos titulo mb-2">
+            Módulo: {{ object }}
+        </h2>
+        <h5 class="subtitulos descricao">
+            {{ object.descricao|default_if_none:""|striptags|safe|truncatechars:130 }}
+        </h5>
+
+        {% if request.user.aluno|get_nivel_no_modulo:modulo == 6 %}
+            <div class="my-4" data-toggle="tooltip" data-placement="top"
+            title="A nota é calculada com base em todas as suas tentativas nos quizzes">
+                A sua nota final no módulo é: 
+                <span class="badge badge-light" style="font-size: 1.3em">
+                    {{ request.user.aluno|get_nota_no_modulo:modulo }}
+                </span>
+            </div>
+        {% endif %}
+
+    </div>
+    {% if request.user.is_aluno %}
+        <div class="header-oa-nivel" data-toggle="tooltip" data-placement="top"
+        title="Os módulos são divididos em 6 níveis, cada um com um número, um nome e uma cor associada. Chegue ao nível 6 para concluir o módulo.">
+            <div>
+                <span class="nome">
+                    Seu nível
+                </span>
+                <h1 class="numero">
+                    {{ request.user.aluno|get_nivel_no_modulo:object }}/6
+                </h1>
+                <span class="nome">
+                    {{ request.user.aluno|get_nivel_no_modulo:object|get_verbose_nivel|default_if_none:"" }}
+                </span>
+            </div>
+        </div>
+    {% endif %}
+{#    {% if request.user.is_professor %}#}
+{#        <div class="header-oa-estatisticas">#}
+{#            <a href="{{ object.get_estatisticas_url }}"#}
+{#                class="btn btn-lg btn-padrao-2">Estatísticas do módulo</a>#}
+{#        </div>#}
+{#    {% endif %}#}
+
+    {% include 'progame/includes/modulo_actions.html' %}
+</div>

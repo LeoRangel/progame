@@ -1,0 +1,52 @@
+{% extends 'progame/layouts/modulo_base.html' %}
+{% load ausers_tags %}
+
+{% block title %}{{ object }} - {{ object.turma }}{% endblock %}
+
+{% block header %}
+    {% with turma=object.turma %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="oa-opcoes">
+{#        {% include 'progame/includes/modulo_actions.html' %}#}
+        
+        <div class="coluna-conteudo-nav-pill">
+            <div class="informacoes-oa">
+                <!-- {% if object.turma|check_professor:request %}
+                    {% include '_modal.html' %}
+
+                    <div class="d-flex mb-4">
+                        <a href="{% url 'progame:modulo_update_view' object.uuid %}" class="btn btn-sm btn-primary">
+                            <i class="fas fa-pencil-alt mr-1"></i>
+                            Editar
+                        </a>
+                    </div>
+                {% endif %} -->
+                <table class="info-table">
+                    <tbody style="width:100%">
+                        <tr>
+                            <td><strong>Nome:</strong></td>
+                            <td>{{ object.nome }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Descrição:</strong></td>
+                            <td>{{ object.descricao|safe }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Criação:</strong></td>
+                            <td>{{ object.criado_em }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Última atualização:</strong></td>
+                            <td>{{ object.atualizado_em }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

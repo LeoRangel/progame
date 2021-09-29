@@ -1,0 +1,144 @@
+{% extends 'progame/layouts/professor_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'progame/css/distr/steps.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="row" id="validation">
+        <div class="col-12">
+            <div class="card wizard-content">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h4 class="card-title">Quase lá</h4>
+                            <p class="card-subtitle mb-4">
+                                Agora você só precisa criar um módulo para sua turma e adicionar pelo menos uma questão para
+                                ele
+                            </p>
+                        </div>
+
+                        <div class="col-md-2 text-right">
+                            <a id="pular" class="btn btn-link btn-light"
+                               href="{% url 'progame:pular_cadastro_modulo' turma.uuid %}">
+                                Pular
+                            </a>
+                        </div>
+                    </div>
+                    <form data-turma="{{ turma.uuid }}" action="#" method="post" class="validation-wizard wizard-circle"
+                           id="form-finalizar-cadastro-turma">
+                        {% csrf_token %}
+                        <!-- Step 1 -->
+                        <h6>Criar módulo</h6>
+                        <section>
+                            {{ form.nome_modulo|as_crispy_field }}
+                            {{ form.descricao_modulo|as_crispy_field }}
+                        </section>
+                        <!-- Step 2 -->
+                        <h6>Adicionar questão</h6>
+                        <section>
+                            <label>
+                                Nível da questão *
+                                <i class="fas fa-question-circle ml-1" data-toggle="tooltip" data-placement="top"
+                                   title="Selecione o nível da questão de acordo com os níveis da Taxonomia Revisada de
+                                   Bloom"></i>
+                            </label>
+                            <div class="row text-center mb-3">
+                                <div class="col-sm-4 col-md-2 mb-2 mb-md-0">
+                                    <div class="nivel-radio-container n-1">
+                                        <input checked="checked" id="n-1" value="1" class="required nivel-radio" name="nivel"
+                                               type="radio">
+                                        <label for="n-1">1. Lembrar</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2 mb-2 mb-md-0">
+                                    <div class="nivel-radio-container n-2">
+                                        <input id="n-2" value="2" class="nivel-radio" name="nivel" type="radio">
+                                        <label for="n-2">2. Entender</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2 mb-2 mb-md-0">
+                                    <div class="nivel-radio-container n-3">
+                                        <input id="n-3" value="3" class="nivel-radio" name="nivel" type="radio">
+                                        <label for="n-3">3. Aplicar</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2 mb-2 mb-md-0">
+                                    <div class="nivel-radio-container n-4">
+                                        <input id="n-4" value="4" class="nivel-radio" name="nivel" type="radio">
+                                        <label for="n-4">4. Analisar</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2 mb-2 mb-md-0">
+                                    <div class="nivel-radio-container n-5">
+                                        <input id="n-5" value="5" class="nivel-radio" name="nivel" type="radio">
+                                        <label for="n-5">5. Avaliar</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-2 mb-2 mb-md-0">
+                                    <div class="nivel-radio-container n-6">
+                                        <input id="n-6" value="6" class="nivel-radio" name="nivel" type="radio">
+                                        <label for="n-6">6. Criar</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{ form.sentenca_questao|as_crispy_field }}
+                            {{ form.descricao_questao|as_crispy_field }}
+
+                            <div class="form-group mb-4">
+                                <label for="alternativa">Alternativas <span class="danger">*</span></label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="alternativa" name="alternativa">
+                                    <div class="input-group-append">
+                                        <a href="#" title="Adicionar" class="btn btn-block btn-primary"
+                                                id="add_alternativa"><i
+                                                class="fas
+                                        fa-plus"></i></a>
+                                    </div>
+                                </div>
+                                <div class="text-danger invalid-alternativa"></div>
+                            </div>
+
+                            <div>
+                                <table class="tabela-alternativas">
+                                    <tbody id="alternativas">
+                                        <tr class="alternativa incorreta" style="display: none">
+                                            <td><span class="identificador">a)</span></td>
+                                            <td class="px-3">
+                                                <span style="cursor: pointer" data-toggle="tooltip"
+                                                      data-placement="top" title="Marcar como correta" class="nome
+                                                      badge badge-secondary">
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span style="cursor: pointer" data-toggle="tooltip"
+                                                      data-placement="top" title="Excluir" class="excluir badge
+                                                      badge-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'progame/js/distr/jquery.steps.min.js' %}"></script>
+    <script src="{% static 'progame/js/distr/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'progame/js/distr/steps.js' %}"></script>
+    <script src="{% static 'progame/js/cadastro_questao.js' %}"></script>
+    <script src="{% static 'progame/js/ajax/csrf_ajax_config.js' %}"></script>
+    <script src="{% static 'progame/js/ajax/finalizar_cadastro_turma_ajax.js' %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% endblock %}

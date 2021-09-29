@@ -1,0 +1,42 @@
+body, input, select {
+    font-size: .95em !important;
+}
+
+table {
+    margin-bottom: 0 !important;
+}
+
+table td,
+table th {
+    padding: 1.2rem .75rem !important;
+    font-size: .95em !important;
+}
+
+table th {
+    border: none !important;
+}
+
+table td {
+    border: none !important;
+}
+
+table tbody tr:not(.none) {
+    cursor: pointer;
+    transition: background-color ease-in .15s;
+}
+
+table tbody tr:not(.none):hover {
+    /*background-color: rgba(0,0,0,0.03);*/
+    background-color: #f2f8ff;
+}
+
+table tbody tr:not(.none).selected {
+    /*background-color: rgba(0,0,0,0.05);*/
+    background-color: #ebf3ff;
+}
+
+img.round {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}

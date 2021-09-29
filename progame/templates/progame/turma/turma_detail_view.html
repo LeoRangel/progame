@@ -1,0 +1,463 @@
+{% extends 'progame/layouts/turma_base.html' %}
+{% load static %}
+{% load ausers_tags %}
+{% load progame_tags %}
+
+{% block title %}{{ object }}{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'progame/css/cards.css' %}">
+{% endblock %}
+
+{% block header %}
+    {% with turma=object %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock %}
+
+
+{% block content %}
+    {% if object|check_professor:request %}
+        {% include '_modal.html' %}
+    {% endif %}
+
+    <div class="conteudo">
+        <div class="conteudo-layout-esquerdo">
+            <div class="secao-top mb-3">
+                <h4 class="titulos">
+                    Módulos
+                    <small class="text-muted">( {{ turma.modulos.count }} )</small>
+                </h4>
+            </div>
+            
+            <div class="oas-cards">
+                
+                {% for modulo in object.modulos.all %}
+                    {% if request.user.is_professor %}
+                        <a href="{% url 'progame:questao_list_view' modulo.uuid %}" class="oa borda-nivel-0">
+                            <h6 class="oa-titulo">
+                                {{ modulo.nome }}
+                            </h6>
+                            <span class="subtitulos oa-descricao d-inline-block text-truncate" style="max-width: 250px;"
+                                  title="{{ modulo.descricao|striptags|safe }}">
+                                {{ modulo.descricao|striptags|safe|truncatechars:130 }}
+                            </span>
+                            {% if modulo.lider %}
+                                <div class="oa-lider">
+                                {% if modulo.lider.aluno.imagem %}
+                                    <img src="{{ modulo.lider.aluno.imagem.url }}" data-toggle="tooltip"
+                                         data-placement="top" title="Líder do ranking do módulo: {{ modulo.lider.aluno }}" alt="Líder do módulo">
+                                {% else %}
+                                    <img src="{% static 'progame/img/user.png' %}" data-toggle="tooltip"
+                                         data-placement="top" title="Líder do ranking do módulo: {{ modulo.lider.aluno }}" alt="Líder do módulo">
+                                {% endif %}
+                                    <div class="trofeu">
+                                        <img src="{% static 'progame/img/ranking/medalha1.png' %}" alt="trofeu">
+                                    </div>
+                                </div>
+                            {% endif %}
+{#                            {% if modulo.is_new %}#}
+{#                                <div class="position-absolute" style="bottom:20px;right:20px;">#}
+{#                                    <span class="badge badge-danger">Novo</span>#}
+{#                                </div>#}
+{#                            {% endif %}#}
+                        </a>
+                    {% elif request.user.is_aluno %}
+                        <a href="{% url 'progame:aluno_modulo_detail_view' modulo.uuid %}"
+                           class="oa borda-nivel-{{ request.user.aluno|get_nivel_no_modulo:modulo }}">
+                            <div class="oa-nivel bg-nivel-{{ request.user.aluno|get_nivel_no_modulo:modulo }}"
+                                 data-toggle="tooltip" data-placement="top" title="Seu nível no módulo">
+                                <span>{{ request.user.aluno|get_nivel_no_modulo:modulo }}</span>
+                            </div>
+                            <h6 class="oa-titulo">
+                                {{ modulo.nome }}
+                            </h6>
+                            <span class="oa-descricao d-inline-block text-truncate" style="max-width: 250px;"
+                                  title="{{ modulo.descricao|striptags|safe }}">
+                                {{ modulo.descricao|striptags|safe|truncatechars:130 }}
+                            </span>
+                            {% if modulo.lider %}
+                                <div class="oa-lider">
+                                {% if modulo.lider.aluno.imagem %}
+                                    <img src="{{ modulo.lider.aluno.imagem.url }}" data-toggle="tooltip"
+                                         data-placement="top" alt="Líder do módulo"
+                                         title="
+                                         {% if modulo.lider.aluno == request.user.aluno %}
+                                             Líder do ranking do módulo: Você
+                                         {% else %}
+                                             Líder do ranking do módulo: {{ modulo.lider.aluno }}
+                                         {% endif %}">
+                                {% else %}
+                                    <img src="{% static 'progame/img/user.png' %}" data-toggle="tooltip"
+                                         data-placement="top" alt="Líder do módulo"
+                                         title="
+                                         {% if modulo.lider.aluno == request.user.aluno %}
+                                             Líder do ranking do módulo: Você
+                                         {% else %}
+                                             Líder do ranking do módulo: {{ modulo.lider.aluno }}
+                                         {% endif %}">
+                                {% endif %}
+                                    <div class="trofeu">
+                                        <img src="{% static 'progame/img/ranking/medalha1.png' %}" alt="trofeu">
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if request.user.aluno|get_nivel_no_modulo:modulo == 6 %}
+                                <div class="position-absolute" style="bottom:20px;right:20px;" data-toggle="tooltip" data-placement="top"
+                                     title="Sua nota no módulo">
+                                    <span class="badge badge-light" style="font-size: 1em">
+                                        {{ request.user.aluno|get_nota_no_modulo:modulo }}
+                                    </span>
+                                </div>
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if request.user.is_professor %}
+                    <div class="oa adicionar-modulo">
+                        <i class="fas fa-plus fa-fw fa-lg mb-3"></i>
+                        Adicionar módulo
+                    </div>
+                {% endif %}
+                
+            </div>
+        </div>
+
+        <div class="conteudo-layout-direito">
+            <div class="secao-top mb-3">
+                <h4 class="titulos">
+                    Ranking da turma
+                    <small class="text-muted">( {{ object.ranking|length }} )</small>
+                </h4>
+                <i class="fas fa-question-circle ml-1" data-toggle="tooltip" data-placement="top"
+                   title="O ranking geral da turma considera a pontuação total que os alunos fizeram em todos os módulos da turma somados."></i>
+            </div>
+            
+            <div class="ranking" id="ranking">
+                {% if object.ranking %}
+                <!-- Top 3 destacado -->
+                <div class="ranking-top">
+                    {% for item in object.ranking|slice:":3" %}
+                        {% if forloop.first %}
+                            <a href="{% url 'progame:aluno_perfil' item.aluno.uuid %}" class="usuario primeiro-lugar order-2
+                                {% if item.aluno == request.user.aluno %}
+                                    voce
+                                {% endif %}">
+                                <div class="ranking-imagem">
+                                    {% if item.aluno.imagem %}
+                                        <img src="{{ item.aluno.imagem.url }}" alt="foto do usuário">
+                                    {% else %}
+                                        <img src="{% static 'progame/img/user.png' %}" alt="foto do usuário">
+                                    {% endif %}
+                                </div>
+                                <span class="ranking-nome d-inline-block text-truncate">
+                                    {% if item.aluno == request.user.aluno %}
+                                        Você
+                                    {% else %}
+                                        {{ item.aluno.user.first_name|default:item.aluno }}
+                                    {% endif %}
+                                </span>
+                                <span class="ranking-pontos">
+                                    {{ item.pontos }}pts
+                                </span>
+
+                                <div class="trofeu">
+                                    <img src="{% static 'progame/img/ranking/trofeu1.png' %}" alt="trofeu">
+                                </div>
+                            </a>
+                        {% elif forloop.counter == 2 %}
+                            <a href="{% url 'progame:aluno_perfil' item.aluno.uuid %}" class="usuario segundo-lugar order-1
+                                {% if item.aluno == request.user.aluno %}
+                                    voce
+                                {% endif %}">
+                                <div class="ranking-imagem">
+                                    {% if item.aluno.imagem %}
+                                        <img src="{{ item.aluno.imagem.url }}" alt="foto do usuário">
+                                    {% else %}
+                                        <img src="{% static 'progame/img/user.png' %}" alt="foto do usuário">
+                                    {% endif %}
+                                </div>
+                                <span class="ranking-nome d-inline-block text-truncate">
+                                    {% if item.aluno == request.user.aluno %}
+                                        Você
+                                    {% else %}
+                                        {{ item.aluno.user.first_name|default:item.aluno }}
+                                    {% endif %}
+                                </span>
+                                <span class="ranking-pontos">
+                                    {{ item.pontos }}pts
+                                </span>
+
+                                <div class="trofeu">
+                                    <img src="{% static 'progame/img/ranking/trofeu2.png' %}" alt="trofeu">
+                                </div>
+                            </a>
+                        {% elif forloop.counter == 3 %}
+                            <a href="{% url 'progame:aluno_perfil' item.aluno.uuid %}" class="usuario terceiro-lugar order-3
+                                {% if item.aluno == request.user.aluno %}
+                                    voce
+                                {% endif %}">
+                                <div class="ranking-imagem">
+                                    {% if item.aluno.imagem %}
+                                        <img src="{{ item.aluno.imagem.url }}" alt="foto do usuário">
+                                    {% else %}
+                                        <img src="{% static 'progame/img/user.png' %}" alt="foto do usuário">
+                                    {% endif %}
+                                </div>
+                                <span class="ranking-nome d-inline-block text-truncate">
+                                    {% if item.aluno == request.user.aluno %}
+                                        Você
+                                    {% else %}
+                                        {{ item.aluno.user.first_name|default:item.aluno }}
+                                    {% endif %}
+                                </span>
+                                <span class="ranking-pontos">
+                                    {{ item.pontos }}pts
+                                </span>
+
+                                <div class="trofeu">
+                                    <img src="{% static 'progame/img/ranking/trofeu3.png' %}" alt="trofeu">
+                                </div>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <!-- Fim Top 3 destacado -->
+
+                <!-- 4 -->
+                {% if object.ranking|length > 3 %}
+                    <ul class="ranking-lista">
+                        {% for item in object.ranking %}
+                            {% if forloop.counter > 3 %}
+                            <a href="{% url 'progame:aluno_perfil' item.aluno.uuid %}" class="ranking-usuario
+                                {% if item.aluno == request.user.aluno %}
+                                    voce
+                                {% endif %}">
+                                <div class="ranking-direita">
+                                    <span class="ranking-posicao">
+                                        {{ forloop.counter }}.
+                                    </span>
+                                    <div class="ranking-imagem">
+                                        {% if item.aluno.imagem %}
+                                            <img class="ranking-imagem" src="{{ item.aluno.imagem.url }}"
+                                                 alt="foto do usuário">
+                                        {% else %}
+                                            <img class="ranking-imagem" src="{% static 'progame/img/user.png' %}"
+                                                 alt="foto do usuário">
+                                        {% endif %}
+                                    </div>
+                                    <span class="ranking-nome d-inline-block text-truncate">
+                                        {% if item.aluno == request.user.aluno %}
+                                            Você
+                                        {% else %}
+                                            {{ item.aluno.user.first_name|default:item.aluno }}
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <span class="ranking-pontos">
+                                    {{ item.pontos }}pts
+                                </span>
+                            </a>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% else %}
+                    <div class="sem-ranking">
+                        <img alt="sem ranking" src="{% static 'progame/img/ilust/ranking-cinza.png' %}">
+
+                        <span class="">
+                            O ranking da turma é ativado quando algum aluno inicia um módulo.
+                        </span>
+                    </div>
+                {% endif %}
+                
+            </div>
+
+            {% if links_de_ajuda and request.user.is_aluno %}
+                <div class="secao-top mb-3">
+                    <h4 class="titulos">
+                        Avisos
+                    </h4>
+                    <i class="fas fa-question-circle ml-1" data-toggle="tooltip" data-placement="top"
+                    title="Veja avisos recentes relacionados a turma."></i>
+                </div>
+
+                <div class="novidades-turma" id="novidades-turma">
+                    {% for link in links_de_ajuda %}
+                        <a href="{% url 'progame:aluno_modulo_detail_view' link.quiz.modulo.uuid %}" class="novidade">
+                            <span class="my-auto">
+                                O professor cadastrou um novo link de estudo no <strong>nível {{ link.quiz.nivel }}</strong>
+                                do módulo <strong>{{ link.quiz.modulo }}</strong>
+                            </span>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+
+            <div class="secao-top mt-5 mb-3">
+                <h4 class="titulos">
+                    Novidades
+                    <small class="text-muted">( {{ turma.conquistas.count }} )</small>
+                </h4>
+                <i class="fas fa-question-circle ml-1" data-toggle="tooltip" data-placement="top"
+                title="Veja as últimas novidades da turma."></i>
+            </div>
+            
+            <div class="novidades-turma" id="novidades-turma">
+                {% if object.conquistas.all %}
+                    {% for conquista in object.conquistas.all reversed %}
+                        <a href="{% url 'progame:aluno_perfil' conquista.aluno.uuid %}" class="novidade">
+                            <span class="my-auto">
+                                <strong class="" style="">
+                                    {{ conquista.aluno }}
+                                </strong>
+                                desbloqueou a conquista
+                                <strong>
+                                    "{{ conquista.item_conquista.nome }}"
+                                </strong>
+                            </span>
+                            {% with path='progame/img/badges/'|add:conquista.item_conquista.slug|add:".png" %}
+                                <img src="{% static path %}" alt="{{ conquista.item_conquista.slug }}">
+                            {% endwith %}
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <div class="sem-novidades">
+                        <img alt="sem novidades" src="{% static 'progame/img/ilust/news-cinza.png' %}">
+
+                        <span>
+                            Não há nenhuma novidade no momento.
+                        </span>
+                    </div>
+                {% endif %}
+            </div>
+            
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script>
+        $('.adicionar-modulo').modalForm({
+            formURL: "{% url 'progame:modulo_create_view' object.uuid %}",
+            modalID: "#modal",
+            modalContent: ".modal-form-content"
+        })
+
+        $("#modal").delegate('textarea#id_descricao', 'keyup', function(){
+          $("#hint_id_descricao").text((130 - $(this).val().length) + ' restantes');
+        });
+
+        if($(window).width() > 768){
+            var barra_navegacao = '.turma-areas';
+        } else {
+            var barra_navegacao = '.navbar-base';
+        }
+        
+        // Tour pela página
+        if($('.header-turma').data('usuario') == 'aluno'){
+            var passos = {
+                steps: [
+                    {
+                        element: '.navbar-turma',
+                        title: 'Barra de navegação da turma',
+                        content: 'Você está em uma página de turma, por isso a sua barra de navegação está um pouco diferente agora. Veja as próximas dicas para aprender mais sobre as turmas.'
+                    },
+                    {
+                        element: barra_navegacao,
+                        title: 'Telas da turma',
+                        content: 'Use estas opções para navegar entre as telas da turma. Atualmente você está na página Mural, por isso a opção com o mesmo nome está destacada.',
+                        path: '/turma/' + $('.header-turma').data('uuid') + '/',
+                    },
+                    {
+                        element: '.header-turma',
+                        title: 'Cabeçalho da turma',
+                        content: 'No cabeçalho do Mural da turma você pode encontrar algumas informações realacionadas a turma, como nome, sala, quantidade de alunos e módulos, entre outras.'
+                    },
+                    {
+                        element: '.oas-cards',
+                        title: 'Módulos de estudo',
+                        content: 'Aqui são mostrados todos os módulos de estudo cadastrados na turma pelo professor. Algumas informações sobre os módulos listados são mostradas nos cartões, como nome e descrição do módulo, líder do ranking do módulo, o seu nível atual, entre outras. A página de um módulo pode ser acessada clicando sobre o cartão desse módulo.'
+                    },
+                    {
+                        element: '#ranking',
+                        title: 'Ranking da Turma',
+                        content: 'Aqui você pode acompanhar o ranking da turma, que classifica os alunos de acordo com os pontos totais obtidos na turma, ou seja, os pontos obtidos em todos os módulos feitos.'
+                    },
+                    {
+                        element: '#novidades-turma',
+                        title: 'Novidades da turma',
+                        content: 'Nesta seção você pode ver as últimas notícias da turma, como conquistas recentemente desbloqueadas pelos alunos.'
+                    },
+                    {
+                        element: '.sair-turma',
+                        title: 'Saír da turma',
+                        content: 'Clique nesta opção se desejar sair da turma e voltar para a página de listagem de turmas.'
+                    },
+
+                ]
+            };
+            site_tour(passos, 'turma_aluno_tour');
+        } else {
+            var passos = {
+                steps: [
+                    {
+                        element: '.navbar-turma',
+                        title: 'Barra de navegação da turma',
+                        content: 'Você está em uma página de turma, por isso a sua barra de navegação está um pouco diferente agora. Veja as próximas dicas para aprender mais sobre as turmas.'
+                    },
+                    {
+                        element: barra_navegacao,
+                        title: 'Telas da turma',
+                        content: 'Use estas opções para navegar entre as telas da turma. Atualmente você está na página Mural, por isso a opção com o mesmo nome está destacada.',
+                        path: '/turma/' + $('.header-turma').data('uuid') + '/',
+                    },
+                    {
+                        element: '.header-turma',
+                        title: 'Cabeçalho da turma',
+                        content: 'No cabeçalho do Mural da turma você pode encontrar algumas informações realacionadas a turma, como nome, sala, quantidade de alunos e módulos, entre outras.'
+                    },
+                    {
+                        element: '.codigo-container',
+                        title: 'Código da turma',
+                        content: 'Cada turma criada tem um código gerado automaticamente. Copie o código e envie para os seus alunos para que eles possam entrar na turma.'
+                    },
+                    {
+                        element: '.oas-cards',
+                        title: 'Módulos de estudo',
+                        content: 'Aqui são mostrados todos os módulos de estudo que você cadastrou na turma. Algumas informações sobre os módulos listados são mostradas nos cartões, como nome e descrição do módulo, líder do ranking do módulo, entre outras. A página de um módulo pode ser acessada clicando sobre o cartão desse módulo.'
+                    },
+                    {
+                        element: '.adicionar-modulo',
+                        title: 'Adicionar módulo',
+                        content: 'Clique nesta opção quando desejar adicionar um novo módulo para os alunos responderem.'
+                    },
+                    {
+                        element: '#ranking',
+                        title: 'Ranking da Turma',
+                        content: 'Aqui você pode acompanhar o ranking da turma, que classifica os alunos de acordo com os pontos totais obtidos na turma, ou seja, os pontos obtidos em todos os módulos feitos.'
+                    },
+                    {
+                        element: '#novidades-turma',
+                        title: 'Novidades da turma',
+                        content: 'Nesta seção você pode ver as últimas notícias da turma, como conquistas recentemente desbloqueadas pelos alunos.'
+                    },
+                    {
+                        element: '.sair-turma',
+                        title: 'Saír da turma',
+                        content: 'Clique nesta opção se desejar sair da turma e voltar para a página de listagem de turmas.'
+                    },
+
+                ]
+            };
+            site_tour(passos, 'turma_professor_tour');
+        }
+        // Fim do Tour pela página
+    
+    </script>
+{% endblock %}

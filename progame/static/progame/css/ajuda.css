@@ -1,0 +1,151 @@
+
+
+.ajuda-header{
+    /* padding: 25px; */
+    min-height: 250px;
+    background-color: var(--cor-primaria);
+    margin-bottom: 50px;
+}
+.ajuda-header .row{
+    width: 100%;
+    min-height: 250px;
+    margin: 0;
+    padding: 0;
+}
+.ajuda-header .row > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.ajuda-header .row > div:last-child{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.ajuda-header img{
+    margin-top: 20px;
+    width: 70%;
+    height: auto;
+}
+.ajuda-header .titulos{
+    color: white !important;
+}
+.ajuda-header .subtitulos{
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.conteudo-ajuda{
+    padding: 20px 0 100px 0;
+}
+.conteudo-ajuda .secao{
+    margin-top: 100px;
+}
+.conteudo-ajuda .secao:first-child{
+    margin-top: 0;
+}
+.conteudo-ajuda .sub-secao{
+    margin-bottom: 100px;
+}
+.conteudo-ajuda .secao > a,
+.conteudo-ajuda .sub-secao > a{
+    text-decoration: none;
+}
+.conteudo-ajuda .secao > a:hover,
+.conteudo-ajuda .sub-secao > a:hover{
+    text-decoration: none;
+}
+.conteudo-ajuda .secao hr,
+.conteudo-ajuda .sub-secao .titulos{
+    margin-bottom: 40px;
+}
+.conteudo-ajuda .secao .titulos .hashtag,
+.conteudo-ajuda .sub-secao .titulos .hashtag{
+    font-weight: normal !important;
+    color: var(--cor-primaria);
+    display: none;
+}
+.conteudo-ajuda .secao > a:hover .titulos .hashtag,
+.conteudo-ajuda .sub-secao > a:hover .titulos .hashtag{
+    display: initial;
+}
+
+
+
+/* Navbar */
+#navbar-ajuda {
+    border-left: var(--borda-1) !important;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    top: 50px;
+}
+#navbar-ajuda .nav-link{
+    color: var(--cinza-4);
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 0px !important;
+}
+#navbar-ajuda .sub-link,
+.todos-links .sub-link{
+    margin-left: 20px;
+}
+#navbar-ajuda .nav-link.active{
+    background-color: transparent !important;
+    color: var(--cor-primaria) !important;
+}
+#navbar-ajuda .nav-link.active:not(.sub-link) {
+    border-left: 3px solid var(--cor-primaria) !important;
+}
+#navbar-ajuda .nav-link:focus,
+#navbar-ajuda .nav-link:hover {
+    color: var(--cor-primaria) !important;
+}
+
+
+/* Página index de ajuda */
+.todos-links {
+    margin-bottom: 50px;
+}
+.todos-links .container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 50px 100px;
+}
+.todos-links .titulos{
+    margin-bottom: 30px;
+}
+.todos-links a{
+    margin-bottom: 15px;
+}
+
+
+/* Paginas proxima e anterior */
+.ajuda-prox-ant{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 50px;
+}
+
+
+@media(max-width: 1200px) {
+    .todos-links .container{
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media(max-width: 768px) {
+    .ajuda-header img{
+        padding-top: 0;
+    }
+    .todos-links .container{
+        grid-template-columns: repeat(1, 1fr) !important;
+    }
+    #navbar-ajuda {
+        border-left: none !important;
+        border-bottom: var(--borda-1) !important;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+    }
+}
+

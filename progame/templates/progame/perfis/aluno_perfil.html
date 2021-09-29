@@ -1,0 +1,62 @@
+{% extends 'progame/layouts/profile_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Perfil de {{ object }} - ProGame{% endblock %}
+
+
+{% block content %}
+
+    <div class="badges-usuario">
+        <h4 class="titulos mb-3">
+            Conquistas
+            {% if conquistas %}
+                <small class="text-muted">( {{ object.conquistas.count }} )</small>
+            {% endif %}
+        </h4>
+
+        {% if conquistas %}
+            <div class="cards">
+                {% for conquista in conquistas %}
+                    <div class="conquista">
+                        <img src="{{ conquista.imagem }}" alt="">
+                        <h6 class="nome">{{ conquista.nome }}</h6>
+                        <label class="desc">{{ conquista.descricao }}</label>
+                        {% if conquista.quantidade > 1 %}
+                            <span title="O aluno já ganhou essa conquista {{ conquista.quantidade }} vezes" class="qtd-conquista badge badge-primary">
+                                x{{ conquista.quantidade }}
+                            </span>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="sem-badges">
+                <img src="{% static 'progame/img/ilust/premio-cinza.png' %}" alt="">
+
+                <h6 class="">
+                    Nenhuma conquista desbloqueada ainda.
+                </h6>
+            </div>
+        {% endif %}
+
+{#        <h4 class="titulos">#}
+{#            Troféus ganhos#}
+{#            <small class="text-muted">2 no total</small>#}
+{#        </h4>#}
+{#        <hr>#}
+{#        <div class="cards">#}
+{#            <div class="trofeu">#}
+{#                <i style="color: gold;" class="fas fa-trophy fa-fw"></i>#}
+{#                <h6 class="nome">1º Lugar</h6>#}
+{#                <label class="desc">Módulo: introdução a algorítimos</label>#}
+{#            </div>#}
+{#            <div class="trofeu">#}
+{#                <i style="color: silver;" class="fas fa-medal fa-fw"></i>#}
+{#                <h6 class="nome">2º Lugar</h6>#}
+{#                <label class="desc">Módulo: imput</label>#}
+{#            </div>#}
+{#        </div>#}
+    </div>
+
+{% endblock %}

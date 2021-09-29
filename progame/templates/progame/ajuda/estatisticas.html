@@ -1,0 +1,314 @@
+{% extends 'progame/layouts/ajuda_base.html' %}
+{% load static %}
+
+{% block css %}
+{% endblock %}
+
+{% block header %}
+    <h4 class="subtitulos">Estatisticas da turma (professor)</h4>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row flex-wrap-reverse">
+
+            <div class="col-md-9">
+                <div class="conteudo-ajuda" data-spy="scroll" data-target="#navbar-ajuda">
+                    
+                    <!-- Estatísticas da turma -->
+                    <div class="secao">
+                        <a href="#item-1">
+                            <h3 class="titulos" id="item-1">
+                                O que são estatísticas da turma
+                                <span class="hashtag">#</span>
+                            </h3>
+                            <hr>
+                        </a>
+                        <div>
+                            <p>
+                                As estatísticas da turma são todas as informações sobre o desempenho dos alunos nos módulos e na turma, que são utilizadas pelo professor para avaliar e ajudar a melhorar o desempenho dos alunos.
+                            </p>
+                            <p>
+                                Para isso, existe uma área da turma totalmente dedicada as estatísticas e que pode ser acessada apenas pelo professor clicando na opção <strong>Estatísticas</strong> localizada na barra de navegação da turma.
+                            </p>
+                            <p>
+                                Nas telas de estatísticas da turma existe um menu vertical de navegação, localizado no lado esquerdo da tela, por onde o professor pode navegar entre as telas de estatísticas relacionadas a: <strong>Alunos</strong> ou <strong>Módulos</strong>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Tela de estatísticas da turma -->
+                    <!-- <div class="secao">
+                        <a href="#item-2">
+                            <h3 class="titulos" id="item-2">
+                                Tela de estatísticas da turma
+                                <span class="hashtag">#</span>
+                            </h3>
+                            <hr>
+                        </a>
+                        <div>
+                            Em breve...
+                        </div>
+                    </div> -->
+
+                    <!-- Tela de listagem de alunos -->
+                    <div class="secao">
+                        <a href="#item-3">
+                            <h3 class="titulos" id="item-3">
+                                Tela de listagem de alunos
+                                <span class="hashtag">#</span>
+                            </h3>
+                            <hr>
+                        </a>
+                        <div>
+                            <p>
+                                Ao clicar na opção <strong>Alunos</strong> do menu de navegação vertical da página de estatísticas da turma, o professor verá a tela de listagem de alunos da turma. Nessa tela, o professor encontrará uma lista de todos os alunos que participam da turma exibidos em cartões com a foto de perfil, o  nome do aluno, a sua pontuação e as seguintes informações básicas sobre as suas atividades na turma:
+                            </p>
+
+                            <br>
+                            <p>
+                                <i class="text-success fas fa-check-circle fa-lg"></i> -
+                                Número de módulos finalizados (nível 6) pelo aluno
+                            </p>
+                            <p>
+                                <i class="text-warning fas fa-clock fa-lg"></i> -
+                                Número de módulos em andamento (entre os níveis 0 e 6) pelo aluno
+                            </p>
+                            <p>
+                                <i class="text-danger fas fa-exclamation-circle fa-lg"></i> -
+                                Número de módulos não iniciados (nível 0) pelo aluno
+                            </p>
+                            <br>
+                            
+                            <p>
+                                Além disso, o professor também poderá identificar nessa tela os alunos que estão precisando de ajuda em algum módulo, por meio da exibição do ícone 
+                                <i style="color: var(--cor-primaria);" class="mx-2 fas fa-exclamation"></i>
+                                ao lado de suas fotos de perfil.
+                            </p>
+                            <p>
+                                Para ver mais estatísticas de um aluno na turma, basta clicar no cartão deste aluno na tela e será aberta a
+                                <a href="#item-4">tela de estatísticas do aluno</a>,
+                                onde serão encontradas todas as informações a respeito das atividades desse aluno na turma.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Estatísticas do aluno -->
+                    <div class="secao">
+                        <a href="#item-4">
+                            <h3 class="titulos" id="item-4">
+                                Tela de estatísticas do aluno
+                                <span class="hashtag">#</span>
+                            </h3>
+                            <hr>
+                        </a>
+                        <div>
+                            <p>
+                                Na tela de estatísticas do aluno, o professor deve encontrar todas as informações e históricos dos alunos nos módulos da turma e em cada um dos seus níveis. Essas informações são coletadas a partir das atividades realizadas pelo aluno na turma e são fundamentais para que o professor possa avalia-lo e ajudá-lo a melhorar o seu desempenho, conseguindo identificar os módulos, níveis e questões que o aluno apresenta mais dificuldade.
+                            </p>
+
+                            <p>
+                                Na parte superior da tela, o professor verá alguns dados do aluno, como foto de perfil, nome e pontuação na turma e o seu status de forma geral na turma, como o quão rápido ele costuma responder às questões dos módulos e o percentual de acerto nas questões respondidas.
+                            </p>
+                            
+                            <p>
+                                Para ver detalhes sobre as atividades do aluno, existe na tela uma tabela com todos os módulos da turma listados e algumas informações do aluno sobre cada um deles. Os campos que compõe a tabela são exatamente: <strong>Última tentativa</strong> do aluno no módulo, que data a última vez em que o aluno respondeu a algum quiz no módulo; <strong>Nível</strong> atual do aluno no módulo, que mostra qual é o nível de 0 à 6 em que o aluno se encontra no módulo; E <strong>Status</strong> do aluno no módulo, que mostra um dos seguintes estados em que o aluno pode se encontrar no módulo:
+                            </p>
+
+                            <br>
+                            <p>
+                                <i class="text-success fas fa-check-circle fa-lg"></i> -
+                                Módulo finalizado (nível 6) pelo aluno
+                            </p>
+                            <p>
+                                <i class="text-warning fas fa-clock fa-lg"></i> - 
+                                Módulo em andamento (entre os níveis 0 e 6) pelo aluno
+                            </p>
+                            <p>
+                                <i class="text-danger fas fa-exclamation-circle fa-lg"></i> - 
+                                Módulo não iniciado (nível 0) pelo aluno
+                            </p>
+                            <br>
+
+                            <p>
+                                Além disso, o professor também poderá identificar nessa tela se o aluno está precisando de ajuda, da mesma forma que na tela de
+                                <a href="#item-3">listagem de alunos</a>,
+                                por meio da exibição do ícone 
+                                <i style="color: var(--cor-primaria);" class="mx-2 fas fa-exclamation"></i>
+                                ao lado de sua foto de perfil e ainda visualizar na tabela quais são exatamente os módulos em que está precisando de ajuda, por meio da exibição do mesmo ícone ao lado do nome do módulo.
+                            </p>
+
+                            <p>
+                                Por fim, para obter informações ainda mais específicas a respeito dos alunos em cada um dos módulos, o professor pode clicar em um dos módulos na tabela. Será aberto uma janela flutuante com várias informações do aluno neste módulo, como o histórico completo de tentativas nos
+                                <a href="{% url 'progame:quizzes' %}">quizzes</a>,
+                                as questões e níveis em que ele tem e teve mais dificuldade, entre outras informações.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Tela de listagem de módulos -->
+                    <div class="secao">
+                        <a href="#item-5">
+                            <h3 class="titulos" id="item-5">
+                                Tela de listagem de módulos
+                                <span class="hashtag">#</span>
+                            </h3>
+                            <hr>
+                        </a>
+                        <div>
+                            <p>
+                                Ao clicar na opção <strong>Módulos</strong> do menu de navegação vertical da página de estatísticas da turma, o professor verá a tela de listagem de módulos da turma. Esta tela é semelhante a tela de 
+                                <a href="#item-3">listagem de alunos</a>,
+                                porém, aqui são listados todos os módulos cadastrados na turma, exibidos em cartões com o nome do módulo, a sua data de criação e as seguintes informações básicas sobre os alunos da turma:
+                            </p>
+
+                            <br>
+                            <p>
+                                <i class="text-success fas fa-check-circle fa-lg"></i> -
+                                Número de alunos que finalizaram (nível 6) o módulo
+                            </p>
+                            <p>
+                                <i class="text-warning fas fa-clock fa-lg"></i> - 
+                                Número de alunos que estão em andamento (entre os níveis 0 e 6) no módulo
+                            </p>
+                            <p>
+                                <i class="text-danger fas fa-exclamation-circle fa-lg"></i> - 
+                                Número de alunos que não iniciaram (nível 0) o módulo
+                            </p>
+                            <br>
+
+                            <p>
+                                O professor também poderá identificar nessa tela os módulos em que existe algum aluno precisando de ajuda, por meio da exibição do ícone
+                                <i style="color: var(--cor-primaria);" class="mx-2 fas fa-exclamation"></i>
+                                ao lado da imagem do módulo.
+                            </p>
+
+                            <p>
+                                Para ver mais estatísticas de um módulo, basta clicar no cartão deste módulo na tela e será aberta a tela de
+                                <a href="#item-6">estatísticas do módulo</a>,
+                                onde serão encontradas todas as informações a respeito das atividades dos alunos nesse módulo.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Estatísticas do módulo -->
+                    <div class="secao">
+                        <a href="#item-6">
+                            <h3 class="titulos" id="item-6">
+                                Tela de estatísticas do módulo
+                                <span class="hashtag">#</span>
+                            </h3>
+                            <hr>
+                        </a>
+                        <div>
+                            <p>
+                                Na tela de estatísticas do módulo, o professor deve encontrar todas as informações e históricos dos alunos no módulo e em cada um dos seus níveis individualmente. Esta tela é semelhante a tela de
+                                <a href="{% url 'progame:estatisticas' %}#item-4">estatísticas do aluno</a>,
+                                porém, aqui são mostradas apenas as informações coletadas a partir das atividades realizadas pelos alunos neste módulo específico. Todos essas informações também são fundamentais para que o professor possa conseguir identificar os níveis e questões do módulo em que os alunos apresentam mais dificuldade e assim consegui ajudá-los a melhorar o seu desempenho e corrigir possíveis erros nas questões do módulo.
+                            </p>
+
+                            <p>
+                                Na parte superior da tela, o professor verá alguns dados do módulo, como nome e data de criação.
+                            </p>
+                            
+                            <p>
+                                Para ver detalhes sobre as atividades dos alunos no módulo, existem duas tabelas na tela. A primeira, mostra todos os alunos da turma listados e algumas informações sobre os alunos no módulo. Os campos que compõe a tabela são exatamente: <strong>Última tentativa</strong> do aluno no módulo, que data a última vez em que o aluno respondeu a algum quiz no módulo; <strong>Nível atual</strong> do aluno no módulo, que mostra qual é o nível de 0 à 6 em que o aluno se encontra no módulo; E <strong>Status do aluno</strong> no módulo, que mostra um dos seguintes estados em que o aluno pode se encontrar no módulo:
+                            </p>
+
+                            <br>
+                            <p>
+                                <i class="text-success fas fa-check-circle fa-lg"></i> - Módulos finalizado (nível 6) pelo aluno
+                            </p>
+                            <p>
+                                <i class="text-warning fas fa-clock fa-lg"></i> - 
+                                Módulo em andamento (entre os níveis 0 e 6) pelo aluno
+                            </p>
+                            <p>
+                                <i class="text-danger fas fa-exclamation-circle fa-lg"></i> - 
+                                Módulo não iniciado (nível 0) pelo aluno
+                            </p>
+                            <br>
+
+                            <p>
+                                O professor também poderá identificar nessa tela se o aluno está precisando de ajuda neste módulo, por meio da exibição do ícone 
+                                <i style="color: var(--cor-primaria);" class="mx-2 fas fa-exclamation"></i>
+                                ao lado de sua foto de perfil.
+                            </p>
+
+                            <p>
+                                Para obter informações ainda mais específicas a respeito dos alunos em cada um dos módulos, o professor pode clicar em um dos alunos na tabela. Será aberto uma janela flutuante com várias informações do aluno neste módulo, como o histórico completo de tentativas nos
+                                <a href="{% url 'progame:quizzes' %}">quizzes</a>,
+                                deste módulo, as questões e níveis deste módulo em que ele tem e teve mais dificuldade, entre outras informações.
+                            </p>
+
+                            <p>
+                                Na segunda tabela, são listados todos os níveis do módulo em questão, com alguns dados desses níveis. Os campos que compõe a tabela são exatamente:
+                                <strong>Nível do módulo</strong>, que mostra o número e nome associado ao nível; <strong>Nº de questões</strong> do módulo, que mostra o total de questões cadastradas no quiz desse nível do módulo; <strong>Índice de acertos</strong> dos aluno no módulo, que mostra a média de acertos dos alunos nas questões deste módulo; E <strong>Status dos alunos</strong>, que mostra de forma resumida o número de alunos que estão nos seguintes estados no módulo:
+                            </p>
+
+                            <br>
+                            <p>
+                                <i class="text-success fas fa-check-circle fa-lg"></i> - Alunos que finalizaram (nível 6) o módulo
+                            </p>
+                            <p>
+                                <i class="text-warning fas fa-clock fa-lg"></i> - 
+                                Alunos que estão em andamento (entre os níveis 0 e 6) no módulo
+                            </p>
+                            <p>
+                                <i class="text-danger fas fa-exclamation-circle fa-lg"></i> - 
+                                Alunos que não iniciaram (nível 0) o módulo
+                            </p>
+                            <br>
+
+                            <p>
+                                Para obter informações ainda mais específicas a respeito dos alunos em cada um dos níveis do módulo, o professor pode clicar em um dos níveis na tabela. Será aberto uma janela flutuante com várias informações sobre os alunos neste nível do módulo, como o histórico de respostas nos
+                                <a href="{% url 'progame:quizzes' %}">quizzes</a>,
+                                os alunos que têm mais dificuldade, as questões e níveis em que os alunos têm mais dificuldade, entre outras informações.
+                            </p>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="ajuda-prox-ant">
+                    <a href="{% url 'progame:rankings' %}">
+                        <i class="mr-2 fas fa-chevron-left"></i>
+                        Rankings
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <nav id="navbar-ajuda" class="sticky-top nav nav-pills flex-column">
+                    <a class="nav-link" href="#item-1">
+                        O que são estatísticas da turma
+                    </a>
+                    <a class="nav-link" href="#item-2">
+                        Tela de estatísticas da turma
+                    </a>
+                    <a class="nav-link" href="#item-3">
+                        Tela de listagem de alunos
+                    </a>
+                    <a class="nav-link" href="#item-4">
+                        Tela de estatísticas do aluno
+                    </a>
+                    <a class="nav-link" href="#item-5">
+                        Tela de listagem de módulos
+                    </a>
+                    <a class="nav-link" href="#item-6">
+                        Tela de estatísticas do módulo
+                    </a>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block footer %}{% endblock %}
+
+
+{% block scripts %}
+{% endblock %}

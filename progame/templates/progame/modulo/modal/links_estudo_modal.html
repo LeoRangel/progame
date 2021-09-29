@@ -1,0 +1,44 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<div class="modal fade" id="links-estudo-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <div>
+                    <h4 class="modal-title titulos font-weight-normal">Links de estudo</h4>
+                    <small class="text-muted" style="font-size: .9em">
+                        Adicione links para auxiliar os estudos dos alunos no Quiz
+                    </small>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form action="" method="post" id="adicionar-link-form" class="prevent-multi-submits">
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fas fa-plus fa-fw mr-1"></i>Adicionar</button>
+                </form>
+            </div>
+
+            <div class="modal-footer d-block py-3 border-0">
+                <div class="text-center">
+                    <img style="display: none" class="spinner invert my-1"
+                         src="{% static 'core/svg-loaders/oval.svg' %}" alt="Carregando...">
+                    <div style="display: none" class="text-muted no-link">
+                        Nenhum link de estudo adicionado a este quiz</div>
+                </div>
+
+                <ul class="links-estudo-list">
+                    <li>
+                        <div class="imagem"></div>
+                        <div class="info"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+{% extends 'progame/layouts/modulo_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ object }} - {{ object.turma }}{% endblock %}
+
+{% block breadcrumbs %}
+    <!-- <div class="_breadcrumbs">
+        <a href="{% url 'progame:professor_dashboard' %}">Turmas</a>
+        <span class="separador">></span>
+        <a href="{% url 'progame:turma_detail_view' object.turma.uuid %}">{{ object.turma }}</a>
+        <span class="separador">></span>
+        <span class="pagina-atual">{{ object }}</span>
+    </div> -->
+{% endblock %}
+
+{% block header %}
+    {% with turma=object.turma %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock %}
+
+{% block content %}
+    <div class="oa-opcoes">
+        <!-- {% include 'progame/includes/modulo_actions.html' %} -->
+        
+        <div class="coluna-conteudo-nav-pill">
+            <div class="informacoes-oa">
+                {% include '_modal.html' %}
+
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+
+                    <div class="d-flex flex-wrap justify-content-start">
+                        <button class="btn btn-primary mr-2" type="submit">Salvar mudanças</button>
+                        <a class="btn btn-light" href="{{ request.META.HTTP_REFERER }}">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        let descricao = $('#id_descricao')
+
+        descricao.keyup(function(){
+            $("#hint_id_descricao").text((130 - $(this).val().length) + ' restantes');
+        });
+
+        $(document).ready(function() {
+            $("#hint_id_descricao").text((130 - descricao.val().length) + ' restantes');
+        })
+    </script>
+{% endblock %}

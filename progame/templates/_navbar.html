@@ -1,0 +1,236 @@
+{% load static %}
+{% load ausers_tags %}
+
+
+{% if request.user.is_authenticated %}
+    <nav id="minha-navbar" class="navbar navbar-expand shadow-sm {% if turma %}navbar-turma{% endif %}">
+        {% if turma %}
+            <div class="voltar">
+                <a class="sair-turma" href="{% url 'progame:get_dashboard' %}">
+                    <!-- <i class="fas fa-arrow-left mr-1"></i> -->
+                    <i class="fas fa-sign-out-alt mr-1"></i>
+                    <!-- Minhas turmas -->
+                    Sair da Turma
+                </a>
+                <span class="separador hidden-xl">.</span>
+                <span class="nome-turma d-inline-block text-truncate hidden-xl">
+                    {{ turma }}
+                </span>
+            </div>
+            <!-- <h5 class="titulos mr-5">
+                {{ turma }}
+            </h5> -->
+        {% else %}
+            <a class="navbar-brand" href="{% url 'progame:get_dashboard' %}">
+                <img src="{% static 'progame/img/logo.png' %}" width="140px" alt="progame">
+            </a>
+        {% endif %}
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample06"
+                aria-controls="navbarsExample06" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample06">
+            <!-- <ul class="turma-areas navbar-nav mr-auto"> -->
+            <ul class="turma-areas navbar-nav">
+                {% if turma %}
+                    <li class="nav-item pr-3 {% if 'turma' in active %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'progame:turma_detail_view' turma.uuid %}">
+                            Mural
+                        </a>
+                    </li>
+                    <li class="nav-item pr-3 {% if 'forum' in active %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'progame:forum' turma.uuid %}">
+                            Fórum
+                        </a>
+                    </li>
+                {% endif %}
+
+                {# Get link das estatísticas caso user esteja em página da turma #}
+                {% if request.user.is_professor %}
+                    {% if turma %}
+                        <li class="nav-item pr-3 {% if 'stats' in active %}active{% endif %}">
+                            <a href="{% url 'stats:aluno_list_view' turma.uuid %}"
+                                class="nav-link">
+                                Estatísticas
+                            </a>
+                        </li>
+                    {% elif object %}
+                        {% with uuid=object.uuid %}
+                            {% if uuid|check_professor_with_uuid:request %}
+                                <li class="nav-item pr-3 {% if 'stats' in active %}active{% endif %}">
+                                    <a href="{% url 'stats:aluno_list_view' uuid|check_professor_with_uuid:request %}"
+                                        class="nav-link">
+                                        Estatísticas
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endwith %}
+                    {% elif object_list %}
+                        {% with uuid=object_list.first.uuid %}
+                            {% if uuid|check_professor_with_uuid:request %}
+                                <li class="nav-item pr-3 {% if 'stats' in active %}active{% endif %}">
+                                    <a href="{% url 'stats:modulo_list_view' uuid|check_professor_with_uuid:request %}"
+                                        class="nav-link">
+                                        Estatísticas
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endwith %}
+                    {% endif %}
+                {% endif %}
+                {# End #}
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="usuario nav-link dropdown-toggle" href="#" id="navDropdown" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        {% if request.user.is_professor %}
+                            <div class="user-profile-circle mr-2">
+                                {% if request.user.professor.imagem %}
+                                    <img src="{{ request.user.professor.imagem.url }}" alt="{{ request.user.professor }}">
+                                {% else %}
+                                    <img src="{% static 'progame/img/user.png' %}" alt="{{ request.user.professor }}">
+                                {% endif %}
+                            </div>
+                            <span class="hidden-xl usuario-nome d-inline-block text-truncate">
+                                {{ request.user.professor }}
+                            </span>
+                        {% elif request.user.is_aluno %}
+                            <div class="user-profile-circle mr-2">
+                                {% if request.user.aluno.imagem %}
+                                    <img src="{{ request.user.aluno.imagem.url }}" alt="{{ request.user.aluno }}">
+                                {% else %}
+                                    <img src="{% static 'progame/img/user.png' %}" alt="{{ request.user.aluno }}">
+                                {% endif %}
+                            </div>
+                            <span class="hidden-xl usuario-nome d-inline-block text-truncate">
+                                {{ request.user.aluno }}
+                            </span>
+                        {% else %}
+                            <div class="user-profile-circle mr-2">
+                                <img src="{% static 'progame/img/user.png' %}" alt="{{ request.user }}">
+                            </div>
+                            <span class="hidden-xl usuario-nome d-inline-block text-truncate">
+                                {{ request.user }}
+                            </span>
+                        {% endif %}
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navDropdown">
+                        <a class="dropdown-item" href="{% url 'progame:get_dashboard' %}">
+                            Minhas Turmas
+                        </a>
+
+                        {% if request.user.is_aluno %}
+                            <a class="dropdown-item" href="{% url 'progame:aluno_perfil' request.user.aluno.uuid %}">
+                                Ver Perfil
+                            </a>
+                        {% endif %}
+
+                        <a class="dropdown-item" href="{% url 'progame:get_perfil_update' %}">
+                            Editar Perfil
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" href="{% url 'progame:ajuda' %}">
+                            <i class="fas fa-question-circle mr-1"></i>
+                            Central de Ajuda
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" href="{% url 'ausers:logout' %}">
+                            <i class="fas fa-sign-out-alt mr-1"></i>
+                            Sair da Conta
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="navbar-base {% if request.user.is_aluno %}nav-aluno{% endif %}">
+        <div class="opcoes">
+
+            {% if turma %}
+                <a class="{% if 'turma' in active %}active{% endif %}"
+                href="{% url 'progame:turma_detail_view' turma.uuid %}">
+                    <i class="fas fa-th fa-fw fa-lg"></i>
+                    Mural
+                </a>
+                <a class="{% if 'forum' in active %}active{% endif %}"
+                href="{% url 'progame:forum' turma.uuid %}">
+                    <i class="fas fa-comments"></i>
+                    Fórum
+                </a>
+            {% endif %}
+
+            {# Get link das estatísticas caso user esteja em página da turma #}
+            {% if request.user.is_professor %}
+                {% if turma %}
+                    <a href="{% url 'stats:aluno_list_view' turma.uuid %}"
+                    class="{% if 'stats' in active %}active{% endif %}">
+                        <i class="fas fa-chart-bar"></i>
+                        Estatísticas
+                    </a>
+                {% elif object %}
+                    {% with uuid=object.uuid %}
+                        {% if uuid|check_professor_with_uuid:request %}
+                            <a href="{% url 'stats:aluno_list_view' uuid|check_professor_with_uuid:request %}"
+                            class="{% if 'stats' in active %}active{% endif %}">
+                               <i class="fas fa-chart-bar"></i>
+                                Estatísticas
+                            </a>
+                        {% endif %}
+                    {% endwith %}
+                {% elif object_list %}
+                    {% with uuid=object_list.first.uuid %}
+                        {% if uuid|check_professor_with_uuid:request %}
+                            <a href="{% url 'stats:modulo_list_view' uuid|check_professor_with_uuid:request %}"
+                            class="{% if 'stats' in active %}active{% endif %}">
+                                <i class="fas fa-chart-bar"></i>
+                                Estatísticas
+                            </a>
+                        {% endif %}
+                    {% endwith %}
+                {% endif %}
+            {% endif %}
+            {# End #}
+        </div>
+    </div>
+
+{% else %}
+    <nav id="minha-navbar" class="navbar navbar-expand-lg navbar-light shadow-sm bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'progame:public_index' %}">
+                <img src="{% static 'progame/img/logo.png' %}" width="140px" alt="progame">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample06"
+                    aria-controls="navbarsExample06" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample06">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item mr-2">
+                        <a class="nav-link" href="{% url 'ausers:login' %}">
+                            Entrar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-padrao" href="{% url 'ausers:cadastro' %}">
+                            Registrar-se
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endif %}
+

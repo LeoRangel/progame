@@ -1,0 +1,159 @@
+{% extends 'progame/layouts/professor_base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Importar questões - ProGame{% endblock %}
+
+{% block css %}
+    <link href="{% static 'progame/css/importar_questoes.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+    {% include 'progame/includes/floating_buttons/importar_questoes_button.html' %}
+    <div class="bg-white p-3 p-md-4 shadow-sm">
+        <div class="mb-4">
+            <a class="btn btn-light btn-sm" href="{% url 'progame:questao_list_view' modulo.uuid %}">
+                <i class="fas fa-arrow-left mr-1"></i>
+                Voltar
+            </a>
+        </div>
+        <form action="" autocomplete="off">
+            <div class="form-row">
+                <div class="col-md-4">{{ filter.form.questao|as_crispy_field }}</div>
+                <div class="col-md-3">{{ filter.form.verbo|as_crispy_field }}</div>
+                <div class="col-md-3 align-self-center">
+                    <button class="btn btn-primary" style="margin-top: .75rem" type="submit">
+                        <i class="fas fa-search fa-fw mr-1"></i>Buscar</button>
+                </div>
+            </div>
+        </form>
+
+        <hr>
+
+        {% if object_list %}
+            <p class="text-muted my-4">Selecione as questões que deseja importar</p>
+            <table class="table table-responsive-sm">
+                <thead>
+                    <tr>
+                        <th>Nível</th>
+                        <th>Verbo</th>
+                        <th>Sentença</th>
+                        <th class="text-center">Professor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for questao in object_list %}
+                        <tr style="color:#626266" data-pk="{{ questao.pk }}">
+                            <td>{{ questao.nivel }}</td>
+                            <td>{{ questao.verbo.verbo|default_if_none:"" }}</td>
+                            <td title="{{ questao.sentenca }}">{{ questao.sentenca }}</td>
+                            <!-- <td title="{{ questao.sentenca }}">{{ questao.sentenca|truncatewords:"14" }}</td> -->
+                            <td class="text-center">
+                                {% if questao.modulo.turma.professor.imagem %}
+                                    <img data-toggle="tooltip" data-placement="top"
+                                         title="{{ questao.modulo.turma.professor }}" class="round"
+                                         src="{{ questao.modulo.turma.professor.imagem.url }}"
+                                         alt="{{ questao.modulo.turma.professor }}">
+                                {% else %}
+                                    <img data-toggle="tooltip" data-placement="top"
+                                         title="{{ questao.modulo.turma.professor }}" class="round"
+                                         src="{% static 'progame/img/user.png' %}"
+                                         alt="{{ questao.modulo.turma.professor }}">
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="text-muted text-center mt-5 mb-4">Nenhuma questão encontrada :(</div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'progame/js/ajax/csrf_ajax_config.js' %}"></script>
+    <script>
+        let importarQuestoesBtn = $('.importar_questoes_button')
+        let questoesSelecionadas = []
+
+        $('tbody tr').not('.none').click(function() {
+            let tr = $(this)
+            tr.toggleClass("selected")
+
+            if (tr.hasClass("selected")) {
+                // add to array
+                questoesSelecionadas.push(tr.data('pk'))
+            } else {
+                // remove from array
+                questoesSelecionadas = questoesSelecionadas.filter(pk => pk !== tr.data('pk'))
+            }
+
+            // show/hide floating action button
+            if (questoesSelecionadas.length > 0) {
+                importarQuestoesBtn.fadeIn()
+            } else {
+                importarQuestoesBtn.fadeOut()
+            }
+        })
+
+
+        importarQuestoesBtn.click(function() {
+            if (questoesSelecionadas.length > 0) {
+                importarQuestoesAjaxRequest(questoesSelecionadas)
+            }
+        })
+
+
+        function importarQuestoesAjaxRequest(questoesSelecionadas) {
+
+            const url = '{% url "progame:importar_questoes" modulo.uuid nivel %}'
+            let icon = importarQuestoesBtn.find('i')
+            let spinner = importarQuestoesBtn.find('.spinner-border')
+
+            $.ajax({
+                url: url,
+                method: "POST",
+                dataType: 'json',
+                data: {
+                    questoes: JSON.stringify(questoesSelecionadas),
+                },
+
+                beforeSend: function(xhr, settings) {
+                    icon.hide()
+                    spinner.show()
+                    importarQuestoesBtn.css('pointer-events', 'none')
+
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                    }
+                },
+
+                success: function(data) {
+                    window.location.href = data.redirect_url
+                },
+                error: function(err) {
+                    let message = err.responseJSON.message
+
+                    if (message) {
+                        tata.error("Erro", message, {
+                            position: 'bl',
+                            duration: 3800,
+                            progress: true,
+                            closeBtn: true,
+                            animate: 'slide',
+                        })
+                    }
+
+                    importarQuestoesBtn.css('pointer-events', 'auto')
+                },
+                complete: function() {
+                    icon.show()
+                    spinner.hide()
+                }
+            })
+        }
+    </script>
+{% endblock %}

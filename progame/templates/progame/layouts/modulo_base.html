@@ -1,0 +1,180 @@
+<!doctype html>
+{% load static %}
+{% load ausers_tags %}
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+    <link rel="icon" type="imagem/jpg" href="{% static 'progame/img/logo-small.jpg' %}" />
+    <title>{% block title %}ProGame{% endblock %}</title>
+
+    {% include "core/_metatags.html" %}
+
+    {% include '_styles.html' %}
+    <link rel="stylesheet" href="{% static 'progame/css/turma.css' %}">
+    <link rel="stylesheet" href="{% static 'progame/css/ranking.css' %}">
+    <link rel="stylesheet" href="{% static 'progame/css/modulo-pagina.css' %}">
+    <link rel="stylesheet" href="{% static 'progame/css/nav-pills.css' %}">
+    {% block css %}{% endblock %}
+
+    <!-- Confetti efeito -->
+    <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
+
+</head>
+
+<body>
+    {% include '_navbar.html' %}
+
+    <audio id="som-conquista" src="{% static 'progame/sons/conquista.mp3' %}"></audio>
+    
+    <main class="container my-4 main-container">
+        <div class="card-pagina-modulo">
+            {% block header %}
+                {% include 'progame/includes/modulo_header.html' with turma=object.turma %}
+            {% endblock %}
+            
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+
+    <!-- Scripts -->
+    {% include '_scripts.html' %}
+    {% include 'core/_messages.html' %}
+    {% block scripts %}{% endblock %}
+    <script src="{% static 'progame/js/distr/set_text_color.js' %}"></script>
+
+    <script>
+        $(document).ready(function() {
+            let uuid = $('#header').data('uuid');
+            $('.editar_turma').modalForm({
+                formURL: '/turma/' + uuid + '/atualizar/',
+                modalID: "#modal",
+                modalContent: ".modal-form-content"
+            })
+        });
+
+        $('.mostrar-codigo').click(function() {
+            $('#codigo-modal').modal('show')
+        })
+
+
+        if($('.header-oa').data('nivel-aluno') != ''){
+            $('.main-container').addClass('aluno-nivel-' + $('.header-oa').data('nivel-aluno'));
+        }
+
+
+        // Tour pela página
+        if($('.header-oa').data('usuario') == 'aluno'){
+
+            var passos = {
+                steps: [
+                    {
+                        element: '.header-oa',
+                        title: 'Cabeçalho da módulo',
+                        content: 'Você está na página do módulo. No cabeçalho você pode encontrar algumas informações realacionadas a este módulo.'
+                    },
+                    {
+                        element: '.span-modulo',
+                        title: 'Estado atual no módulo',
+                        content: 'Aqui você pode vizualizar o seu estado atual no módulo. Se você estiver no nível 0 o seu estado será "Não iniciado", nos níveis de 1 à 5, "Em andamento" e no nível 6, "Concluído".'
+                    },
+                    {
+                        element: '.header-oa-nivel',
+                        title: 'Seu nível no módulo',
+                        content: 'Este é o seu nível atual no módulo. Os níveis dos módulos são baseados na Taxonomia de Bloom, por isso vão de 1 à 6 (o nível 0 não faz parte da taxonomia de bloom, por isso, é utilizado apenas como uma forma de representar que você ainda não iniciou este módulo). Cada nível tem uma palavra, uma cor e um número associados, representando o nível de conhecimento do aluno.'
+                    },
+                    {
+                        element: '.coluna-nav-pill',
+                        title: 'Opções do módulo',
+                        content: 'Navegue entre as seções do módulo por meio desta barra de navegação. Note que a opção correspondente a seção atual está destacada com a cor referente ao seu nível atual no quiz.',
+                    },
+                    {
+                        element: '#accordion',
+                        title: 'Níveis do módulo',
+                        content: 'Aqui são mostrados todos os 6 níveis do módulo. Cada um desses níveis possui um quiz divertido cadastrado pelo professor e que você deve responder quando estiver disponível. Para passar em um nível você precisa acertar 70% das questões, além disso, as pontuações obtidas nos quizzes são usadas para definir a sua classificação nos rankings da turma e do módulo, por isso é sempre importante estudar o assunto correspondente antes de responder um quiz.',
+                        path: '/aluno/modulo/' + $('.header-oa').data('uuidmodulo') + '/',
+                    },
+                    {
+                        element: '#ranking',
+                        title: 'Ranking do módulo',
+                        content: 'No ranking do módulo você pode ver a classificação de todos os alunos da turma de acordo com a suas pontuações obtidas apenas nos quizzes deste módulo.',
+                        path: '/modulo/' + $('.header-oa').data('uuidmodulo') + '/ranking/',
+                    },
+                    {
+                        element: '.informacoes-oa',
+                        title: 'Informações sobre o módulo',
+                        content: 'Nesta seção você pode ver alguns dados do módulo como nome, descrição, data de criação e última atualização.',
+                        path: '/modulo/' + $('.header-oa').data('uuidmodulo') + '/',
+                    },
+                    {
+                        element: '.btn-voltar',
+                        title: 'Sair do módulo',
+                        content: 'Clique nesta opção se desejar sair do módulo e voltar para a página de Mural da turma.'
+                    },
+                ]
+            };
+            site_tour(passos, 'módulo_aluno_tour');
+        
+        } else {
+        
+            var passos = {
+                steps: [
+                    {
+                        element: '.header-oa',
+                        title: 'Cabeçalho da módulo',
+                        content: 'Você está na página do módulo. No cabeçalho você pode encontrar algumas informações realacionadas a este módulo.'
+                    },
+                    {
+                        element: '.coluna-nav-pill',
+                        title: 'Opções do módulo',
+                        content: 'Navegue entre as seções do módulo por meio desta barra de navegação. Note que a opção correspondente a seção atual está destacada.',
+                    },
+                    {
+                        element: '#accordion',
+                        title: 'Níveis do módulo',
+                        content: 'Aqui são mostrados todos os 6 níveis do módulo baseados na Taxonomia de Bloom. Você deve cadastrar questões em cada um dos níveis para que os alunos possam respodê-las por meio de um quiz divertido. De acordo com o desempenho dos alunos nesses quizzes você conseguirá saber o nível de conhecimento de cada um deles e conseguir ajudá-los a evoluir.',
+                        path: '/modulo/' + $('.header-oa').data('uuidmodulo') + '/questoes/',
+                    },
+                    {
+                        element: '#heading1 .icones-card',
+                        title: 'Opções do nível',
+                        content: 'Em cada nível do módulo existe um conjunto de opções que você pode usar para gerenciá-lo. Estas são repectivamente: Bloquear/Desbloquear nível, Links de estudo do nível, Importar questões prontas para o nível e criar uma questão para o nível.',
+                        path: '/modulo/' + $('.header-oa').data('uuidmodulo') + '/questoes/',
+                    },
+                    {
+                        element: '#ranking',
+                        title: 'Ranking do módulo',
+                        content: 'No ranking do módulo você pode ver a classificação de todos os alunos da turma de acordo com a suas pontuações obtidas apenas nos quizzes deste módulo.',
+                        path: '/modulo/' + $('.header-oa').data('uuidmodulo') + '/ranking/',
+                    },
+                    {
+                        element: '.informacoes-oa',
+                        title: 'Dados do módulo',
+                        content: 'Nesta seção você pode ver alguns dados do módulo como nome, descrição, data de criação e última atualização.',
+                        path: '/modulo/' + $('.header-oa').data('uuidmodulo') + '/',
+                    },
+                    {
+                        element: '.botoes',
+                        title: 'Opções do módulo',
+                        content: 'Aqui você tem um conjunto de opções referente ao módulo, como editar, remover e ir para a página de estatísticas deste módulo.',
+                        path: '/modulo/' + $('.header-oa').data('uuidmodulo') + '/questoes/',
+                    },
+                    {
+                        element: '.btn-voltar',
+                        title: 'Saír do módulo',
+                        content: 'Clique nesta opção se desejar sair do módulo e voltar para a página de Mural da turma.',
+                        path: '/modulo/' + $('.header-oa').data('uuidmodulo') + '/questoes/',
+                    },
+                ]
+            };
+            site_tour(passos, 'módulo_professor_tour');
+        }
+        // Fim do Tour pela página
+        
+    </script>
+</body>
+</html>

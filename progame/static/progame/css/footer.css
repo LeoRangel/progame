@@ -1,0 +1,114 @@
+/* Footer */
+.footer-logo{
+    /* color: rgb(41, 41, 41); */
+    /* padding: 15px; */
+    display: flex;
+    flex-wrap: nowrap;
+    flex-flow: row;
+    align-items: center;
+    margin-bottom: 10px;
+    /* background-color: rgba(255, 255, 255, 1); */
+    justify-items: left;
+    text-align: left;
+    border-radius: 20px;
+}
+.footer-logo .logo-site{
+    width: 150px;
+    height: auto;
+}
+.footer-logo .nome-site-footer {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    /* padding-top: 30px; */
+    align-items: center;
+}
+.footer-logo .nome-site-footer .nome{
+    font-weight: bold;
+    font-family: var(--font-primaria);
+    margin: 0%;
+    padding: 0%;
+    font-size: 25px;
+    transition: 0.4s;
+}
+.footer-logo .nome-site-footer .slogan{
+    font-weight: bold;
+    margin: 0%;
+    padding: 0%;
+    padding-left: 5px;
+    font-size: 15px;
+    text-align: left !important;
+}
+.footer{
+    /*background-color: rgb(250, 250, 250);*/
+    background-color: whitesmoke;
+    color: black;
+    /*margin-top: 50px;*/
+    padding: 40px 0;
+}
+.footer span{
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+}
+.footer .titulos{
+    margin-bottom: 25px;
+}
+
+.footer .row{
+    padding-top: 25px;
+    /* padding-bottom: 25px; */
+    justify-content: space-between;
+}
+.footer .row > div{
+    padding-bottom: 35px;
+}
+
+.footer .rodape{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.footer .rodape span{
+    font-size: 14px;
+}
+
+.footer ul {
+    list-style: none;
+    margin-left:0 !important;
+    padding: 0;
+}
+.footer ul li{
+    display: flex;
+    justify-items: center;
+    margin: 10px 0;
+}
+.footer ul li a{
+    font-size: 14px;
+    text-align: left;
+    color: black;
+    /* color: #D3D3D3; */
+}
+.footer ul li i{
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+.botao-topo{
+    background-color: transparent !important;
+}
+.botao-topo i{
+    font-size: small;
+}
+
+
+@media(min-width: 1200px) {
+    .footer{
+        padding: 70px 0;
+    }
+    .footer .rodape{
+        padding-top: 20px;
+    }
+}

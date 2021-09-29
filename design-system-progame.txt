@@ -1,0 +1,63 @@
+Design system - Progame
+
+### Font-size padrão (body): 16px
+
+### Font-size mínimo: 14px (apenas para pequenos labels e detalhes)
+
+### Transparencia par subtextos: 0.7%
+
+### Alinhar centralizado somente textos pequenos
+
+### Bordas:
+    usar sempre a padrão = --borda-raio-geral: .3rem;
+
+
+### HEADERS: tela small = 80% do tamanho original da fonte
+
+### (H1):
+    Uso: Título no índex,  
+    orig: 2.5rem / 40px
+    small: 2rem / 32px
+
+### (H2):
+    Uso: Títulos de seções (ex: módulos, conquistas)
+    orig: 2rem / 32px
+    small: 1.6 / 25.6px
+
+### (H3):
+    orig: 1.75rem / 28px
+    small: 1.4 / 22.4px
+
+### (H4):
+    orig: 1.5rem / 24px
+    small: 1.20 / 24px
+
+### (H5):
+    orig: 1.25rem / 20px
+    small: 1 / 16px
+
+### (H6):
+    orig: 1rem / 16px
+    small: 80% / 12.8px
+
+### Margens para titulos: 1rem / mb-3 / <hr>
+
+### Títulos com quantidade ao lado:
+    <h4 class="titulos">
+        Módulos
+        <small class="text-muted">( {{ object_list.count }} )</small>
+    </h4>
+    <hr>
+
+### Efeito de flutuar on hover
+    .classe {
+        border-radius: var(--borda-raio-geral);
+        box-shadow: var(--sombra-geral);
+        position: relative;
+        transition: transform .2s ease-in-out;
+        text-decoration: none !important;
+    }
+    .classe:hover{
+        transform: translateY(-3px);
+        box-shadow: 0 .150rem .50rem rgba(0,0,0,.075);
+    }

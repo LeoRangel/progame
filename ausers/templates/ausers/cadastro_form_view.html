@@ -1,0 +1,58 @@
+{% extends 'ausers/base.html' %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+{% load static %}
+{% providers_media_js %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'progame/css/login.css' %}">
+{% endblock %}
+
+{% block title %}Cadastro - ProGame{% endblock %}
+
+{% block content %}
+    <h3 class="titulos mb-4">
+        Crie a sua conta
+    </h3>
+
+    <form action="" method="post" id="cadastro-form">
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <textarea name="g-recaptcha-response" hidden id="recaptcha"></textarea>
+        <button class="btn btn-primary btn-block my-4" type="submit">Continuar</button>
+
+        <div class="login-or">
+            <hr class="hr-or">
+            <span class="span-or">ou</span>
+        </div>
+        <a href="{% provider_login_url 'google' %}"
+        class="btn btn-padrao-2 btn-block google">
+            <i class="fab fa-google mr-2 text-danger"></i>
+            Registrar-se com a conta do Google
+        </a>
+
+    </form>
+
+    <!-- <hr> -->
+    <div class="text-center mt-4">
+        Já possui uma conta? <a href="{% url 'ausers:login' %}">Entre</a>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_site_key }}"></script>
+    <script>
+        grecaptcha.ready(function() {
+            $('#cadastro-form').submit(function(e){
+                let form = this;
+                e.preventDefault();
+
+                grecaptcha.execute('{{ recaptcha_site_key }}', {action: ''}).then(function(token) {
+                    $('#recaptcha').val(token);
+                    form.submit()
+                });
+            })
+        });
+    </script>
+{% endblock %}

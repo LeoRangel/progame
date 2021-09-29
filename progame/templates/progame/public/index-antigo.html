@@ -1,0 +1,161 @@
+{% extends 'progame/layouts/public_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+{% providers_media_js %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'progame/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'progame/css/login.css' %}">
+    <style>
+        .grecaptcha-badge {
+            visibility: hidden;
+        }
+    </style>
+{% endblock %}
+
+{% block header %}
+    <div class="header-home" style="background-image: url('{% static 'progame/img/bg-home.jpg' %}')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 home-titulo">
+                    <h1>PROGAME</h1>
+                    <span>Um ambiente virtual de aprendizagem gratuito para disciplinas de programação</span>            
+                </div>
+
+                {% if not request.user.is_authenticated %}
+                <div class="col-lg-6 home-login">
+                    <div id="login-entrar">
+                        <div class="myform form ">
+                            <div class="logo mb-1">
+                                <div class="col-md-12 text-center">
+                                    <label>Fazer login</label>
+                                </div>
+                            </div>
+                            
+                            <form action="{% url 'ausers:login' %}" method="post" name="login" id="login-form">
+                                {% csrf_token %}
+                                {{ login_form|crispy }}
+
+                                <div class="small text-muted my-3">
+                                    Este site é protegido pelo reCAPTCHA e a <a target="_blank"href="https://policies.google.com/privacy">Política de
+                                    Privacidade</a> e os <a target="_blank" href="https://policies.google.com/terms">Termos de Serviço</a> do Google se aplicam.
+                                </div>
+                                
+                                <button type="submit" class="btn btn-block mybtn btn-padrao">
+                                    Entrar
+                                </button>
+
+                                <div class="login-or">
+                                    <hr class="hr-or">
+                                    <span class="span-or">ou</span>
+                                </div>
+
+                                <p class="text-center">
+                                    <a href="{% provider_login_url 'google' %}" class="google btn mybtn">
+                                        <i class="fab fa-google fa-fw mr-2 text-danger"></i>
+                                        Entre usando o Google
+                                    </a>
+                                </p>
+
+                                <div class="form-group">
+                                    <p class="text-center">
+                                        <a href="{% url 'account_reset_password' %}">
+                                            Esqueceu sua senha?
+                                        </a>
+                                    </p>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <p class="text-center">
+                                        Não tem uma conta?
+                                        <a href="#" id="signup">Inscreva-se</a>
+                                    </p>
+                                </div>
+
+                                <textarea name="g-recaptcha-response" hidden class="recaptcha"></textarea>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="login-criar">
+                        <div class="myform form ">
+                            <div class="logo mb-1">
+                                <div class="col-md-12 text-center">
+                                    <label>Criar conta</label>
+                                </div>
+                            </div>
+                    
+                            <form action="{% url 'ausers:cadastro' %}" method="post" name="resgistro" id="signup-form">
+                                {% csrf_token %}
+                                {{ signup_form|crispy }}
+
+                                <div class="small text-muted my-3">
+                                    Este site é protegido pelo reCAPTCHA e a <a target="_blank"href="https://policies.google.com/privacy">Política de
+                                    Privacidade</a> e os <a target="_blank" href="https://policies.google.com/terms">Termos de Serviço</a> do Google se aplicam.
+                                </div>
+                                
+                                <button type="submit" class="btn btn-block mybtn btn-padrao">
+                                    Inscrever-se
+                                </button>
+
+                                <div class="login-or">
+                                    <hr class="hr-or">
+                                    <span class="span-or">ou</span>
+                                </div>
+
+                                <p class="text-center">
+                                    <a href="{% provider_login_url 'google' %}" class="google btn mybtn">
+                                        <i class="fab fa-google fa-fw mr-2 text-danger"></i>
+                                        Registre-se usando o Google
+                                    </a>
+                                </p>
+
+                                <div class="col-md-12 ">
+                                    <div class="form-group">
+                                        <p class="text-center">
+                                            Já tem uma conta?
+                                            <a href="#" id="signin">
+                                                Entre
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <textarea name="g-recaptcha-response" hidden class="recaptcha"></textarea>
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+                {% endif %}
+            </div>
+    
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+{% endblock %}
+
+
+{% block scripts %}
+    <script src="{% static 'progame/js/distr/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'progame/js/login.js' %}"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_site_key }}"></script>
+    <script>
+        grecaptcha.ready(function() {
+            $('form').submit(function(e){
+                let form = $(this);
+                e.preventDefault();
+
+                grecaptcha.execute('{{ recaptcha_site_key }}', {action: ''}).then(function(token) {
+                    form.find('.recaptcha').val(token);
+                    form[0].submit()
+                });
+            })
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,37 @@
+<!doctype html>
+{% load static %}
+<html lang="pt" style="height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+    <link rel="icon" type="imagem/jpg" href="{% static 'progame/img/logo-small.jpg' %}" />
+    <title>{% block title %}ProGame{% endblock %}</title>
+
+    {% include "core/_metatags.html" %}
+
+    <!-- Styles -->
+    {% include '_styles.html' %}
+    {% block css %}{% endblock %}
+</head>
+
+{#rgba(29,128,217, 0.8)#}
+
+<!-- <body style="background-color: #fafafa; height: 100%"> -->
+<body>
+    {% include '_navbar.html' %}
+
+    <main class="mx-auto px-3 main-container auth d-flex align-items-center py-3">
+        <div class="form-container">
+        {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    {% include '_scripts.html' %}
+    {% block scripts %}{% endblock %}
+    {% include 'core/_messages.html' %}
+</body>
+</html>

@@ -1,0 +1,325 @@
+.ranking{
+    background-color: #fff;
+    
+    /* box-shadow: var(--sombra-1); */
+    
+    /* border:  var(--borda-1); */
+    border-radius: var(--borda-raio-padrao);
+    /* box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important; */
+    overflow:hidden !important;
+}
+.conteudo-layout-direito .ranking{
+    /* box-shadow: none; */
+    background-color: transparent !important;
+    border:  var(--borda-1);
+    margin-bottom: 50px;
+}
+
+
+.ranking-lista{
+    list-style: none;
+    margin: 0px;
+    padding: 0;
+    overflow-y: auto;
+    /* white-space: nowrap; */
+}
+.conteudo-layout-direito .ranking-lista{
+    max-height: 140px;
+}
+
+.ranking-usuario{
+    padding: 20px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--cinza4);
+}
+.ranking-usuario:hover{
+    text-decoration: none;
+    background-color: rgb(245, 245, 245);
+    /* background-color: rgb(250, 250, 250); */
+    color: var(--cinza4);
+}
+
+.ranking-direita{ /* Parte que contém posição, foto e nome do usuário */
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+
+
+.ranking-posicao{
+    color: var(--cinza3);
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 25px;
+}
+.ranking-imagem{
+    width: 50px;
+    height: 50px;
+    border: none;
+    margin-right: 15px;
+}
+.ranking-imagem img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+/* .ranking .voce .ranking-imagem img{
+    border: 3px solid black;
+} */
+.ranking-nome{
+    font-size: 1em;
+    font-weight: 600;
+}
+.ranking-top .ranking-nome{
+    max-width: 200px;
+}
+.ranking-lista .ranking-nome{
+    max-width: 300px;
+}
+
+.ranking-pontos{
+    font-size: 1em;
+    color: var(--cinza3);
+    /* font-weight: bold; */
+}
+/* .ranking .voce .ranking-posicao,
+.ranking .voce .ranking-nome,
+.ranking .voce .ranking-pontos{
+    font-weight: bold;
+    color: black !important;
+} */
+
+
+/* Top 3 */
+.ranking .ranking-top{
+    margin: auto;
+    border-bottom: var(--borda-2);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}    
+.ranking .ranking-top .usuario{
+    padding: 35px 10px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-end;
+    color: black;
+    /* overflow: hidden; */
+}
+.ranking .ranking-top .usuario:hover{
+    text-decoration: none;
+    background-color: rgb(245, 245, 245);
+    /* background-color: rgb(250, 250, 250); */
+    color: black;
+}
+/* Primeiro lugar */
+.ranking .ranking-top .primeiro-lugar .trofeu{
+    margin-top: 10px;
+    font-size: 2em;
+    /* font-size: 1.5em; */
+    
+    width: 70px;
+}
+.ranking .ranking-top .primeiro-lugar .trofeu img,
+.ranking .ranking-top .segundo-lugar .trofeu img,
+.ranking .ranking-top .terceiro-lugar .trofeu img{
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+    box-shadow: 0 0 0 var(--sombra-1);
+}
+.ranking .ranking-top .primeiro-lugar .ranking-imagem{
+    width: 80px;
+    height: 80px;
+    margin: 0;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+/* Segundo e terceiro Lugar */
+.ranking .ranking-top .segundo-lugar .trofeu,
+.ranking .ranking-top .terceiro-lugar .trofeu{
+    margin-top: 10px;
+    font-size: 1.5em;
+
+    width: 50px;
+}
+ 
+.ranking .ranking-top .segundo-lugar .ranking-imagem,
+.ranking .ranking-top .terceiro-lugar .ranking-imagem{
+    margin: 0;
+    position: relative;
+    margin-bottom: 12.5px;
+}
+
+/* Icone de coroa de louros nas fotos do top 3 */
+.ranking .ranking-top .primeiro-lugar .ranking-imagem::after,
+.ranking .ranking-top .segundo-lugar .ranking-imagem::after,
+.ranking .ranking-top .terceiro-lugar .ranking-imagem::after{
+    position: absolute;
+    left: -25%; /* Pra poder ficar centralizado */
+    bottom: -85%; /* Pra poder ficar centralizado */
+    z-index: 3;
+    width: 150%;
+    height: 150%;
+}
+.ranking .ranking-top .primeiro-lugar .ranking-imagem::after {
+    content: url('../img/ranking/cl-gold.svg');
+}
+.ranking .ranking-top .segundo-lugar .ranking-imagem::after{
+    content: url('../img/ranking/cl-silver.svg');
+}
+.ranking .ranking-top .terceiro-lugar .ranking-imagem::after {
+    content: url('../img/ranking/cl-bronze.svg');
+}
+
+
+
+/* Sem ranking */
+.sem-ranking {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.4);
+}
+.sem-ranking img{
+    width: 180px;
+    margin-bottom: 15px;
+}
+/* .sem-ranking i:before{
+    font-size: 80px;
+    margin-left: 0;
+    margin-bottom: 15px;
+} */
+
+
+
+
+@media(min-width: 1200px) {
+    
+    /* Colocação - posição */
+    .conteudo-layout-direito .ranking-posicao{
+        font-size: 14px;
+        margin-right: 10px;
+    }
+    .conteudo-layout-direito .ranking-imagem{
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+    }
+    /* Nome e pontos */
+    .conteudo-layout-direito .ranking-nome,
+    .conteudo-layout-direito .ranking-pontos{
+        font-size: 14px;
+    }
+    .conteudo-layout-direito .ranking-top .ranking-nome{
+        max-width: 80px;
+    }
+    .conteudo-layout-direito .ranking-lista .ranking-nome{
+        max-width: 120px;
+    }
+    
+    /* Primeiro lugar - líder */
+    .conteudo-layout-direito .ranking .ranking-top .primeiro-lugar,
+    .conteudo-layout-direito .ranking .ranking-top .segundo-lugar,
+    .conteudo-layout-direito .ranking .ranking-top .terceiro-lugar{
+        padding: 30px 5px;
+        /* margin: 5px; */
+    }
+    .conteudo-layout-direito .ranking .ranking-top .primeiro-lugar .ranking-imagem{
+        width: 60px;
+        height: 60px;
+        margin-bottom: 10px;
+    }
+    .conteudo-layout-direito .ranking .ranking-top .segundo-lugar .ranking-imagem,
+    .conteudo-layout-direito .ranking .ranking-top .terceiro-lugar .ranking-imagem{
+        margin-bottom: 10px;
+    }
+
+    /* Trofeis top 3 */
+    .conteudo-layout-direito .ranking .ranking-top .primeiro-lugar .trofeu{
+        font-size: 1.5em;
+
+        width: 50px;
+
+    }
+    .conteudo-layout-direito .ranking .ranking-top .segundo-lugar .trofeu,
+    .conteudo-layout-direito .ranking .ranking-top .terceiro-lugar .trofeu{
+        font-size: 1em;
+
+        width: 30px;
+    }
+}
+    
+@media(max-width: 768px) {
+    
+    /* Colocação - posição */
+    .ranking-posicao{
+        font-size: 14px;
+        margin-right: 10px;
+    }
+    .ranking-imagem{
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+    }
+    
+    /* Primeiro lugar - líder */
+    .ranking .ranking-top .primeiro-lugar,
+    .ranking .ranking-top .segundo-lugar,
+    .ranking .ranking-top .terceiro-lugar{
+        padding: 30px 5px;
+        /* margin: 5px; */
+    }
+    .ranking .ranking-top .primeiro-lugar .ranking-imagem{
+        width: 60px;
+        height: 60px;
+        margin-bottom: 10px;
+    }
+    .ranking .ranking-top .segundo-lugar .ranking-imagem,
+    .ranking .ranking-top .terceiro-lugar .ranking-imagem{
+        margin-bottom: 10px;
+    }
+
+    /* Nome e pontos */
+    .ranking-nome,
+    .ranking-pontos{
+        font-size: 14px;
+    }
+    .ranking-top .ranking-nome{
+        max-width: 100px !important;
+    }
+    .ranking-lista .ranking-nome{
+        max-width: 120px !important;
+    }
+
+
+    /* Trofeis top 3 */
+    .ranking .ranking-top .primeiro-lugar .trofeu{
+        font-size: 1.5em;
+        width: 50px;
+    }
+    .ranking .ranking-top .segundo-lugar .trofeu,
+    .ranking .ranking-top .terceiro-lugar .trofeu{
+        font-size: 1em;
+        width: 30px;
+    }
+
+    
+}
+
+@media(max-width: 400px) {
+    .ranking-top .ranking-nome{
+        max-width: 75px !important;
+    }
+}
+
+

@@ -1,0 +1,93 @@
+{% extends 'progame/layouts/public_base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'progame/css/escolher-usuario.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="escolher-usuario">
+        <div class="container">
+            <form action="{% url 'progame:escolher_tipo_conta' %}" method="post" id="tipo-user-form">
+                {% csrf_token %}
+                <div class="opcoes-escolha">
+                    <div class="mb-4 d-flex flex-column">
+                        <h4 class="titulos">
+                            Quase lá!
+                        </h4>
+                        <h6 class="subtitulos">
+                            Escolha o tipo de usuário para finalizar o cadastro da conta
+                        </h6>
+                        <div class="text-danger invalid" style="display: none"></div>
+                    </div>
+                    <div>
+                        <div class="tipo-usuario" name="aluno">
+                            <i class="fas fa-user-graduate"></i>
+                            <h5>Aluno</h5>
+                            <span>
+                                Você poderá participar de turmas criadas pelos professores e responder aos módulos
+                                de estudo, concorrer nos rankings com os seus colegas e desbloquear conquistas legais.
+                            </span>
+                        </div>
+                        <div class="tipo-usuario" name="professor">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <h5>Professor</h5>
+                            <span>
+                                Você poderá criar turmas e adicionar módulos de estudo para os seus alunos,
+                                bem como avaliar seus desempenhos e níveis de aprendizagem por meio da plataforma.
+                            </span>
+                        </div>
+                    </div>
+                    <input type="text" hidden id="value">
+                    <button type="submit" class="btn btn-padrao w-100 mt-4" disabled id="escolher">
+                        Continuar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block footer %}{% endblock %}
+
+
+{% block scripts %}
+    <script>
+        $('.tipo-usuario').click(function() {
+            let tipo = $(this);
+            $('.invalid').hide().text('');
+
+            $('.tipo-usuario').each(function() {
+                if ($(this)[0] === tipo[0]) {
+                    $(this).addClass('active')
+                } else {
+                    $(this).removeClass('active')
+                }
+            });
+
+            let button = $('.tipo-usuario.active');
+            if (button.length) {
+                $('#escolher').attr('disabled', false)
+            } else {
+                $('#escolher').attr('disabled', true)
+            }
+        });
+
+
+        $('#escolher').on('click', function(e) {
+            e.preventDefault();
+            let active_btn = $('.tipo-usuario.active');
+
+            if (!active_btn.length) {
+                $('.invalid').show().text('Selecione pelo menos uma das opções abaixo')
+            } else {
+                $('.invalid').hide().text('');
+                $('#value').attr('name', active_btn.attr('name'));
+
+                $('#tipo-user-form').submit()
+            }
+        })
+    </script>
+{% endblock %}

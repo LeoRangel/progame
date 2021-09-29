@@ -1,0 +1,79 @@
+{% load static %}
+{% load ausers_tags %}
+
+{% if turma|check_professor:request %}
+    {% include 'progame/includes/codigo_modal.html' %}
+{% endif %}
+
+<div class="header-turma" id="header" data-uuid="{{ turma.uuid }}" style="background: #313a47;">
+    <div class="container">
+        <div class="turma-infos">
+            <!-- {% block breadcrumbs %}
+                <div class="_breadcrumbs">
+                    <a href="{% url 'progame:professor_dashboard' %}">Turmas</a>
+                    <span class="separador">></span>
+                    <span class="pagina-atual">{{ turma }}</span>
+                </div>
+            {% endblock %} -->
+
+            <h1 class="titulos">
+                {{ turma }}
+            </h1>
+
+            <div class="turma-professor mb-4">
+                <div class="professor">
+                    {% if turma.professor.imagem %}
+                        <img src="{{ turma.professor.imagem.url }}" alt="{{ turma.professor }}">
+                    {% else %}
+                        <img src="{% static 'progame/img/user.png' %}" alt="{{ turma.professor }}">
+                    {% endif %}
+                    <span>{{ turma.professor }}</span>
+                </div>
+                {% if turma.get_info %}
+                    <span class="mx-1 mx-sm-3 dot-separator">&#183;</span>
+                    <span>{{ turma.get_info }}</span>
+                {% endif %}
+            </div>
+
+            {% if turma|check_professor:request %}
+                <div class="codigo-container">
+                    <p data-clipboard-text="{{ turma.codigo }}" data-toggle="tooltip" data-placement="top"
+                       title="Copiar" class="codigo copiar">
+                        {{ turma.codigo }}
+                    </p>
+                    <i data-toggle="tooltip" data-placement="top" title="Mostrar" class="mostrar-codigo
+                    fas fa-expand fa-fw fa-lg"></i>
+                </div>
+
+                <div class="mt-3">
+                    <a class="btn btn-sm btn-light editar_turma" href="#">Editar</a>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="turma-dados">
+            <div class="turma-qtd mr-5">
+                <h1>{{ turma.modulos.count }}</h1>
+                <span>
+                    {% if turma.modulos.count == 1 %}
+                        Módulo
+                    {% else %}
+                        Módulos
+                    {% endif %}
+                </span>
+            </div>
+            <div class="turma-qtd">
+                <h1>
+                    {{ turma.alunos.count }}
+                </h1>
+                <span>
+                    {% if turma.alunos.count == 1 %}
+                        Aluno(a)
+                    {% else %}
+                        Alunos
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+{% extends 'ausers/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Cadastro de Aluno - ProGame{% endblock %}
+
+{% block content %}
+    <h3 style="margin-bottom: 2rem" class="text-center">Cadastro de aluno</h3>
+
+    <form action="" method="post" id="cadastro-aluno-form">
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <textarea name="g-recaptcha-response" hidden id="recaptcha"></textarea>
+        <button class="btn btn-primary btn-block my-4" type="submit">Cadastrar-se</button>
+    </form>
+    <hr>
+    <div class="text-center">
+        <a href="{% url 'ausers:login' %}">Já possui uma conta? Entre</a>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_site_key }}"></script>
+    <script>
+        grecaptcha.ready(function() {
+            $('#cadastro-aluno-form').submit(function(e){
+                let form = this;
+                e.preventDefault();
+
+                grecaptcha.execute('{{ recaptcha_site_key }}', {action: ''}).then(function(token) {
+                    $('#recaptcha').val(token);
+                    form.submit()
+                });
+            })
+        });
+    </script>
+{% endblock %}

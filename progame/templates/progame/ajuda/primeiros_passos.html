@@ -1,0 +1,288 @@
+{% extends 'progame/layouts/ajuda_base.html' %}
+{% load static %}
+
+{% block css %}
+{% endblock %}
+
+{% block header %}
+<h4 class="subtitulos">Primeiros passos</h4>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row flex-wrap-reverse">
+
+        <div class="col-md-9">
+            <div class="conteudo-ajuda" data-spy="scroll" data-target="#navbar-ajuda">
+
+                <!-- Introdução -->
+                <div class="secao">
+                    <a href="#item-1">
+                        <h3 class="titulos" id="item-1">
+                            Introdução
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Bem vindo a central de ajuda do ProGame! Aqui você poderá encontrar todas as informações a
+                            respeito de como usar a plataforma.
+                        </p>
+                        <p>
+                            Use o menu de opções lateral para navegar entre as seções da página e se quiser voltar para
+                            a página inicial da central de ajuda, clique em "Central de ajuda" no cabeçalho da página.
+                        </p>
+                        <p>
+                            Para começar a usar a plataforma você precisa, primeiramente, criar uma conta como professor
+                            ou uma conta como aluno. Siga para a seção de
+                            <a href="#item-2">Cadastro</a>
+                            para aprender como registrar-se no sistema e se já fez isso, você pode fazer
+                            <a href="#item-4">Login</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Cadastro -->
+                <div class="secao">
+                    <a href="#item-2">
+                        <h3 class="titulos" id="item-2">
+                            Criar uma conta
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Para criar uma conta no ProGame é simples:
+                        </p>
+
+                        <br>
+                        <p>
+                            1 - Vá para a página de cadastro clicando no botão <strong>Registrar-se</strong> na barra de
+                            navegação localizada no topo da página.
+                        </p>
+                        <p>
+                            2 - Escolha uma das formas de cadastro: Registrar-se com a conta do google ou Preencher o
+                            formulário.
+                        </p>
+                        <p>
+                            3 - Se você escolheu <strong>Registrar-se com a conta do google</strong>, tudo o que precisa
+                            fazer é clicar no botão com esse mesmo nome e escolher a conta que será utilizada. Se você
+                            prefere a segunda opção, preencha o formulário com um endereço de email e uma senha válidos
+                            (obs: no 3º campo do formulário você precisa repetir a senha como procedimento de segurança)
+                            e clique no botão <strong>Continuar</strong>.
+                        </p>
+                        <p>
+                            O próximo passo de criar uma conta é escolher o seu
+                            <a href="#item-3">tipo de usuário</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Escolher tipo de usuário -->
+                <div class="secao">
+                    <a href="#item-3">
+                        <h3 class="titulos" id="item-3">
+                            Escolher tipo de usuário
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Após fazer a primeira parte do cadastro, você precisa agora escolher o tipo de usuário que
+                            você será no sistema, para finalizar o procedimento e ser redirecionado para a página de
+                            inicial do usuário. Para isso, realize os seguintes passos:
+                        </p>
+
+                        <br>
+                        <p>
+                            1 - Leia a descrição e escolha uma das opções de usuário:
+                            <strong>Aluno</strong> ou <strong>Professor</strong>.
+                        </p>
+                        <p>
+                            2 - Clique na opção escolhida.
+                        </p>
+                        <p>
+                            3 - Clique no botão <strong>Continuar</strong>.
+                        </p>
+                        <br>
+
+                        <p>
+                            Feito isso, você será redirecionado para a página inicial do usuário
+                            <a href="#item-4">Minhas turmas</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Login -->
+                <div class="secao">
+                    <a href="#item-4">
+                        <h3 class="titulos" id="item-4">
+                            Entrar na minha conta
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Para fazer login no sistema, você precisa ter criado uma conta anteriormente. Se ainda não
+                            fez esse procedimento, volte para a seção
+                            <a href="#item-2">cadastro</a>
+                            e veja o passo a passo de como você pode fazer isso. Caso já tenha uma conta no ProGame,
+                            você pode fazer login da seguinte maneira:
+                        </p>
+
+                        <br>
+                        <p>
+                            1 - Clique no botão <strong>Entrar</strong> localizado na barra de navegação no topo da
+                            página para ser redirecionado para a página de login.
+                        </p>
+                        <p>
+                            2 - Preencha o formulário de login com email e senha da sua conta.
+                        </p>
+                        <p>
+                            3 - Clique no botão <strong>Entrar</strong>.
+                        </p>
+                        <br>
+
+                        <p>
+                            Feito isso, você será redirecionado para a página inicial do usuário
+                            <a href="#item-4">Minhas turmas</a>
+                            ou para a página de
+                            <a href="#item-2-2">Escolher tipo de usuário</a>
+                            no caso de o cadastro da conta ainda não está finalizado.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Esqueci minha senha -->
+                <!-- <div class="secao">
+                        <a href="#item-5">
+                            <h3 class="titulos" id="item-5">
+                                Esqueci minha senha
+                                <span class="hashtag">#</span>
+                            </h3>
+                            <hr>
+                        </a>
+                        <div>
+                            Em breve...
+                        </div>
+                    </div> -->
+
+                <!-- Perfil -->
+                <div class="secao">
+                    <a href="#item-6">
+                        <h3 class="titulos" id="item-6">
+                            Ver perfil
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Para ver o seu perfil de usuário é simples.
+                        </p>
+
+                        <br>
+                        <p>
+                            1 - Na barra de navegação localizada no topo da página, clique na opção que mostra sua foto
+                            e nome de usuário.
+                        </p>
+                        <p>
+                            2 - Localize a opção <strong>Meu perfil</strong> e clique para que seja aberta a tela de
+                            perfil.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Editar dados pessoais -->
+                <div class="secao">
+                    <a href="#item-7">
+                        <h3 class="titulos" id="item-7">
+                            Editar dados pessoais
+                            <span class="hashtag">#</span>
+                        </h3>
+                    </a>
+                    <div>
+                        <p>
+                            Para editar os seus dados de usuário, realize os seguintes procedimentos:
+                        </p>
+
+                        <br>
+                        <p>
+                            1 - Na barra de navegação localizada no topo da página, clique na opção que mostra sua foto
+                            e nome de usuário.
+                        </p>
+                        <p>
+                            2 - Localize a opção <strong>Editar perfil</strong> e clique para que seja aberta a tela de
+                            edição de perfil.
+                        </p>
+                        <p>
+                            3 - Realize as edições necessárias.
+                        </p>
+                        <p>
+                            4 - Clique no botão <strong>Salvar</strong>.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ajuda-prox-ant">
+                <a href="{% url 'progame:ajuda' %}">
+                    <i class="mr-2 fas fa-chevron-left"></i>
+                    Central de ajuda
+                </a>
+                <a href="{% url 'progame:turmas_e_alunos' %}">
+                    Turmas e Alunos
+                    <i class="ml-2 fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <nav id="navbar-ajuda" class="sticky-top nav nav-pills flex-column">
+
+                <a class="nav-link" href="#item-1">
+                    Introdução
+                </a>
+
+                <a class="nav-link" href="#item-2">
+                    Criar uma conta
+                </a>
+
+                <a class="nav-link" href="#item-3">
+                    Escolher tipo de usuário
+                </a>
+
+                <a class="nav-link" href="#item-4">
+                    Entrar na minha conta
+                </a>
+
+                <!-- <a class="nav-link" href="#item-5">
+                        Esqueci minha senha
+                    </a> -->
+
+                <a class="nav-link" href="#item-6">
+                    Ver perfil
+                </a>
+
+                <a class="nav-link" href="#item-7">
+                    Editar dados pessoais
+                </a>
+
+            </nav>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+
+{% block footer %}{% endblock %}
+
+
+{% block scripts %}
+{% endblock %}

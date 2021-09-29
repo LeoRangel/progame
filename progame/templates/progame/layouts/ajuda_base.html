@@ -1,0 +1,60 @@
+<!doctype html>
+{% load static %}
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+    <link rel="icon" type="imagem/jpg" href="{% static 'progame/img/logo-small.jpg' %}" />
+    <title>{% block title %}ProGame - Ajuda{% endblock %}</title>
+
+    {% include "core/_metatags.html" %}
+
+    <!-- Styles -->
+    {% include '_styles.html' %}
+    <link rel="stylesheet" href="{% static 'progame/css/ajuda.css' %}">
+    {% block css %}{% endblock %}
+    
+</head>
+
+<body>
+    {% include '_navbar.html' %}
+
+    <div class="ajuda-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="py-5">
+                        <a href="{% url 'progame:ajuda' %}">
+                            <h1 class="titulos">Central de ajuda</h1>
+                        </a>
+                        {% block header %}{% endblock %}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="{% static 'progame/img/ilust/ajuda.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container main-container">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include '_footer.html' %}
+
+    
+    <!-- Scripts -->
+    {% include '_scripts.html' %}
+    {% block scripts %}{% endblock %}
+    {% include 'core/_messages.html' %}
+    <script>
+        $('[data-spy="scroll"]').each(function () {
+            var $spy = $(this).scrollspy('refresh')
+        })
+    </script>
+</body>
+</html>

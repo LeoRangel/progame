@@ -1,0 +1,73 @@
+
+
+/* Níveis da tela de cadastro de pergunta: cores e outros estilos */
+.nivel-radio-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    border-radius: var(--borda-raio-padrao);
+    transition: background-color .3s ease-out;
+}
+.nivel-radio-container, .nivel-radio-container * {
+    cursor: pointer;
+}
+.nivel-radio-container input[type=radio] {
+    display: none;
+}
+.nivel-radio-container label {
+    margin: 0;
+}
+.nivel-radio-container {background-color: rgba(0,0,0,0.05);}
+.nivel-radio-container.n-1.active{background: var(--cor-nivel-1);}
+.nivel-radio-container.n-2.active{background: var(--cor-nivel-2);}
+.nivel-radio-container.n-3.active{background: var(--cor-nivel-3);}
+.nivel-radio-container.n-4.active{background: var(--cor-nivel-4);}
+.nivel-radio-container.n-5.active{background: var(--cor-nivel-5);}
+.nivel-radio-container.n-6.active{background: var(--cor-nivel-6);}
+
+.nivel-radio-container.n-1.active,
+.nivel-radio-container.n-2.active,
+.nivel-radio-container.n-3.active,
+.nivel-radio-container.n-4.active,
+.nivel-radio-container.n-5.active,
+.nivel-radio-container.n-6.active{
+    color: white !important;
+}
+
+/* Alternativas */
+.tabela-alternativas {
+    border-collapse:separate;
+    border-spacing: 0 1em;
+}
+.tabela-alternativas td {
+    vertical-align: top;
+}
+.alternativa {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+.alternativa .identificador {
+    font-size: 18px;
+}
+.alternativa .nome {
+    white-space: normal;
+    text-align: left;
+    color: #000 !important;
+    font-weight: 400 !important;
+}
+.alternativa.incorreta .nome {
+    background-color: rgba(0,0,0,0.05) !important;
+}
+.alternativa.correta .nome {
+    /* background-color: var(--cor-primaria-2) !important; */
+    background-color: var(--cor-nivel-1) !important;
+    color: white !important;
+}
+
+.excluir {
+    background-color: var(--cor-nivel-4);
+}
+.excluir i{
+    font-size: 14px;
+}

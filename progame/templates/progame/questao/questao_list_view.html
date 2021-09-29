@@ -1,0 +1,182 @@
+{% extends 'progame/layouts/modulo_base.html' %}
+{% load ausers_tags %}
+{% load progame_tags %}
+{% load quiz_tags %}
+{% load static %}
+
+{% block title %}{{ object }} - {{ object.turma }}{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="_breadcrumbs">
+        <a href="{% url 'progame:professor_dashboard' %}">Turmas</a>
+        <span class="separador">></span>
+        <a href="{% url 'progame:turma_detail_view' object.turma.uuid %}">{{ object.turma }}</a>
+        <span class="separador">></span>
+        <span class="pagina-atual">{{ object }}</span>
+    </div>
+{% endblock %}
+
+{% block header %}
+    {% with turma=object.turma %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+
+{% block content %}
+    {% include 'progame/modulo/modal/links_estudo_modal.html' with form=link_estudo_form %}
+    <div class="oa-opcoes">
+{#        {% include 'progame/includes/modulo_actions.html' %}#}
+        <div class="coluna-conteudo-nav-pill">
+            <div id="accordion" class="bg-info">
+            {% for nivel, questoes in questoes_dict.items %}
+                {% with quiz=object|get_quiz:nivel %}
+                    <div class="card">
+                        <div class="card-header" id="heading{{nivel}}">
+                            <button class="btn btn-link questao-list" data-toggle="collapse" data-target="#collapse{{ nivel }}"
+                                    aria-expanded="true" aria-controls="collapse{{ nivel }}">
+                                <div class="numero">
+                                    <span class="">
+                                        {{ nivel }}
+                                    </span>
+                                </div>
+                                <div class="infos">
+                                    <div class="titulo">
+                                        <span class="nome">
+                                            {{ nivel|get_verbose_nivel }}
+                                        </span>
+                                    </div>
+                                    <div class="d-flex icones-card">
+                                        <a class="quiz-toggle-bloqueio link-icon btn" data-toggle="tooltip"
+                                           data-placement="top" data-modulo="{{ object.pk }}" data-nivel="{{ nivel }}"
+                                           title="
+                                            {% if quiz.bloqueado %}
+                                                Desbloquear quiz
+                                            {% else %}
+                                                Bloquear quiz
+                                            {% endif %}
+                                            "
+                                           href="{% url 'progame:quiz_toggle_bloqueio' %}">
+                                            {% if quiz.bloqueado %}
+                                                <i class="fas fa-lock fa-fw"></i>
+                                            {% else %}
+                                                <i class="fas fa-lock-open fa-fw"></i>
+                                            {% endif %}
+                                        </a>
+                                        <a class="link-icon btn links-estudo" data-toggle="tooltip" data-placement="top"
+                                           title="Links de estudo" href="#"
+                                           data-post-url="{% url 'quiz:link_ajuda_create_view' quiz.uuid %}"
+                                           data-get-url="{% url 'quiz:get_links_ajuda' quiz.uuid %}">
+                                            <i class="fas fa-link fa-fw"></i>
+                                        </a>
+                                        <a class="link-icon btn" data-toggle="tooltip" data-placement="top"
+                                           title="Importar questões"
+                                           href="{% url 'progame:importar_questoes_list_view' object.uuid nivel %}">
+                                            <i class="fas fa-file-import fa-fw"></i>
+                                        </a>
+                                        <a class="link-icon btn" data-toggle="tooltip" data-placement="top"
+                                           title="Adicionar questão"
+                                           href="{% url 'progame:questao_create_view' object.uuid nivel %}">
+                                            <i class="fas fa-plus fa-fw"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+
+                        <div id="collapse{{ nivel }}" class="collapse-conteudo collapse" aria-labelledby="heading{{nivel}}"
+                             data-parent="#accordion">
+                            <div class="container-fluid">
+                            {% if not quiz.has_questoes_suficientes %}
+                                <div class="alert alert-warning mb-0 mt-4" role="alert">
+                                    O quiz precisa ter pelo menos <strong>{{ quiz.min_questoes }} questão
+                                    cadastrada</strong> para os alunos responderem
+                                </div>
+                            {% endif %}
+                            {% for questao in questoes %}
+                                    <div class="questao row p-3" id="q{{ questao.pk }}">
+                                        <div class="col-9 col-md-10">
+                                            <div class="header font-weight-normal">
+                                                {{ questao.sentenca }}
+                                            </div>
+                                            <div class="body">
+                                                {% for alternativa in questao.alternativas.all %}
+                                                    <div class="alternativa">
+                                                        {% if alternativa.is_correta %}
+                                                            <span class="text-success" title="Alternativa correta"
+                                                            >{{ alternativa }}</span>
+                                                        {% else %}
+                                                            <span class="text-muted">{{ alternativa }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="col-3 col-md-2 m-auto text-right">
+                                            <a href="{% url 'progame:questao_update_view' questao.uuid %}"
+                                               class="edit-button btn btn-sm btn-primary">Editar</a>
+                                        </div>
+                                    </div>
+                            {% empty %}
+                                <div class="text-muted px-3 py-4">Nenhuma questão cadastrada para esse nível</div>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endwith %}
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'progame/js/detect_device.js' %}"></script>
+    <script src="{% static 'progame/js/utils.js' %}"></script>
+    <script src="{% static 'progame/js/ajax/csrf_ajax_config.js' %}"></script>
+    <script src="{% static 'progame/js/ajax/quiz_toggle_bloqueio_ajax.js' %}"></script>
+    <script src="{% static 'progame/js/ajax/links_estudo_ajax.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            let param_string = window.location.search;
+
+            // n = nivel, q = questao_pk
+            if(param_string) {
+                let params = new URLSearchParams(param_string);
+                let nivel_collapse = $('#collapse'+params.get('n'));
+                let questao = $('#q'+params.get('q'));
+
+                // TODO: Corrigir, pois não está funcionando corretamente
+                $([document.documentElement, document.body]).animate({
+                    scrollTop: nivel_collapse.parent().offset().top
+                }, 1000);
+
+                nivel_collapse.addClass('show');
+                nivel_collapse.parents('.card:first').addClass('active');
+                destacar_campo(questao)
+            }
+
+            if (mobileAndTabletcheck()) {
+                $('.edit-button').css('opacity', '1')
+                $('.icones-card').css('opacity', '1')
+                $('.link-icon').css('border', '1px solid rgba(0,0,0,0.3)')
+            }
+        });
+
+        $(window).resize(function() {
+            if (mobileAndTabletcheck()) {
+                $('.edit-button').css('opacity', '1')
+                $('.icones-card').css('opacity', '1')
+                $('.link-icon').css('border', '1px solid rgba(0,0,0,0.3)')
+            }
+        });
+
+        $('.card-header').delegate('a.links-estudo', 'click', function() {
+            $('#links-estudo-modal').modal('show')
+        })
+
+        $('.card-header').delegate('a.link-icon', 'click', function(e) {
+            e.stopPropagation()
+        })
+    </script>
+{% endblock %}

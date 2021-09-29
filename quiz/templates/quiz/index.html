@@ -1,0 +1,27 @@
+<!doctype html>
+{% load static %}
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+    <link rel="icon" type="imagem/jpg" href="{% static 'progame/img/logo-small.jpg' %}" />
+    <title>Quiz - ProGame</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <div id="root"></div>
+
+    <script src="{% static 'progame/js/distr/popper_.min.js' %}"></script>
+    <script src="{% static 'progame/js/distr/jquery.min.js' %}"></script>
+    <script src="{% static 'progame/js/distr/bootstrap_.min.js' %}"></script>
+    <script src="{% static 'quiz/main.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{% load ausers_tags %}
+
+<div class="coluna-nav-pill">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+         aria-orientation="vertical">
+        <a class="nav-link {% if 'quiz' in active or 'questoes' in active %}active{% endif %}" id="v-pills-quiz-tab"
+           href="
+            {% if object.turma|check_professor:request %}
+                {% url 'progame:questao_list_view' object.uuid %}
+            {% elif object.turma|check_aluno:request %}
+                {% url 'progame:aluno_modulo_detail_view' object.uuid %}
+            {% endif %}
+            "
+           role="tab" aria-controls="v-pills-quiz" aria-selected="false">
+            Quizzes
+        </a>
+        <a class="nav-link {% if 'ranking' in active %}active{% endif %}" id="v-pills-ranking-tab" href=
+                "{% url 'progame:modulo_ranking_detail_view' object.uuid %}" role="tab"
+           aria-controls="v-pills-ranking" aria-selected="false">
+            Ranking
+        </a>
+        <a class="nav-link {% if 'info' in active %}active{% endif %}" id="v-pills-infos-tab"
+           href="{% url 'progame:modulo_detail_view' object.uuid %}" role="tab" aria-controls="v-pills-infos"
+           aria-selected="true">
+           <span class="hidden-sm">
+               Informações
+           </span>
+           <span class="show-sm">
+               Info.
+           </span>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,579 @@
+{% extends 'stats/base.html' %}
+{% load static %}
+{% load stats_tags %}
+{% load progame_tags %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'stats/css/caract.css' %}">
+    <link rel="stylesheet" href="{% static 'stats/css/custom-table.css' %}">
+    <link rel="stylesheet" href="{% static 'stats/css/custom-modal.css' %}">
+{% endblock %}
+
+
+{% block modal %}
+    {% include 'stats/modulo/aluno_modal.html' %}
+    {% include 'stats/includes/modal/modulo_quiz_modal.html' %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="card-modulo">
+        <div class="p-top-options">
+            <div>
+                <a href="{% url 'stats:modulo_list_view' turma.uuid %}" class="btn-voltar btn-e">
+                </a>
+            </div>
+            <div>
+{#                <div class="ajuda mr-2 text-info">#}
+{#                    <i class="far fa-exclamation mr-1"></i>#}
+{#                    <span>#}
+{#                        Alguém precisa de ajuda!#}
+{#                    </span>#}
+{#                </div>#}
+                <div class="dropdown options-dropdown">
+                    <div style="cursor: pointer" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                         aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-fw ml-1"></i>
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                        <a href="{% url 'progame:questao_list_view' object.uuid %}" class="dropdown-item" type="button">
+                            Ir para página</a>
+{#                        <button class="dropdown-item" type="button">Remover</button>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="c-header">
+            <div class="infos" id="infos-header">
+                <div class="foto">
+                    <img src="{% static 'stats/img/module.png' %}" alt="{{ object }}">
+{#                    <div class="ajuda text-info" data-toggle="tooltip" data-placement="top" title="Alguém precisa de ajuda">#}
+{#                        <!-- <i class="far fa-exclamation"></i> -->#}
+{#                        <i class="fas fa-exclamation"></i>#}
+{#                    </div>#}
+                </div>
+                <div class="dados">
+                    <h3 class="titulos">
+                        Módulo: {{ object }}
+                    </h3>
+                    <h6 class="subtitulos">
+                        <!-- {{ object.descricao }} -->
+                        Cadastrado em {{ object.criado_em|date:"d/m/Y" }}
+                    </h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="c-qtd">
+            <div class="finalizados text-success">
+                <i class="fas fa-check-circle fa-lg"></i>
+                <span>
+                    {% if object.qtd_alunos_finalizados == 1 %}
+                        {{ object.qtd_alunos_finalizados }} Aluno finalizou
+                    {% else %}
+                        {{ object.qtd_alunos_finalizados }} Alunos finalizaram
+                    {% endif %}
+                </span>
+            </div>
+            <div class="em-progresso text-warning-darker">
+                <i class="fas fa-clock fa-lg"></i>
+                <span>
+                    {% if object.qtd_alunos_em_andamento == 1 %}
+                        {{ object.qtd_alunos_em_andamento }} Aluno está em andamento
+                    {% else %}
+                        {{ object.qtd_alunos_em_andamento }} Alunos estão em andamento
+                    {% endif %}
+                </span>
+            </div>
+            <div class="pendentes text-danger">
+                <i class="fas fa-exclamation-circle fa-lg"></i>
+                <span>
+                    {% if object.qtd_alunos_pendentes == 1 %}
+                        {{ object.qtd_alunos_pendentes }} Aluno ainda não iniciou
+                    {% else %}
+                        {{ object.qtd_alunos_pendentes }} Alunos ainda não iniciaram
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <div class="custom-table">
+                <div class="thead">
+                    <div class="tr">
+                        <div class="td">Aluno</div>
+                        <div class="td">Última tentativa</div>
+                        <div class="td">Questões respondidas</div>
+                        <div class="td">Nota no módulo</div>
+                        <div class="td">Nível Atual</div>
+                        <div class="td">Status</div>
+                    </div>
+                </div>
+                <div class="tbody">
+                    {% for aluno in turma.alunos.all %}
+                        <a href="#" class="aluno-tr tr" data-pk="{{ aluno.pk }}" data-toggle="modal"
+                           data-target="#alunoModal">
+                            <div class="td">
+                                {% if aluno.imagem %}
+                                    <img src="{{ aluno.imagem.url }}" alt="{{ aluno }}">
+                                {% else %}
+                                    <img src="{% static 'progame/img/user.png' %}" alt="{{ aluno }}">
+                                {% endif %}
+                                <span>{{ aluno }}</span>
+{#                                <span class="ajuda" data-toggle="tooltip" data-placement="top" title="Precisa de ajuda">#}
+{#                                    <!-- <i class="far fa-exclamation"></i> -->#}
+{#                                    <i class="fas fa-exclamation"></i>#}
+{#                                </span>#}
+                            </div>
+                            <div class="td">
+                                {{ aluno|get_data_ultima_tentativa_modulo:object|default_if_none:'Nunca' }}
+                            </div>
+                            <div class="td">
+                                {{ aluno|get_questoes_respondidas_no_modulo:object }}/{{ object.questoes.count }}
+                            </div>
+                            <div class="td">
+                                {{ aluno|get_nota_no_modulo:object }}
+                            </div>
+                            <div class="td">
+                                {% if aluno|get_nivel_no_modulo:object > 0 %}
+                                    ( {{ aluno|get_nivel_no_modulo:object }} )
+                                    {{ aluno|get_nivel_no_modulo:object|get_verbose_nivel|upper }}
+                                {% else %}
+                                    0
+                                {% endif %}
+                            </div>
+                            <div class="td">
+                                {% if aluno|get_status_no_modulo:object == 1 %}
+                                    <i class="text-danger fas fa-exclamation-circle fa-lg" data-toggle="tooltip"
+                                       data-placement="top" title="Ainda não iniciou"></i>
+                                {% elif aluno|get_status_no_modulo:object == 2 %}
+                                    <i class="text-warning-darker fas fa-clock fa-lg" data-toggle="tooltip"
+                                       data-placement="top" title="Em andamento"></i>
+                                {% elif aluno|get_status_no_modulo:object == 3 %}
+                                    <i class="text-success fas fa-check-circle fa-lg" data-toggle="tooltip"
+                                       data-placement="top" title="Finalizou"></i>
+                                {% endif %}
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% if not turma.alunos.all %}
+                <div class="text-center mt-4">
+                    <p class="text-muted">Nenhum aluno na turma</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="c-header mt-5">
+            <div class="infos">
+                <div class="dados">
+                    <h4 class="titulos">
+                        Níveis do módulo
+                    </h4>
+                    <h6 class="subtitulos">
+                        Estatísticas separadas pelo nível do quiz
+                    </h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <div class="custom-table">
+                <div class="thead">
+                    <div class="tr">
+                        <div class="td">Nível</div>
+                        <div class="td">Nº de questões</div>
+                        <div class="td">Índice de acertos</div>
+                        <div class="td">Status dos alunos</div>
+                    </div>
+                </div>
+                <div class="tbody">
+                    {% for quiz in object.quizzes.all %}
+                        <a href="#" class="tr quiz-tr" data-nivel="{{ quiz.nivel }}" data-toggle="modal"
+                           data-target="#quizModal">
+                            <div class="td">
+                                ( {{ quiz.nivel }} )
+                                {{ quiz.nivel|get_verbose_nivel|upper }}
+                            </div>
+                            <div class="td">
+                                {{ quiz.questoes.count }}
+                            </div>
+                            <div class="td">
+                                {{ quiz.porcentagem_de_acertos }}%
+                            </div>
+                            <div class="td">
+                                <div class="qtd">
+                                    <div class="finalizados text-success" data-toggle="tooltip"
+                                       data-placement="top" title="Finalizaram">
+                                        <i class="fas fa-check-circle fa-lg"></i>
+                                        <span>{{ quiz.qtd_alunos_finalizados }}</span>
+                                    </div>
+                                    <div class="em-progresso text-warning-darker" data-toggle="tooltip"
+                                       data-placement="top" title="Em andamento">
+                                        <i class="fas fa-clock fa-lg"></i>
+                                        <span>{{ quiz.qtd_alunos_em_andamento }}</span>
+                                    </div>
+                                    <div class="pendentes text-danger" data-toggle="tooltip"
+                                       data-placement="top" title="Ainda não iniciaram">
+                                        <i class="fas fa-exclamation-circle fa-lg"></i>
+                                        <span>{{ quiz.qtd_alunos_pendentes }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        const url = "{% url 'stats:get_modulo_info' object.uuid %}"
+        const alunoUrl = "{% url 'stats:get_modulo_aluno_info' object.uuid %}"
+
+        let quizTr = $('.quiz-tr')
+        let alunoTr = $('.aluno-tr')
+
+        let quizModal = $('#quizModal')
+        let alunoModal = $('#alunoModal')
+
+        let modalHeader = quizModal.find('.modal-header')
+        let modalBody = quizModal.find('.modal-body')
+        let spinner = quizModal.find('._spinner')
+
+        let alunoModalHeader = alunoModal.find('.modal-header')
+        let alunoModalBody = alunoModal.find('.modal-body')
+        let alunoSpinner = alunoModal.find('._spinner')
+
+        const tabelaComDificuldade = alunoModal.find('.tabela-com-dificuldade')
+        const tabelaEsteveComDificuldade = alunoModal.find('.tabela-esteve-com-dificuldade')
+
+        const tabelaAlunos = quizModal.find('.tabela-alunos')
+        const tabelaHistoricoRespostas = quizModal.find('.tabela-historico-respostas')
+
+        quizTr.click(function() {
+            let nivel = $(this).data('nivel')
+
+            resetModalContent()
+            getQuizInfo(url, nivel)
+        })
+
+
+        alunoTr.click(function() {
+            let pk = $(this).data('pk')
+
+            resetAlunoModalContent()
+            getAlunoInfo(alunoUrl, pk)
+        })
+
+        function getAlunoInfo(url, pk) {
+            if (url && pk) {
+                $.ajax({
+                    url: url,
+                    data: {aluno_pk: pk},
+
+                    beforeSend: function() {
+                        alunoModalBody.hide()
+                        alunoModalHeader.find('._header').hide()
+                        alunoSpinner.show()
+                    },
+                    success: function(res) {
+                        // Header do modal - informações do módulo e nível do aluno
+                        let alunoInfo = res.alunoInfo
+
+                        alunoModalHeader.find('.m-infos .titulos').text(alunoInfo.nome)
+                        alunoModalHeader.find('.m-infos .subtitulos').text(`${alunoInfo.pontosNaTurma} pontos na turma`)
+                        alunoModalHeader.find('.nivel-modulo h1').text(alunoInfo.nivelAluno)
+                        alunoModalHeader.find('.nivel-modulo span').text(alunoInfo.nivelAlunoDescricao)
+
+                        // Tabelas de questões com dificuldade (questoesComDificuldade)
+                        let questoesComDificuldade = res.questoesComDificuldade
+
+                        if (questoesComDificuldade.length > 0) {
+                            questoesComDificuldade.forEach(questao => {
+                                let tr = $('<tr></tr>')
+                                $(`<th title="${questao.sentenca}">${questao.sentencaTruncated}</th>`).appendTo(tr)
+                                $(`<td>${questao.nivel}</td>`).appendTo(tr)
+                                $(`<td>${questao.qtdErros}</td>`).appendTo(tr)
+
+                                tr.appendTo(tabelaComDificuldade.find('table tbody'))
+                            })
+                        } else {
+                            tabelaComDificuldade.hide()
+                            let div = $('<div class="_empty w-100 d-flex p-4 text-left"></div>')
+                            $('<span class="mx-auto text-muted">Nenhuma.</span>').appendTo(div)
+
+                            div.insertAfter(tabelaComDificuldade)
+                        }
+
+                        // Tabelas de questões que esteve com dificuldade (questoesQueEsteveComDificuldade)
+                        let questoesEsteveComDificuldade = res.questoesQueEsteveComDificuldade
+
+                        if (questoesEsteveComDificuldade.length > 0) {
+                            questoesEsteveComDificuldade.forEach(questao => {
+                                let tr = $('<tr></tr>')
+                                $(`<th title="${questao.sentenca}">${questao.sentencaTruncated}</th>`).appendTo(tr)
+                                $(`<td>${questao.nivel}</td>`).appendTo(tr)
+                                $(`<td>${questao.qtdErros}</td>`).appendTo(tr)
+
+                                tr.appendTo(tabelaEsteveComDificuldade.find('table tbody'))
+                            })
+                        } else {
+                            tabelaEsteveComDificuldade.hide()
+                            let div = $('<div class="_empty w-100 d-flex p-4 text-left"></div>')
+                            $('<span class="mx-auto text-muted">Nenhuma.</span>').appendTo(div)
+
+                            div.insertAfter(tabelaEsteveComDificuldade)
+                        }
+
+                        // Tabelas de tentativas
+                        let quizzes = res.quizzes
+                        const tabelaBase = alunoModal.find('.tabela-tentativas-base')
+
+                        if (!$.isEmptyObject(quizzes)) {
+                            for (let quiz in quizzes) {
+                                let novaTabela = tabelaBase.clone().css('display', 'block')
+                                let tbody = novaTabela.find('table tbody')
+                                novaTabela.removeClass('tabela-tentativas-base').insertBefore(tabelaBase)
+
+                                novaTabela.find('.t-header').text(`Quiz nível ${quiz}`)
+
+                                let tentativas = quizzes[quiz]
+                                tentativas.forEach(function (tentativa) {
+                                    let tr = $('<tr></tr>')
+                                    $(`<th>${tentativa.numero}</th>`).appendTo(tr)
+                                    $(`<td>${tentativa.data}</td>`).appendTo(tr)
+                                    $(`<td>${tentativa.acertos}</td>`).appendTo(tr)
+                                    $(`<td>${tentativa.erros}</td>`).appendTo(tr)
+                                    $(`<td>${tentativa.pontuacao} pts</td>`).appendTo(tr)
+
+                                    tr.appendTo(tbody)
+                                })
+                            }
+                        } else {
+                            let div = $('<div class="_empty w-100 d-flex p-4 text-left"></div>')
+                            $('<span class="mx-auto text-muted">O aluno não realizou nenhuma tentativa nesse módulo.</span>')
+                            .appendTo(div)
+
+                            div.insertAfter(tabelaBase)
+                        }
+                    },
+                    error: function(err) {
+                        alert('Houve um erro ao buscar os dados. Tente novamente mais tarde.')
+                    },
+                    complete: function() {
+                        alunoSpinner.fadeOut(function() {
+                            alunoModalHeader.find('._header').fadeIn()
+                            alunoModalBody.fadeIn()
+                        })
+                    }
+                })
+            }
+        }
+
+        function getQuizInfo(url, nivel) {
+            if (url && nivel) {
+                $.ajax({
+                    url: url,
+                    data: {nivel: nivel},
+
+                    beforeSend: function() {
+                        modalBody.hide()
+                        modalHeader.find('._header').hide()
+                        spinner.show()
+                    },
+                    success: function(res) {
+                        // Header do modal - informações do nível do módulo
+                        let nivelInfo = res.nivelInfo
+
+                        modalHeader.find('.nivel-modulo h1').text(nivelInfo.nivel)
+                        modalHeader.find('.nivel-modulo span').text(nivelInfo.descricao)
+
+                        // Alunos
+                        let alunos = res.alunos
+
+                        let tr = $('<tr></tr>')
+                        $(`<td>${alunos.completaram}</td>`).appendTo(tr)
+                        $(`<td>${alunos.emAndamento}</td>`).appendTo(tr)
+                        $(`<td>${alunos.pendentes}</td>`).appendTo(tr)
+
+                        tr.appendTo(tabelaAlunos.find('table tbody'))
+
+                        {#// Tabelas de tentativas#}
+                        {#let quizzes = res.quizzes#}
+                        {#const tabelaBase = quizModal.find('.tabela-tentativas-base')#}
+                        {##}
+                        {#if (!$.isEmptyObject(quizzes)) {#}
+                        {#    for (let quiz in quizzes) {#}
+                        {#        let novaTabela = tabelaBase.clone().css('display', 'block')#}
+                        {#        let tbody = novaTabela.find('table tbody')#}
+                        {#        novaTabela.removeClass('tabela-tentativas-base').insertBefore(tabelaBase)#}
+                        {##}
+                        {#        novaTabela.find('.t-header').text(`Quiz nível ${quiz}`)#}
+                        {##}
+                        {#        let tentativas = quizzes[quiz]#}
+                        {#        tentativas.forEach(function (tentativa) {#}
+                        {#            let tr = $('<tr></tr>')#}
+                        {#            $(`<th>${tentativa.numero}</th>`).appendTo(tr)#}
+                        {#            $(`<td>${tentativa.data}</td>`).appendTo(tr)#}
+                        {#            $(`<td>${tentativa.acertos}</td>`).appendTo(tr)#}
+                        {#            $(`<td>${tentativa.erros}</td>`).appendTo(tr)#}
+                        {#            $(`<td>${tentativa.pontuacao} pts</td>`).appendTo(tr)#}
+                        {##}
+                        {#            tr.appendTo(tbody)#}
+                        {#        })#}
+                        {#    }#}
+                        {# } else {#}
+                        {#    let div = $('<div class="_empty w-100 d-flex p-4 text-left"></div>')#}
+                        {#    $('<span class="mx-auto text-muted">O aluno não realizou nenhuma tentativa nesse módulo.</span>')#}
+                        {#    .appendTo(div)#}
+                        {##}
+                        {#    div.insertAfter(tabelaBase)#}
+                        {# }#}
+
+                        // Tabelas de histório de respostas
+                        let historicoDeRespostas = res.historicoDeRespostas
+                        let tabelaHistoricoDeRespostasBase = quizModal.find('.tabela-historico-respostas-base')
+
+                        if (!$.isEmptyObject(historicoDeRespostas)) {
+                            for (let questao in historicoDeRespostas) {
+                                let novaTabela = tabelaHistoricoDeRespostasBase.clone().css('display', 'block')
+                                novaTabela.removeClass('tabela-historico-respostas-base').insertBefore(tabelaHistoricoDeRespostasBase)
+
+                                novaTabela.find('.t-header').text(`(Questão) ${questao}`)
+
+                                let alternativas = historicoDeRespostas[questao]
+                                alternativas.forEach(alternativa => {
+                                    let tr = $('<tr></tr>')
+                                    $(`<th title="${alternativa.alternativa}">${alternativa.alternativaTruncated}</th>`).appendTo(tr)
+
+                                    let iconeCorretaIncorreta
+                                    if (alternativa.isCorreta) {
+                                        iconeCorretaIncorreta = $(`<div class="text-success d-inline-block" data-toggle="tooltip"
+                                           data-placement="top" title="Correta">
+                                            <i class="fas fa-check-circle fa-lg"></i>
+                                        </div>`)
+                                    } else {
+                                        iconeCorretaIncorreta = $(`<div class="text-danger d-inline-block" data-toggle="tooltip"
+                                           data-placement="top" title="Incorreta">
+                                            <i class="fas fa-times-circle fa-lg"></i>
+                                        </div>`)
+                                    }
+                                    iconeCorretaIncorreta.appendTo($(`<td></td>`).appendTo(tr))
+                                    $(`<td>${alternativa.quantosSelecionaram}%</td>`).appendTo(tr)
+
+                                    tr.appendTo(novaTabela.find('table tbody'))
+                                    $('[data-toggle="tooltip"]').tooltip()
+
+                                    novaTabela.find('.t-header').text(`(Questão) ${alternativa.questaoTruncated}`)
+                                    .attr('title', alternativa.questao)
+                                    tabelaHistoricoDeRespostasBase.css('display', 'none')
+                                })
+                            }
+                         } else {
+                            tabelaHistoricoRespostas.hide()
+                            let div = $('<div class="_empty w-100 d-flex p-4 text-left"></div>')
+                            $('<span class="mx-auto text-muted">Ninguém tentou nada ainda.</span>').appendTo(div)
+
+                            div.insertAfter(tabelaHistoricoRespostas)
+                         }
+                    },
+                    error: function(err) {
+                        alert('Houve um erro ao buscar os dados. Tente novamente mais tarde.')
+                    },
+                    complete: function() {
+                        spinner.fadeOut(function() {
+                            modalHeader.find('._header').fadeIn()
+                            modalBody.fadeIn()
+                        })
+                    }
+                })
+            }
+        }
+
+        function resetAlunoModalContent() {
+            // volta a mostrar tabelas
+            tabelaComDificuldade.show()
+            tabelaEsteveComDificuldade.show()
+
+            // remove tr's do tbody das tabelas
+            tabelaComDificuldade.find('tbody').empty()
+            tabelaEsteveComDificuldade.find('tbody').empty()
+
+            // remove informações do header
+            alunoModalHeader.find('.m-infos .titulos').text('')
+            alunoModalHeader.find('.m-infos .subtitulos').text('')
+            alunoModalHeader.find('.nivel-modulo h1').text('')
+            alunoModalHeader.find('.nivel-modulo span').text('')
+
+            // remove todas as tabelas com exceção da tabelaBase
+            alunoModal.find('.tabela-tentativas:not(.tabela-tentativas-base)').remove()
+            alunoModal.find('._empty').remove()
+        }
+
+        function resetModalContent() {
+            // volta a mostrar tabelas
+            tabelaAlunos.show()
+            tabelaHistoricoRespostas.show()
+
+            // remove tr's do tbody das tabelas
+            tabelaAlunos.find('tbody').empty()
+            tabelaHistoricoRespostas.find('tbody').empty()
+
+            // remove informações do header
+            modalHeader.find('.nivel-modulo h1').text('')
+            modalHeader.find('.nivel-modulo span').text('')
+
+            // remove todas as tabelas com exceção da tabelaBase
+            quizModal.find('.tabela-historico-respostas:not(.tabela-historico-respostas-base)').remove()
+            quizModal.find('._empty').remove()
+        }
+
+
+
+        // Tour pela página
+        var passos = {
+            steps: [
+                {
+                    element: $(".card-modulo"),
+                    title: 'Estatísticas do módulo',
+                    content: 'Você está na página de estatícas do módulo. Aqui você pode encontrar uma série de informações sobre as atividade dos alunos no módulo.',
+                },
+                {
+                    element: $("#infos-header"),
+                    title: 'Informações do módulo',
+                    content: 'No cabeçalho da página você pode ver algumas informações como nome e data de criação.',
+                },
+                // {
+                //     element: $(".c-header .caract"),
+                //     title: 'Características do módulo',
+                //     content: 'Nesta área você poderá ver algumas características do módulo de acordo com as atividades dos alunos nele, como se ele responde rápido e se acerta muitas questões.',
+                // },
+                // {
+                //     element: $(".card-aluno .c-qtd"),
+                //     title: 'Informações dos alunos',
+                //     content: 'Aqui você poderá saber quantos módulos o aluno, respectivamente, já concluiu (ícone verde), está em andamento (ícone amarelo) e ainda não iniciou (ícone vermelho).',
+                // },
+                // {
+                //     element: $(".custom-table"),
+                //     title: 'Tabela de módulos',
+                //     content: 'Na tabela de módulos, você poderá encontrará informações das atividades do aluno em todos os módulos da turma, como o nível e a situação atual dele nestes módulos. Clique em um dos módulos da tabela quando quiser obter informações mais precisa sobre a atividade deste aluno no módulo.',
+                // },
+                {
+                    element: $(".btn-voltar"),
+                    title: 'Voltar para lista de módulos',
+                    content: 'Clique aqui para sair da página de estatística do módulo e voltar para a tela de listagem de módulos.',
+                },
+            ]
+        };
+        site_tour(passos, 'estatisticas_modulo_tour');
+        // Fim do Tour pela página
+
+    </script>
+{% endblock %}

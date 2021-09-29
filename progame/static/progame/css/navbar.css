@@ -1,0 +1,292 @@
+
+
+
+
+nav {
+   min-height: 80px;
+   /* font-size: 1em; */
+   /* font-weight: 600 !important; */
+   /* transition: margin-left .5s; */
+/*    z-index: 8 !important;*/
+/*    padding-right: 27px;*/
+}
+
+/*.navbar{*/
+/*    background-color: white;*/
+/*    color: black;*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    right: 0;*/
+/*    left: 0;*/
+/*    z-index: 100 !important;*/
+/*}*/
+
+#minha-navbar{
+    /* font-weight: bold; */
+}
+#minha-navbar a{
+    text-decoration: none;
+}
+#minha-navbar .navbar-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+#minha-navbar .navbar-brand:active img {
+    /* width: 130px !important; */
+    /* margin-left: 5px; */
+    /* object-fit: cover; */
+}
+#minha-navbar .navbar-toggler {
+    padding: 5px !important;
+    border-color: transparent !important;
+}
+
+#minha-navbar .turma-areas{
+    background-color: var(--cor-primaria);
+    margin-left: 15px;
+    
+    /* width: 100%; */
+    display: flex;
+    justify-content: center;
+    /* align-items: baseline; */
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    height: 100%;
+}
+#minha-navbar .nav-item {
+    display: flex;
+    align-items: center;
+}
+#minha-navbar .nav-item .nav-link{
+    color: var(--cinza2);
+    font-size: 1rem;
+    /* margin: 0 10px !important; */
+    z-index: 1;
+    padding: 10px 20px;
+
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+#minha-navbar .nav-item .nav-link.btn{
+}
+#minha-navbar .nav-item.active .nav-link{
+    color: var(--cor-primaria);
+}
+#minha-navbar .nav-item:hover{
+    color: var(--cinza4);
+}
+#minha-navbar .nav-item .usuario{
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+/* #minha-navbar .nav-item.social-icon a {
+    color: rgba(255,255,255,.8);
+    font-size: 1.2rem;
+    margin-right: 20px;
+}
+#minha-navbar .nav-item.social-icon:hover a {
+    color: rgba(255,255,255,1);
+} */
+
+
+
+
+/* Navbar na turma */
+#minha-navbar.navbar-turma{
+    background-color: var(--cor-primaria);
+}
+#minha-navbar.navbar-turma .voltar{
+    background-color: var(--cor-primaria);
+    display: flex;
+    align-items: center;
+}
+#minha-navbar.navbar-turma .voltar a{
+    background-color: var(--cor-primaria);
+    color: white;
+    /* margin-right: 15px; */
+    /* margin-left: 20px; */
+}
+#minha-navbar.navbar-turma .voltar a i{
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+#minha-navbar.navbar-turma .voltar a:hover{
+    color: whitesmoke;
+}
+#minha-navbar.navbar-turma .voltar a::after {
+    font-weight: bold;
+    /* font-family: "Font Awesome 5 Free", sans-serif;
+    content: "\f51b\00a0\00a0 Minhas turmas"; */
+    margin-right: 10px;
+}
+
+#minha-navbar.navbar-turma .navbar-toggler .navbar-toggler-icon{
+    color: white !important;
+    padding: 5px !important;
+    border-color: transparent !important;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+}
+
+#minha-navbar.navbar-turma .nav-item .nav-link{
+    color: white !important;
+}
+#minha-navbar.navbar-turma .nav-item.active .nav-link{
+    /* color: rgb(233, 231, 231) !important; */
+    /* border-bottom: 2px solid rgb(233, 231, 231); */
+    /* background-color: white; */
+    /* border-radius: var(--botao-borda-raio); */
+    
+    /* border-radius: 50px; */
+
+    /* background-color: rgba(0, 0, 0, 0.2); */
+    /* border: 2px solid white; */
+    border: 5px solid white;
+
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-weight: bold;
+
+    /* border-radius: 50px; */
+    /* color: var(--cor-primaria) !important; */
+}
+#minha-navbar.navbar-turma .nav-item:not(.active) .nav-link:not(.usuario):hover{
+    /* color: rgb(233, 231, 231) !important; */
+    /* border-radius: var(--botao-borda-raio); */
+    
+    /* border-radius: 50px; */
+    
+    /* background-color: rgba(0, 0, 0, 0.2); */
+    /* border: 2px solid white; */
+
+    border: 5px solid white;
+
+    border-top: none;
+    border-left: none;
+    border-right: none;
+
+    /* border-radius: 50px; */
+}
+#minha-navbar.navbar-turma .nav-item .usuario img{
+    border: 2px solid white;
+}
+
+
+
+
+
+
+/* Navbar-base - Opções para quando tela pequena */
+.navbar-base{
+    /* height: fit-content; */
+    width: 100%;
+    position: fixed !important;
+    /* top: auto; */
+    bottom: 0 !important;
+    left: 0 !important;
+    /* padding: 0 10px !important; */
+    z-index: 20;
+    background-color: white;
+}
+.navbar-base .opcoes{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+}
+.navbar-base.nav-aluno .opcoes{
+    grid-template-columns: repeat(2, 1fr) !important;
+}
+.navbar-base .opcoes a{
+    width: 100%;
+    color: darkgray;
+    margin: 0px;
+    font-size: .85em;
+    padding: 20px 0px;
+    text-decoration: none;
+    /* word-break: break-word; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+.navbar-base .opcoes a i{
+    margin-bottom: 5px;
+    font-size: larger;
+}
+.navbar-base .opcoes a:hover{
+    color: var(--cor-primaria);
+}
+.navbar-base .opcoes a.active{
+    color: var(--cor-primaria);
+}
+
+
+.nome-turma{
+    font-weight: bold;
+    max-width: 200px;
+    color: rgba(255, 255, 255, 0.707);
+}
+
+
+
+
+/* Quando expande a navbar */
+@media(max-width: 1200px) {
+    /* #minha-navbar .nav-item.social-icon {
+        display: none;
+    } */
+    .nome-turma{
+        max-width: 150px;
+    }
+}
+
+@media(max-width: 768px) {
+    #minha-navbar .navbar-brand img {
+        width: 100px !important;
+    }
+    #minha-navbar .nav-item .usuario .usuario-nome{
+        max-width: 100px;
+    }
+    #minha-navbar .turma-areas{
+        display: none;
+    }
+    
+    .navbar-base{
+        /* visibility: visible; */
+        display: block;
+    }
+}
+@media(min-width: 768px) {
+    .navbar-base{
+        display: none;
+        /* visibility: none; */
+    }
+}
+@media(max-width: 991px) {
+    #minha-navbar.navbar-turma .voltar a::after{
+        /* content: "\f060\00a0\00a0\00a0\00a0 Turmas"; */
+        /* content: "\f51b\00a0\00a0 Turmas"; */
+    }
+}
+/* @media(min-width: 992px) { */
+@media(min-width: 960px) {
+    #minha-navbar.navbar-turma .voltar .separador{
+        /* min-width: 205px; */
+        margin-right: 22px;
+        padding-right: 30px;
+        border-right: 1px solid hsla(0, 0%, 100%, 0.8);
+        color: transparent;
+    }
+}

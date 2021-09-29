@@ -1,0 +1,164 @@
+{% extends 'progame/layouts/aluno_base.html' %}
+{% load static %}
+
+{% block title %}Aluno - ProGame{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'progame/css/distr/swiper.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% include 'progame/aluno/modal/participar_turma_modal.html' with form=participar_turma_form %}
+
+    {% if turmas %}
+        <h4 class="titulos mb-3">
+            Suas turmas
+            <small class="text-muted">( {{ turmas.count }} )</small>
+        </h4>
+        
+        <div class="minhas-turmas" data-qtdturmas="{{ turmas.count }}">
+        {% for turma in turmas %}
+            <a class="turma-card" href="{% url 'progame:turma_detail_view' turma.uuid %}">
+                <div class="t-header">
+                    {% if turma.imagem %}
+                        <img src="{{ turma.imagem.url }}" alt="{{ turma }}">
+                    {% else %}
+                        <img src="{% static 'progame/img/turma-img.jpg' %}" alt="{{ turma }}">
+                    {% endif %}
+                </div>
+                <div class="t-body">
+                    <div class="t-info">
+                        <h6 class="t-nome">
+                            {{ turma }}
+                        </h6>
+                        <span class="t-desc">
+                            {{ turma.get_info|default_if_none:"sem sala" }}
+                        </span>
+                    </div>
+                    <div class="t-footer {% if not turma.lider %}justify-content-end{% endif %}">
+                        {% if turma.lider %}
+                            <div class="user-circle trophy" title="">
+                                {% if turma.lider.aluno.imagem %}
+                                    <img src="{{ turma.lider.aluno.imagem.url }}" data-toggle="tooltip"
+                                            data-placement="top" title="
+                                            {% if turma.lider.aluno == request.user.aluno %}
+                                            Líder do ranking da turma: Você
+                                            {% else %}
+                                            Líder do ranking da turma: {{ turma.lider.aluno }}
+                                            {% endif %}
+                                            "
+                                            alt="Líder da turma">
+                                {% else %}
+                                    <img src="{% static 'progame/img/user.png' %}" data-toggle="tooltip"
+                                            data-placement="top" title="
+                                            {% if turma.lider.aluno == request.user.aluno %}
+                                            Líder do ranking da turma: Você
+                                            {% else %}
+                                            Líder do ranking da turma: {{ turma.lider.aluno }}
+                                            {% endif %}
+                                            "
+                                            alt="Líder da turma">
+                                {% endif %}
+
+                                <div class="trofeu">
+                                    <img src="{% static 'progame/img/ranking/trofeu1.png' %}" alt="trofeu">
+                                </div>
+                            </div>
+                        {% endif %}
+                        <div class="users-list">
+                            {% for aluno in turma.alunos.all|slice:":4" %}
+                                <div class="user-circle">
+                                    {% if aluno.imagem %}
+                                        <img src="{{ aluno.imagem.url }}" data-toggle="tooltip"
+                                                data-placement="top"
+                                                title="
+                                                {% if aluno == request.user.aluno %}
+                                                Você
+                                                {% else %}
+                                                {{ aluno }}
+                                                {% endif %}
+                                                " alt="{{ aluno }}">
+                                    {% else %}
+                                        <img src="{% static 'progame/img/user.png' %}"
+                                                data-toggle="tooltip" data-placement="top"
+                                                title="
+                                                {% if aluno == request.user.aluno %}
+                                                Você
+                                                {% else %}
+                                                {{ aluno }}
+                                                {% endif %}
+                                                " alt="{{ aluno }}">
+                                    {% endif %}
+                                </div>
+                            {% empty %}
+                                <small class="text-muted">Nenhum aluno</small>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+        </div>
+
+    {% else %}
+        <div class="sem-turmas">
+            <img src="{% static 'progame/img/ilust/turma2-cinza.png' %}">
+
+            <h6 class="">
+                Você ainda não participa de nenhuma turma.
+            </h6>
+            <a class="participar_turma_button" href="#">Entre em uma turma agora</a>.
+        </div>
+    {% endif %}
+
+    {% include 'progame/includes/floating_buttons/participar_turma_button.html' %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'progame/js/ajax/csrf_ajax_config.js' %}"></script>
+    <script src="{% static 'progame/js/ajax/participar_turma_ajax.js' %}"></script>
+    <script src="{% static 'progame/js/distr/swiper.min.js' %}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.participar_turma_button').click(function() {
+                $('#participar_turma').modal('show')
+            });
+        })
+
+
+        // Tour pela página
+        if($('.minhas-turmas').data('qtdturmas') > 0){
+            var passos = {
+                steps: [
+                    {
+                        element: '#participar_turma_botao',
+                        title: 'Participar de uma nova turma',
+                        content: 'Você está na página de listagem de turmas. Clique aqui quando quiser participar de uma nova turma.'
+                    },
+                    {
+                        element: '.minhas-turmas',
+                        title: 'Minhas turmas',
+                        content: 'Aqui são listadas todas as turmas que você participa. Nos cartões são exibidas algumas informações, como nome e descrição da turma, líder do ranking da turma, entre outras. Clique em um dos cartões para ir para a página da turma.',
+                    },
+                ]
+            }
+        } else{
+            var passos = {
+                steps: [
+                    {
+                        element: '#participar_turma_botao',
+                        title: 'Participar de uma nova turma',
+                        content: 'Você está na página de listagem de turmas. Clique aqui quando quiser participar de uma nova turma.'
+                    },
+                ]
+            };
+        }
+        site_tour(passos, 'minhas_turmas_aluno_tour');
+        // Fim do Tour pela página
+
+
+
+
+    </script>
+{% endblock %}

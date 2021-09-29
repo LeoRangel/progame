@@ -1,0 +1,169 @@
+{% extends 'progame/layouts/modulo_base.html' %}
+{% load ausers_tags %}
+{% load static %}
+
+{% block title %}{{ object }} - {{ object.turma }}{% endblock %}
+
+{% block breadcrumbs %}
+    <!-- <div class="_breadcrumbs">
+        <a href="{% url 'progame:professor_dashboard' %}">Turmas</a>
+        <span class="separador">></span>
+        <a href="{% url 'progame:turma_detail_view' object.turma.uuid %}">{{ object.turma }}</a>
+        <span class="separador">></span>
+        <span class="pagina-atual">{{ object }}</span>
+    </div> -->
+{% endblock %}
+
+{% block header %}
+    {% with turma=object.turma %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock %}
+
+{% block content %}
+    {% if object.turma|check_professor:request %}
+        {% include '_modal.html' %}
+    {% endif %}
+
+    <!-- Ranking -->
+    <div class="oa-opcoes">
+        <!-- {% include 'progame/includes/modulo_actions.html' %} -->
+
+        <div class="coluna-conteudo-nav-pill">
+
+            {% if object.ranking %}
+            <div class="ranking" id="ranking">
+                <!-- Top 3 destacado -->
+                <div class="ranking-top">
+                    {% for item in object.ranking|slice:":3" %}
+                        {% if forloop.first %}
+                            <a href="{% url 'progame:aluno_perfil' item.aluno.uuid %}"  class="usuario primeiro-lugar order-2
+                                {% if item.aluno == request.user.aluno %}
+                                    voce
+                                {% endif %}">
+                                <div class="ranking-imagem">
+                                    {% if item.aluno.imagem %}
+                                        <img src="{{ item.aluno.imagem.url }}" alt="foto do usuário">
+                                    {% else %}
+                                        <img src="{% static 'progame/img/user.png' %}" alt="foto do usuário">
+                                    {% endif %}
+                                </div>
+                                <span class="ranking-nome d-inline-block text-truncate">
+                                    {% if item.aluno == request.user.aluno %}
+                                        Você
+                                    {% else %}
+                                        {{ item.aluno.user.first_name|default:item.aluno }}
+                                    {% endif %}
+                                </span>
+                                <span class="ranking-pontos">{{ item.pontos }}pts</span>
+                                
+                                <div class="trofeu">
+                                    <img src="{% static 'progame/img/ranking/medalha1.png' %}" alt="trofeu">
+                                </div>
+                            </a>
+                        {% elif forloop.counter == 2 %}
+                            <a href="{% url 'progame:aluno_perfil' item.aluno.uuid %}"  class="usuario segundo-lugar order-1
+                                {% if item.aluno == request.user.aluno %}
+                                    voce
+                                {% endif %}">
+                                <div class="ranking-imagem">
+                                    {% if item.aluno.imagem %}
+                                        <img src="{{ item.aluno.imagem.url }}" alt="foto do usuário">
+                                    {% else %}
+                                        <img src="{% static 'progame/img/user.png' %}" alt="foto do usuário">
+                                    {% endif %}
+                                </div>
+                                <span class="ranking-nome d-inline-block text-truncate">
+                                    {% if item.aluno == request.user.aluno %}
+                                        Você
+                                    {% else %}
+                                        {{ item.aluno.user.first_name|default:item.aluno }}
+                                    {% endif %}
+                                </span>
+                                <span class="ranking-pontos">{{ item.pontos }}pts</span>
+                                
+                                <div class="trofeu">
+                                    <img src="{% static 'progame/img/ranking/medalha2.png' %}" alt="trofeu">
+                                </div>
+                            </a>
+                        {% elif forloop.counter == 3 %}
+                            <a href="{% url 'progame:aluno_perfil' item.aluno.uuid %}"  class="usuario terceiro-lugar order-3
+                                {% if item.aluno == request.user.aluno %}
+                                    voce
+                                {% endif %}">
+                                <div class="ranking-imagem">
+                                    {% if item.aluno.imagem %}
+                                        <img src="{{ item.aluno.imagem.url }}" alt="foto do usuário">
+                                    {% else %}
+                                        <img src="{% static 'progame/img/user.png' %}" alt="foto do usuário">
+                                    {% endif %}
+                                </div>
+                                <span class="ranking-nome d-inline-block text-truncate">
+                                    {% if item.aluno == request.user.aluno %}
+                                        Você
+                                    {% else %}
+                                        {{ item.aluno.user.first_name|default:item.aluno }}
+                                    {% endif %}
+                                </span>
+                                <span class="ranking-pontos">{{ item.pontos }}pts</span>
+                                
+                                <div class="trofeu">
+                                    <img src="{% static 'progame/img/ranking/medalha3.png' %}" alt="trofeu">
+                                </div>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <!-- Fim Top 3 destacado -->
+
+                <!-- 4 -->
+                {% if object.ranking|length > 3 %}
+                <ul class="ranking-lista">
+                    {% for item in object.ranking %}
+                        {% if forloop.counter > 3 %}
+                            <a href="{% url 'progame:aluno_perfil' item.aluno.uuid %}"  class="ranking-usuario
+                                {% if item.aluno == request.user.aluno %}
+                                    voce
+                                {% endif %}">
+                                <div class="ranking-direita">
+                                    <span class="ranking-posicao">
+                                        {{ forloop.counter }}.
+                                    </span>
+                                    <div class="ranking-imagem">
+                                        {% if item.aluno.imagem %}
+                                            <img class="ranking-imagem" src="{{ item.aluno.imagem.url }}" alt="foto
+                                            do usuário">
+                                        {% else %}
+                                            <img class="ranking-imagem" src="{% static 'progame/img/user.png' %}"
+                                                 alt="foto do usuário">
+                                        {% endif %}
+                                    </div>
+                                    <span class="ranking-nome d-inline-block text-truncate">
+                                        {% if item.aluno == request.user.aluno %}
+                                            Você
+                                        {% else %}
+                                            {{ item.aluno.user.first_name|default:item.aluno }}
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <span class="ranking-pontos">{{ item.pontos }}pts</span>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            {% else %}
+                <div id="ranking" class="sem-ranking">
+                    <img src="{% static 'progame/img/ilust/ranking-cinza.png' %}">
+
+                    <span class="">
+                        O ranking do módulo é ativado quando algum aluno inicia o módulo.
+                    </span>
+                </div>
+            {% endif %}
+
+
+        </div>
+    </div>
+{% endblock %}

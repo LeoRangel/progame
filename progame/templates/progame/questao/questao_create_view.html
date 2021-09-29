@@ -1,0 +1,176 @@
+{% extends 'progame/layouts/professor_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'progame/css/distr/steps.css' %}">
+    <link rel="stylesheet" href="{% static 'progame/css/perguntas.css' %}">
+{% endblock %}
+
+{% block title %}Adicionar questão - ProGame{% endblock %}
+
+
+{% block content %}
+    <div class="mb-4">
+        <h4 class="titulos card-title">Cadastro de questão</h4>
+        <p class="card-subtitle text-muted mb-4">Informe o verbo, tempo de resposta (máximo para o aluno pontuar), sentença (enunciado), descrição e alternativas</p>
+    </div>
+    <div class="alert alert-warning alert-dismissible fade show mb-4" role="alert">
+        <h5>Importante</h5>
+        Editar ou adicionar novas questões após os alunos responderem o Quiz pode resultar em erros ou inconsistências
+        nas estatísticas do módulo.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <section>
+        <form data-modulo="{{ modulo.uuid }}" action="#" method="post" id="form-cadastrar-questao">
+            {% csrf_token %}
+{#            <label>#}
+{#                Nível da questão *#}
+{#                <i class="fas fa-question-circle ml-1" data-toggle="tooltip" data-placement="top"#}
+{#                   title="Selecione o nível da questão de acordo com os níveis da Taxonomia Revisada de#}
+{#                   Bloom."></i>#}
+{#            </label>#}
+{#            <div class="row text-center mb-3">#}
+{#                <div class="col-sm-4 col-md-2 mb-2 mb-md-0">#}
+{#                    <div class="nivel-radio-container n-1">#}
+{#                        <input checked="checked" id="n-1" value="1" class="required nivel-radio" name="nivel"#}
+{#                               type="radio">#}
+{#                        <label for="n-1">1. Lembrar</label>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-sm-4 col-md-2 mb-2 mb-md-0">#}
+{#                    <div class="nivel-radio-container n-2">#}
+{#                        <input id="n-2" value="2" class="nivel-radio" name="nivel" type="radio">#}
+{#                        <label for="n-2">2. Entender</label>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-sm-4 col-md-2 mb-2 mb-md-0">#}
+{#                    <div class="nivel-radio-container n-3">#}
+{#                        <input id="n-3" value="3" class="nivel-radio" name="nivel" type="radio">#}
+{#                        <label for="n-3">3. Aplicar</label>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-sm-4 col-md-2 mb-2 mb-md-0">#}
+{#                    <div class="nivel-radio-container n-4">#}
+{#                        <input id="n-4" value="4" class="nivel-radio" name="nivel" type="radio">#}
+{#                        <label for="n-4">4. Analisar</label>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-sm-4 col-md-2 mb-2 mb-md-0">#}
+{#                    <div class="nivel-radio-container n-5">#}
+{#                        <input id="n-5" value="5" class="nivel-radio" name="nivel" type="radio">#}
+{#                        <label for="n-5">5. Avaliar</label>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-sm-4 col-md-2 mb-2 mb-md-0">#}
+{#                    <div class="nivel-radio-container n-6">#}
+{#                        <input id="n-6" value="6" class="nivel-radio" name="nivel" type="radio">#}
+{#                        <label for="n-6">6. Criar</label>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+
+            <div class="row">
+                <div class="col-md-2">
+                    {{ form.verbo|as_crispy_field }}
+                    <a href="{% url 'progame:modulos' %}#item-5" class="_position d-inline-block" target="_blank"
+                       data-position="verbo">
+                        <i class="fas fa-question-circle ml-1" data-toggle="tooltip"
+                           data-placement="top" title="Ajuda"></i>
+                    </a>
+                </div>
+                <div class="col-md-2">
+                    {{ form.tempo_para_responder|as_crispy_field }}
+                    <!-- <i class="fas fa-question-circle ml-1" data-toggle="tooltip" data-placement="top"
+                    title="Este campo define quanto tempo o aluno tem para pontuar ao responder a questão. Ao chegar no tempo definido, sua pontuação será automaticamente 0, caso acerte a questão."></i> -->
+                </div>
+                <div class="col-md-8">
+                    {{ form.sentenca|as_crispy_field }}
+                </div>
+            </div>
+
+            {{ form.descricao|as_crispy_field }}
+
+            <div class="form-group mb-4">
+                <label for="alternativa">
+                    Alternativas <span class="danger">*</span>
+                    <i class="fas fa-question-circle ml-1" data-toggle="tooltip" data-placement="top"
+                    title="Escreva o texto da alternativa no campo de texto, em seguida,
+                    clique no botão '+' para que seja adicionada.
+                    Para finalizar, clique nas alternativas corretas."></i>
+                </label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="alternativa" name="alternativa">
+                    <div class="input-group-append">
+                        <a href="#" title="Adicionar" class="btn btn-block btn-primary"
+                           id="add_alternativa"><i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+                <div class="text-danger invalid-alternativa"></div>
+            </div>
+
+            <div>
+                <table class="tabela-alternativas mb-4">
+                    <tbody id="alternativas">
+                        <tr class="alternativa incorreta" style="display: none">
+                            <td><span class="identificador">a)</span></td>
+                            <td class="px-3">
+                                <span style="cursor: pointer" data-toggle="tooltip"
+                                      data-placement="top" title="Marcar como correta" class="nome badge badge-secondary">
+                                </span>
+                            </td>
+                            <td>
+                                <span style="cursor: pointer" data-toggle="tooltip"
+                                      data-placement="top" title="Excluir" class="excluir badge badge-danger">
+                                    <!-- <i class="fas fa-times"></i> -->
+                                    <i class="fas fa-trash-alt"></i>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex">
+                <button class="btn btn-primary mr-2" title="Cadastrar e voltar" id="submit-form" type="submit">
+                    Cadastrar
+                </button>
+                <a class="btn btn-light" href="{% url 'progame:questao_list_view' modulo.uuid %}">Cancelar</a>
+            </div>
+{#            <div class="d-flex justify-content-between">#}
+{#                <div>#}
+{#                    <button class="btn btn-primary mr-2" title="Cadastrar e voltar" id="submit-form"#}
+{#                            type="submit">Cadastrar</button>#}
+{#                    <button class="btn btn-primary mr-2" name="continuar" value="True"#}
+{#                            title="Cadastrar e continuar cadastrando" type="submit">Cadastrar e continuar</button>#}
+{#                </div>#}
+{#                <a class="btn btn-light" href="{% url 'progame:questao_list_view' modulo.uuid %}">Cancelar</a>#}
+{#            </div>#}
+        </form>
+    </section>
+{% endblock %}
+
+
+{% block scripts %}
+    <script>
+        const nivel = '{{ nivel }}'
+
+        if (nivel) {
+            $('input[type=radio]').each(function() {
+                $(this).attr('checked', false)
+             })
+            $('#n-'+nivel).attr('checked', true)
+        }
+
+        let el = $('._position')
+        let destination = $(`label[for="id_${el.data('position')}"]`)
+        el.insertAfter(destination)
+    </script>
+    <script src="{% static 'progame/js/distr/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'progame/js/cadastro_questao.js' %}"></script>
+    <script src="{% static 'progame/js/ajax/csrf_ajax_config.js' %}"></script>
+    <script src="{% static 'progame/js/ajax/cadastrar_questao_ajax.js' %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% endblock %}

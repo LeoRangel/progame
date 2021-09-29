@@ -1,0 +1,366 @@
+{% extends 'stats/base.html' %}
+{% load static %}
+{% load progame_tags %}
+{% load stats_tags %}
+{#{% load core_tags %}#}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'stats/css/caract.css' %}">
+    <link rel="stylesheet" href="{% static 'stats/css/custom-table.css' %}">
+    <link rel="stylesheet" href="{% static 'stats/css/custom-modal.css' %}">
+{% endblock %}
+
+
+{% block modal %}
+    {% include 'stats/aluno/aluno_modal.html' %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="card-aluno">
+        <div class="p-top-options">
+            <div>
+                <a href="{% url 'stats:aluno_list_view' turma.uuid %}" class="btn-voltar btn-e"></a>
+            </div>
+            <div>
+{#                <div class="ajuda mr-2">#}
+{#                    <i class="far fa-exclamation mr-1"></i>#}
+{#                    <span>#}
+{#                        Precisa de ajuda!#}
+{#                    </span>#}
+{#                </div>#}
+                <div class="dropdown options-dropdown">
+                    <div style="cursor:pointer" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                         aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-fw ml-1"></i>
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                        <a href="{% url 'progame:aluno_perfil' object.uuid %}" class="dropdown-item" type="button">
+                            Ir para perfil
+                        </a>
+{#                        <button class="dropdown-item" type="button">Remover</button>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="c-header">
+            <div class="infos">
+                <div class="foto">
+                    {% if object.imagem %}
+                        <img src="{{ object.imagem.url }}" alt="{{ object }}">
+                    {% else %}
+                        <img src="{% static 'progame/img/user.png' %}" alt="{{ object }}">
+                    {% endif %}
+{#                    <div class="ajuda" data-toggle="tooltip" data-placement="top" title="Precisa de ajuda">#}
+{#                        <i class="fas fa-exclamation"></i>#}
+{#                    </div>#}
+                </div>
+                <div class="dados">
+                    <h3 class="titulos">
+                        {{ object }}
+                    </h3>
+                    <h6 class="subtitulos">
+                        {{ object|get_pontuacao_na_turma:turma }} pontos
+                    </h6>
+                </div>
+            </div>
+            <div class="caract">
+                {% if aluno|responde_rapido:turma %}
+                    <div class="velocidade">
+                        <div class="icone">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <div class="c-infos">
+                            <span class="">Responde rápido</span>
+                            <span>Média de {{ aluno|get_tempo_medio_de_resposta_na_turma_formatado:turma }} por resposta</span>
+                        </div>
+                    </div>
+                {% elif aluno|responde_lento:turma %}
+                    <div class="velocidade">
+                        <div class="icone">
+                            <i class="fas fa-walking"></i>
+                        </div>
+                        <div class="c-infos">
+                            <span class="">Responde lento</span>
+                            <span>Média de {{ aluno|get_tempo_medio_de_resposta_na_turma_formatado:turma }} por resposta</span>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if aluno|acerta_muito:turma %}
+                    <div class="acertos">
+                        <div class="icone">
+                            <i class="fas fa-check fa-lg"></i>
+                        </div>
+                        <div class="c-infos">
+                            <span class="">Acerta muito</span>
+                            <span>Acertou {{ aluno|get_porcentagem_de_acertos_na_turma:turma }}% das questões</span>
+                        </div>
+                    </div>
+                {% elif aluno|erra_muito:turma %}
+                    <div class="acertos">
+                        <div class="icone">
+                            <i class="fas fa-times fa-lg"></i>
+                        </div>
+                        <div class="c-infos">
+                            <span class="">Erra muito</span>
+                            <span>Errou {{ aluno|get_porcentagem_de_erros_na_turma:turma }}% das questões</span>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="c-qtd">
+            <div class="finalizados text-success" data-toggle="tooltip" data-placement="top" title="Nível 6">
+                <i class="fas fa-check-circle fa-lg"></i>
+                <span>{{ aluno|get_qtd_modulos_finalizados:turma }} Módulos finalizados</span>
+            </div>
+            <div class="em-progresso text-warning" data-toggle="tooltip" data-placement="top" title="Níveis 0-5">
+                <i class="fas fa-clock fa-lg"></i>
+                <span>{{ aluno|get_qtd_modulos_em_andamento:turma }} Módulos em andamento</span>
+            </div>
+            <div class="pendentes text-danger" data-toggle="tooltip" data-placement="top" title="Nível 0 (nenhuma tentativa)">
+                <i class="fas fa-question-circle fa-lg"></i>
+                <span>{{ aluno|get_qtd_modulos_pendentes:turma }} Módulos não iniciados</span>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <div class="custom-table">
+                <div class="thead">
+                    <div class="tr">
+                        <div class="td">Módulo</div>
+                        <div class="td">Última tentativa</div>
+                        <div class="td">Nível</div>
+                        <div class="td text-center">Status do aluno no módulo</div>
+                    </div>
+                </div>
+                <div class="tbody">
+                    {% for modulo in turma.modulos.all %}
+                        <a href="#" class="tr modulo-tr" data-modulo-uuid="{{ modulo.uuid }}" data-toggle="modal"
+                           data-target="#alunoModal">
+                            <div class="td">
+                                <img src="{% static 'stats/img/module.png' %}" alt="modulo">
+                                <span>{{ modulo }}</span>
+{#                                <span class="ajuda" data-toggle="tooltip" data-placement="top" title="Precisa de ajuda neste módulo">#}
+{#                                    <i class="fas fa-exclamation"></i>#}
+{#                                </span>#}
+                            </div>
+                            <div class="td">
+                                {{ object|get_data_ultima_tentativa_modulo:modulo|default_if_none:"Nunca" }}
+                            </div>
+                            <div class="td">
+                                {% if object|get_nivel_no_modulo:modulo > 0 %}
+                                    {{ object|get_nivel_no_modulo:modulo }} -
+                                    {{ object|get_nivel_no_modulo:modulo|get_verbose_nivel }}
+                                {% else %}
+                                    0
+                                {% endif %}
+                            </div>
+                            <div class="td text-center">
+                                {% if object|get_status_no_modulo:modulo == 1 %}
+                                    <i class="text-danger fas fa-exclamation-circle fa-lg" data-toggle="tooltip"
+                                       data-placement="top" title="Ainda não iniciou"></i>
+                                {% elif object|get_status_no_modulo:modulo == 2 %}
+                                    <i class="text-warning-darker fas fa-clock fa-lg" data-toggle="tooltip"
+                                       data-placement="top" title="Em andamento"></i>
+                                {% elif object|get_status_no_modulo:modulo == 3 %}
+                                    <i class="text-success fas fa-check-circle fa-lg" data-toggle="tooltip"
+                                       data-placement="top" title="Finalizou"></i>
+                                {% endif %}
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+    <script>
+        const url = "{% url 'stats:get_aluno_modulo_info' object.pk %}"
+        let moduloTr = $('.modulo-tr')
+        let modal = $('#alunoModal')
+        let modalHeader = modal.find('.modal-header')
+        let modalBody = modal.find('.modal-body')
+        let spinner = modal.find('._spinner')
+
+        const tabelaComDificuldade = modal.find('.tabela-com-dificuldade')
+        const tabelaEsteveComDificuldade = modal.find('.tabela-esteve-com-dificuldade')
+
+        moduloTr.click(function() {
+            let moduloUuid = $(this).data('modulo-uuid')
+
+            resetModalContent()
+            getAlunoModuloInfo(url, moduloUuid)
+        })
+
+        function getAlunoModuloInfo(url, moduloUuid) {
+            if (url && moduloUuid) {
+                $.ajax({
+                    url: url,
+                    data: {modulo_uuid: moduloUuid},
+
+                    beforeSend: function() {
+                        modalBody.hide()
+                        modalHeader.find('._header').hide()
+                        spinner.show()
+                    },
+                    success: function(res) {
+                        // Header do modal - informações do módulo e nível do aluno
+                        let moduloInfo = res.moduloInfo
+
+                        modalHeader.find('.m-infos .titulos').text(`Módulo: ${moduloInfo.nome}`)
+                        modalHeader.find('.m-infos .subtitulos').text(moduloInfo.descricao)
+                        modalHeader.find('.nivel-modulo h1').text(moduloInfo.nivelAluno)
+                        modalHeader.find('.nivel-modulo span').text(moduloInfo.nivelAlunoDescricao)
+
+                        // Tabelas de questões com dificuldade (questoesComDificuldade)
+                        let questoesComDificuldade = res.questoesComDificuldade
+
+                        if (questoesComDificuldade.length > 0) {
+                            questoesComDificuldade.forEach(questao => {
+                                let tr = $('<tr></tr>')
+                                $(`<th title="${questao.sentenca}">${questao.sentencaTruncated}</th>`).appendTo(tr)
+                                $(`<td>${questao.nivel}</td>`).appendTo(tr)
+                                $(`<td>${questao.qtdErros}</td>`).appendTo(tr)
+
+                                tr.appendTo(tabelaComDificuldade.find('table tbody'))
+                            })
+                        } else {
+                            tabelaComDificuldade.hide()
+                            let div = $('<div class="_empty w-100 d-flex p-4 text-left"></div>')
+                            $('<span class="mx-auto text-muted">Nenhuma.</span>').appendTo(div)
+
+                            div.insertAfter(tabelaComDificuldade)
+                        }
+
+                        // Tabelas de questões que esteve com dificuldade (questoesQueEsteveComDificuldade)
+                        let questoesEsteveComDificuldade = res.questoesQueEsteveComDificuldade
+
+                        if (questoesEsteveComDificuldade.length > 0) {
+                            questoesEsteveComDificuldade.forEach(questao => {
+                                let tr = $('<tr></tr>')
+                                $(`<th title="${questao.sentenca}">${questao.sentencaTruncated}</th>`).appendTo(tr)
+                                $(`<td>${questao.nivel}</td>`).appendTo(tr)
+                                $(`<td>${questao.qtdErros}</td>`).appendTo(tr)
+
+                                tr.appendTo(tabelaEsteveComDificuldade.find('table tbody'))
+                            })
+                        } else {
+                            tabelaEsteveComDificuldade.hide()
+                            let div = $('<div class="_empty w-100 d-flex p-4 text-left"></div>')
+                            $('<span class="mx-auto text-muted">Nenhuma.</span>').appendTo(div)
+
+                            div.insertAfter(tabelaEsteveComDificuldade)
+                        }
+
+                        // Tabelas de tentativas
+                        let quizzes = res.quizzes
+                        const tabelaBase = modal.find('.tabela-tentativas-base')
+
+                        if (!$.isEmptyObject(quizzes)) {
+                            for (let quiz in quizzes) {
+                                let novaTabela = tabelaBase.clone().css('display', 'block')
+                                let tbody = novaTabela.find('table tbody')
+                                novaTabela.removeClass('tabela-tentativas-base').insertBefore(tabelaBase)
+
+                                novaTabela.find('.t-header').text(`Quiz nível ${quiz}`)
+
+                                let tentativas = quizzes[quiz]
+                                tentativas.forEach(function (tentativa) {
+                                    let tr = $('<tr></tr>')
+                                    $(`<th>${tentativa.numero}</th>`).appendTo(tr)
+                                    $(`<td>${tentativa.data}</td>`).appendTo(tr)
+                                    $(`<td>${tentativa.acertos}</td>`).appendTo(tr)
+                                    $(`<td>${tentativa.erros}</td>`).appendTo(tr)
+                                    $(`<td>${tentativa.pontuacao} pts</td>`).appendTo(tr)
+
+                                    tr.appendTo(tbody)
+                                })
+                            }
+                        } else {
+                            let div = $('<div class="_empty w-100 d-flex p-4 text-left"></div>')
+                            $('<span class="mx-auto text-muted">O aluno não realizou nenhuma tentativa nesse módulo.</span>')
+                            .appendTo(div)
+
+                            div.insertAfter(tabelaBase)
+                        }
+                    },
+                    error: function(err) {
+                        alert('Houve um erro ao buscar os dados. Tente novamente mais tarde.')
+                    },
+                    complete: function() {
+                        spinner.fadeOut(function() {
+                            modalHeader.find('._header').fadeIn()
+                            modalBody.fadeIn()
+                        })
+                    }
+                })
+            }
+        }
+
+        function resetModalContent() {
+            // volta a mostrar tabelas
+            tabelaComDificuldade.show()
+            tabelaEsteveComDificuldade.show()
+
+            // remove tr's do tbody das tabelas
+            tabelaComDificuldade.find('tbody').empty()
+            tabelaEsteveComDificuldade.find('tbody').empty()
+
+            // remove informações do header
+            modalHeader.find('.m-infos .titulos').text('')
+            modalHeader.find('.m-infos .subtitulos').text('')
+            modalHeader.find('.nivel-modulo h1').text('')
+            modalHeader.find('.nivel-modulo span').text('')
+
+            // remove todas as tabelas com exceção da tabelaBase
+            modal.find('.tabela-tentativas:not(.tabela-tentativas-base)').remove()
+            modal.find('._empty').remove()
+        }
+
+        // Tour pela página
+        var passos = {
+            steps: [
+                {
+                    element: $(".card-aluno"),
+                    title: 'Estatísticas do aluno',
+                    content: 'Você está na página de estatícas do aluno. Aqui você pode encontrar uma série de informações sobre as atividade do aluno nos módulos da turma.',
+                },
+                {
+                    element: $(".c-header .infos"),
+                    title: 'Informações do aluno',
+                    content: 'No cabeçalho da página você pode ver algumas informações como nome e pontuação do aluno.',
+                },
+                {
+                    element: $(".c-header .caract"),
+                    title: 'Características do aluno',
+                    content: 'Nesta área você poderá ver algumas características do aluno de acordo com suas atividades na turma, como se ele responde rápido e se acerta muitas questões.',
+                },
+                {
+                    element: $(".card-aluno .c-qtd"),
+                    title: 'Informações dos módulos',
+                    content: 'Aqui você poderá saber quantos módulos o aluno, respectivamente, já concluiu (<i class="fas fa-check-circle fa-lg"></i>), está em andamento (<i class="fas fa-clock fa-lg"></i>) e ainda não iniciou (<i class="fas fa-question-circle fa-lg"></i>).',
+                },
+                {
+                    element: $(".custom-table"),
+                    title: 'Tabela de módulos',
+                    content: 'Na tabela de módulos, você poderá encontrará informações das atividades do aluno em todos os módulos da turma, como o nível e a situação atual dele nestes módulos. Clique em um dos módulos da tabela quando quiser obter informações mais precisa sobre a atividade deste aluno no módulo.',
+                },
+                {
+                    element: $(".btn-voltar"),
+                    title: 'Voltar para lista de alunos',
+                    content: 'Clique aqui para sair da página de estatística do aluno e voltar para a tela de listagem de alunos.',
+                },
+            ]
+        };
+        site_tour(passos, 'estatisticas_aluno_tour');
+        // Fim do Tour pela página
+
+    </script>
+{% endblock %}

@@ -1,0 +1,152 @@
+[
+  {
+    "model": "progame.ItemConquista",
+    "pk": 1,
+    "fields": {
+      "nome": "Sabe tudo",
+      "descricao": "Você acertou todas as questões em um quiz da turma. Mandou bem!",
+      "descricao2": "Acertou todas as questões em um quiz da turma",
+      "slug": "acertar-tudo"
+    }
+  },
+  {
+    "model": "progame.ItemConquista",
+    "pk": 2,
+    "fields": {
+      "nome": "Nível máximo",
+      "descricao": "Você alcançou o nível 6 e concluiu o seu primeiro módulo da turma. Quantos mais você consegue?!",
+      "descricao2": "Alcançou o nível 6 e concluiu um módulo da turma",
+      "slug": "alcancar-nivel-6"
+    }
+  },
+  {
+    "model": "progame.ItemConquista",
+    "pk": 3,
+    "fields": {
+      "nome": "Pontuador iniciante",
+      "descricao": "Você alcançou seus primeiros 100 pontos na turma, mas ainda tem muitos para ganhar!",
+      "descricao2": "Alcançou 100 pontos na turma",
+      "slug": "alcancar-100-pontos"
+    }
+  },
+  {
+    "model": "progame.ItemConquista",
+    "pk": 4,
+    "fields": {
+      "nome": "Pontuador dedicado",
+      "descricao": "500 pontos alcançados na turma. Você está ficando bom nisso!",
+      "descricao2": "Alcançou 500 pontos na turma",
+      "slug": "alcancar-500-pontos"
+    }
+  },
+  {
+    "model": "progame.ItemConquista",
+    "pk": 5,
+    "fields": {
+      "nome": "Pontuador promissor",
+      "descricao": "Mil pontos alcançados na turma. Você tem futuro nisso, continue assim!",
+      "descricao2": "Alcançou Mil pontos na turma",
+      "slug": "alcancar-1mil-pontos"
+    }
+  },
+  {
+    "model": "progame.ItemConquista",
+    "pk": 6,
+    "fields": {
+      "nome": "Pontuador veterano",
+      "descricao": "Você alcançou 2 mil pontos na turma e já é um veterano nisso, parabéns!",
+      "descricao2": "Alcançou 2 mil pontos na turma",
+      "slug": "alcancar-2mil-pontos"
+    }
+  },
+  {
+    "model": "progame.ItemConquista",
+    "pk": 7,
+    "fields": {
+      "nome": "Super pontuador",
+      "descricao": "5 mil pontos alcançados na turma. Você é realmente muito bom nisso!",
+      "descricao2": "Alcançou 5 mil pontos na turma",
+      "slug": "alcancar-5mil-pontos"
+    }
+  },
+  {
+    "model": "progame.ItemConquista",
+    "pk": 8,
+    "fields": {
+      "nome": "Pontuador nota 10",
+      "descricao": "Você alcançou 10 mil pontos na turma. Impressionante!",
+      "descricao2": "Alcançou 10 mil pontos na turma",
+      "slug": "alcancar-10mil-pontos"
+    }
+  },
+  {
+    "model": "progame.ItemConquista",
+    "pk": 9,
+    "fields": {
+      "nome": "Pontuador Incrível",
+      "descricao": "20 mil pontos alcançados na turma. Você já é quase um mestre nisso!",
+      "descricao2": "Alcançou 20 mil pontos na turma",
+      "slug": "alcancar-20mil-pontos"
+    }
+  },
+  {
+    "model": "progame.ItemConquista",
+    "pk": 10,
+    "fields": {
+      "nome": "Mestre dos pontos",
+      "descricao": "Você alcançou 50 mil pontos na turma. Simplesmente fenomenal!",
+      "descricao2": "Alcançou 50 mil pontos na turma",
+      "slug": "alcancar-50mil-pontos"
+    }
+  },
+  {
+    "model": "progame.ItemConquista",
+    "pk": 11,
+    "fields": {
+      "nome": "Pontuador lendário",
+      "descricao": "Você alcançou incríveis 100 mil pontos na turma. Você é uma verdadeira lenda!",
+      "descricao2": "Alcançou 100 mil pontos na turma",
+      "slug": "alcancar-100mil-pontos"
+    }
+  },
+  {
+    "model": "progame.ItemConquista",
+    "pk": 12,
+    "fields": {
+      "nome": "Aluno dedicado",
+      "descricao": "Você concluiu 3 módulos de estudo da turma. Continue assim!",
+      "descricao2": "Concluiu 3 módulos da turma",
+      "slug": "concluir-3-modulos"
+    }
+  },
+  {
+    "model": "progame.ItemConquista",
+    "pk": 13,
+    "fields": {
+      "nome": "Aluno estudioso",
+      "descricao": "Você concluiu 10 módulos de estudo da turma. Muito bom!",
+      "descricao2": "Concluiu 10 módulos da turma",
+      "slug": "concluir-10-modulos"
+    }
+  },
+  {
+    "model": "progame.ItemConquista",
+    "pk": 14,
+    "fields": {
+      "nome": "Aluno super estudioso",
+      "descricao": "Você concluiu 20 módulos de estudo da turma. Sensacional!",
+      "descricao2": "Concluiu 20 módulos da turma",
+      "slug": "concluir-20-modulos"
+    }
+  },
+  {
+    "model": "progame.ItemConquista",
+    "pk": 15,
+    "fields": {
+      "nome": "Rápido como um raio",
+      "descricao": "UAL! Você respondeu um quiz muito rápidamente!",
+      "descricao2": "Respondeu um quiz muito rápidamente",
+      "slug": "responde-rapido"
+    }
+  }
+]

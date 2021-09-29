@@ -1,0 +1,384 @@
+{% extends 'progame/layouts/ajuda_base.html' %}
+{% load static %}
+
+{% block css %}
+{% endblock %}
+
+{% block header %}
+<h4 class="subtitulos">Quizzes, Pontuações e Conquistas</h4>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row flex-wrap-reverse">
+
+        <div class="col-md-9">
+            <div class="conteudo-ajuda" data-spy="scroll" data-target="#navbar-ajuda">
+
+                <!-- O que são quizzes -->
+                <div class="secao">
+                    <a href="#item-1">
+                        <h3 class="titulos" id="item-1">
+                            O que são quizzes
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Os quizzes são um jogo de perguntas e respostas que existem para cada um dos níveis dos
+                            módulos do ProGame e são criados a partir do momento em que o professor cadastra perguntas
+                            em um nível de um módulo. Quando este nível é desbloqueado pelo professor, os alunos da
+                            turma podem respondê-lo e testar os seus conhecimentos sobre o assunto do módulo nesse
+                            determinado nível de aprendizagem. Os resultados dos alunos nos quizzes são acompanhados
+                            pelo professor, que deve usar esses dados para ajudá-los a melhorar os seus desempenhos.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Como responder a um quiz (aluno) -->
+                <div class="secao">
+                    <a href="#item-2">
+                        <h3 class="titulos" id="item-2">
+                            Como responder a um quiz (aluno)
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Para responder algum quiz no ProGame, basta acessar a página de algum módulo, localizar o
+                            nível em que o quiz estiver desbloqueado e clicar no botão <strong>Responder quiz</strong>.
+                            Assim, você será redirecionado para a tela do quiz, onde poderá responder as perguntas e
+                            ganhar pontos. Se você ainda não passou em todos os níveis do módulo, o nível desbloqueado
+                            será o nível posterior ao seu nível atual no módulo. No entanto, se você já tiver alcançado
+                            o nível máximo em um módulo, você não poderá fazer mais nenhum quiz neste módulo, pois,
+                            depois de completos, nenhum dos níveis podem ser refeitos.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tela do quiz (aluno) -->
+                <div class="secao">
+                    <a href="#item-3">
+                        <h3 class="titulos" id="item-3">
+                            Tela do quiz (aluno)
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Depois de clicar no botão <strong>Responder quiz</strong> em algum nível do módulo, você
+                            será levado a tela do quiz. É nessa tela onde o jogo acontece. Para começar, você receberá
+                            uma mensagem
+                            perguntando se está preparado, se sim, clique no botão <strong>Play</strong> para que o quiz
+                            seja
+                            iniciado.
+                        </p>
+
+                        <p>
+                            Na tela do quiz, você vai ter que responder todas as questões cadastradas pelo professor no
+                            nível escolhido. Para cada questão acertada no quiz, você ganhará uma quantidade de pontos,
+                            que servirão para desbloquear conquistas e competir nos rankings do sistema. No entanto,
+                            para passar do nível atual para o próximo, os pontos não são levados em consideração, mas
+                            sim os acertos, você precisa acertar pelo menos <strong>70% das questões</strong> do quiz
+                            para concluir um
+                            nível. Do contrário, você terá que fazer uma nova tentativa. Mas fique atento, em cada
+                            tentativa feita no quiz você ganhará menos pontos nas questões acertadas.
+                        </p>
+
+                        <p>
+                            O cálculo de pontos dos quizzes do ProGame será explicado no próximo tópico.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Como são calculados os pontos -->
+                <div class="secao">
+                    <a href="#item-4">
+                        <h3 class="titulos" id="item-4">
+                            Como são calculados os pontos
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Ao responder um Quiz, o aluno pode ganhar pontos por acertos de questões e acumulá-los no
+                            módulo e na turma. Cada questão respondida no Quiz é calculada individualmente e tem seus
+                            próprios pontos.
+                        </p>
+
+                        <p>
+                            No ProGame, a pontuação total obtida na questão é calculada com base no <strong>tempo de
+                                resposta</strong> e na <strong>quantidade de tentativas</strong> que o aluno levou para
+                            acertar a questão, dessa forma, apesar de não existir um limite de tempo para responder uma
+                            questão e nem um limite de tentativas num quiz, quanto mais tempo e tentativas um aluno
+                            gasta para responder uma questão, menos pontos ele ganhará caso acerte-a, podendo até mesmo
+                            ganhar 0 pontos por uma questão acertada.
+                        </p>
+
+                        <p>
+                            Para definir a pontuação do aluno na questão considerando o <strong>tempo de resposta do
+                                aluno</strong> e o <strong>tempo para responder</strong> definido pelo professor, o
+                            ProGame utiliza o cálculo
+                            <a target="_black"
+                                href="https://support.kahoot.com/hc/en-us/articles/115002303908-How-to-toggle-points">
+                                utilizado pela plataforma Kahoot,
+                            </a>
+                            que faz uso dessas mesmas variáveis. Esse cálculo é representado da seguinte maneira:
+                        </p>
+
+                        <br>
+                        <h3 class="w-100 d-flex justify-content-center">
+                            <strong>( 1 - ( R / Q / 2 ) ) P</strong>
+                        </h3>
+                        <br>
+
+                        <p>
+                            onde:
+                        </p>
+
+                        <ul>
+                            <li>
+                                <p>
+                                    <strong>R</strong> é o tempo (em segundos) que o aluno levou para responder a
+                                    questão.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <strong>Q</strong> é o tempo mínimo (em segundos) que o aluno tem para pontuar na
+                                    questão. Essa variável é definida pelo professor. Caso esse tempo seja ultrapassado,
+                                    a pontuação do aluno é automaticamente 0.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    E <strong>P</strong> é a quantidade máxima de pontos que pode ser obtida pelo aluno
+                                    naquela questão. Esse valor é definido por um cálculo que considera o <strong>nível
+                                        do quiz</strong> em que a questão está, o <strong>número de
+                                        alternativas</strong> da questão e o <strong>número de tentativas</strong>
+                                    realizadas pelo aluno nesse quiz. Veja a seguir como esse cálculo é realizado.
+                                </p>
+                            </li>
+                        </ul>
+
+                        <br>
+                        <br>
+                        <h5>
+                            <strong>
+                                Quantidade máxima de pontos por questão
+                            </strong>
+                        </h5>
+                        <br>
+                        <br>
+
+                        <p>
+                            Para calcular a quantidade máxima de pontos que pode ser obtida pelo aluno em uma questão,
+                            representado por <strong>P</strong> no cálculo de pontuação de questões, é verificado,
+                            primeiramente, se o aluno já respondeu aquela mesma questão anteriormente. Se ele já
+                            respondeu a questão anteriormente em outra tentativa e acertou, não poderá pontuar novamente
+                            mesmo que acerte a questão nessa nova tentativa, pois ele já tem pontos associados a esta
+                            questão e não se pode ganhar pontos mais do que uma vez em uma mesma questão. Se ele já
+                            respondeu anteriormente e errou, ele ainda pode ter a chance de pontuar nessa questão, porém
+                            sua pontuação será diminuída para cada nova tentativa realizada e poderá inclusive chegar a
+                            0.
+                        </p>
+
+                        <p>
+                            A diminuição de pontos ganhos por tentativa é realizada de acordo com o <strong>número de
+                                alternativas</strong> da questão. Se o <strong>número de tentativas</strong> do aluno
+                            for maior que o <strong>número de alternativas</strong> da questão, o valor de
+                            <strong>P</strong> vai ser automaticamente igual a 0. No caso contrário, esse valor será
+                            definido a partir da realização do seguinte cálculo:
+                        </p>
+
+                        <br>
+                        <h3 class="w-100 d-flex justify-content-center">
+                            <strong>P = ( ( A - T ) * ( 1 / (A - 1) ) ) * V</strong>
+                        </h3>
+                        <br>
+
+                        <p>
+                            onde:
+                        </p>
+
+                        <ul>
+                            <li>
+                                <p>
+                                    <strong>A</strong> é quantidade de alternativas da questão.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    <strong>T</strong> é a quantidade de tentativas que o aluno já realizou na questão.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    E <strong>V</strong> é o valor máximo de uma questão no quiz. Esse valor pode variar
+                                    para cada nível do módulo em que a questão estiver, sendo uma diferença de 50 pontos
+                                    de um nível para o seu anterior e posterior. A tabela abaixo mostra exatamente os
+                                    valores para cada um dos níveis do módulo.
+                                </p>
+                            </li>
+                        </ul>
+
+                        <br>
+                        <img class="w-100" src="{% static 'progame/img/tabela-pontos.png' %}" alt="">
+                        <br>
+                        <br>
+                        <br>
+
+                        <p>
+                            De maneira geral, o que o cálculo da quantidade máxima de pontos faz é, com base no número
+                            de alternativas da questão, diminuir uma quantidade exata de possíveis pontos ganhos para
+                            cada nova tentativa que o aluno realizar em uma questão, de modo que na primeira tentativa
+                            na questão ele possa obter 100% dos pontos, e a partir da tentativa, cujo número seja igual
+                            ao número de alternativas da questão, ele pontue automaticamente 0, mesmo acertando a
+                            questão. Veja o exemplo da figura abaixo, que mostra como seria a pontuação máxima de uma
+                            questão do <strong>quiz de nível 1</strong> e com <strong>3 alternativas</strong>, para cada
+                            número de tentativas.
+                        </p>
+
+                        <br>
+                        <img class="w-100" src="{% static 'progame/img/exemplo-tentativas.png' %}" alt="">
+                        <br>
+                        <br>
+                        <br>
+
+                        <p>
+                            Ao final do cálculo de quantidade máxima de pontos, o valor resultante será passado para o
+                            cálculo de pontuação na questão para que esse seja então realizado.
+                        </p>
+
+                    </div>
+                </div>
+
+                <!-- Resultados do quiz -->
+                <div class="secao">
+                    <a href="#item-5">
+                        <h3 class="titulos" id="item-5">
+                            Resultados do quiz
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Ao responder todas as questões de um quiz do ProGame, será exibida a tela de resultados do
+                            quiz. Nesta tela, além de saber se conseguiu passar no quiz, você poderá visualizar as
+                            seguintes informações:
+                        </p>
+
+                        <ul>
+                            <li>
+                                Número de acertos e erros nas questões
+                            </li>
+                            <li>
+                                Tempo médio de resposta por questão
+                            </li>
+                            <li>
+                                Total de pontos ganhos no quiz
+                            </li>
+                            <li>
+                                Posição atual no módulo a que pertence o quiz feito
+                            </li>
+                            <li>
+                                Posição atual no ranking geral da turma
+                            </li>
+                            <li>
+                                Nível atual no módulo a que pertence o quiz
+                            </li>
+                        </ul>
+
+                        <p>
+                            Além dessas informações, dependendo do seu resultado no quiz, você poderá também ver os
+                            <strong>links de estudos do nível</strong>. Esses links são cadastrados pelo professor e
+                            serão exibidos na tela de resultados caso você não consiga passar no quiz, indicando que
+                            você precisa estudar mais o assunto do módulo antes de realizar uma nova tentativa.
+                        </p>
+
+                        <p>
+                            Se você conseguir passar no quiz atual, será perguntado se você já deseja fazer o do próximo
+                            nível, no caso contrário, será perguntado se você deseja fazer uma nova tentativa. Mas
+                            lembre-se, para um bom desempenho, é sempre recomendado estudar o assunto do módulo antes de
+                            fazer os quizzes.
+                        </p>
+
+                    </div>
+                </div>
+
+                <!-- O que são conquistas -->
+                <div class="secao">
+                    <a href="#item-6">
+                        <h3 class="titulos" id="item-6">
+                            O que são conquistas
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            As conquistas são um modo de premiação que o ProGame usa para condecorar os usuários que
+                            realizam determinadas ações especiais dentro do sistema, como por exemplo, alcançar o nível
+                            máximo em um módulo ou ganhar 100 pontos em um quiz.
+                        </p>
+
+                        <p>
+                            Existem várias conquistas no ProGame que serão exibidas no perfil dos usuários que
+                            conseguirem desbloqueá-las. Será que você é capaz de ganhar todas elas?
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ajuda-prox-ant">
+                <a href="{% url 'progame:modulos' %}">
+                    <i class="mr-2 fas fa-chevron-left"></i>
+                    Modulos
+                </a>
+                <a href="{% url 'progame:rankings' %}">
+                    Rankings
+                    <i class="ml-2 fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <nav id="navbar-ajuda" class="sticky-top nav nav-pills flex-column">
+                <a class="nav-link" href="#item-1">
+                    O que são quizzes
+                </a>
+                <a class="nav-link" href="#item-2">
+                    Como responder a um quiz (aluno)
+                </a>
+                <a class="nav-link" href="#item-3">
+                    Tela do quiz (aluno)
+                </a>
+                <a class="nav-link" href="#item-4">
+                    Como são calculados os pontos
+                </a>
+                <a class="nav-link" href="#item-5">
+                    Resultados do quiz
+                </a>
+                <a class="nav-link" href="#item-6">
+                    O que são conquistas
+                </a>
+
+            </nav>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+
+{% block footer %}{% endblock %}
+
+
+{% block scripts %}
+{% endblock %}

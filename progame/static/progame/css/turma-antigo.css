@@ -1,0 +1,148 @@
+.header-turma{
+    padding: 20px;
+    width: 100%;
+    min-height: 390px;
+    background-color: var(--cor-secundaria-1);
+    background-repeat: no-repeat;
+    background-position: center !important;
+    background-size: cover !important;
+    display: flex;
+    align-items: center;
+    /*text-shadow: 0 .125rem .25rem rgba(0, 0, 0, 0.253)!important;*/
+}
+.header-turma .container{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    /* height: 100%; */
+    /* flex-direction: row; */
+    /* justify-content: space-between; */
+}
+
+/* Informações da turma */
+.header-turma .turma-infos{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: white;
+    flex: 0 0 70%;
+}
+.header-turma .turma-infos .titulos{
+    color: white;
+}
+.header-turma .turma-infos .turma-sala{
+    /* font-size: 15px; */
+}
+
+.header-turma .turma-professor {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.header-turma .turma-professor img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+/* Fim Informações da turma */
+
+/* Dados da turma */
+.header-turma .dados{
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 0 0 30%;
+}
+.header-turma .dados .separador{
+    height: 2.6rem;
+    margin: 0 30px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.header-turma .dados .qtd > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.header-turma .dados .qtd .num{
+    font-weight: bold;
+    /* margin-bottom: 0px; */
+}
+.header-turma .dados .qtd .desc{
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+.header-turma .codigo-container .codigo {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+    /* font-weight: bold; */
+}
+.header-turma .codigo-container .mostrar-codigo {
+    cursor: pointer;
+}
+.codigo-maximizado {
+    font-size: 7.5rem;
+}
+/* Fim Dados da turma */
+
+
+@media(max-width: 1200px) {
+    .header-turma .turma-infos {
+        flex: 0 0 100%;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    
+    .codigo-maximizado {
+        font-size: 6rem;
+    }
+    
+    .header-turma .dados {
+        flex: 0 0 100%;
+        justify-content: center;
+        margin-top: 30px;
+    }
+    .header-turma .dados .separador{
+        /* height: 1.6rem; */
+        /* margin: 0 20px; */
+    }
+    .header-turma .dados .qtd .num{
+        font-size: 2rem;
+    }
+    .header-turma .dados .qtd .desc{
+        /* font-size: 14px; */
+    }
+    
+
+    .header-turma .turma-infos ._breadcrumbs {
+        justify-content: inherit;
+    }
+    .header-turma .turma-infos ._breadcrumbs a,
+    .header-turma .turma-infos ._breadcrumbs span {
+        margin-bottom: 10px;
+    }
+    .header-turma .turma-infos .dot-separator {
+        display: none;
+    }
+    .header-turma .turma-infos .turma-professor {
+        flex-direction: column;
+    }
+    .header-turma .turma-infos .turma-professor .professor {
+        margin: 15px 0;
+    }
+}
+
+@media(max-width: 415px) {
+    .codigo-maximizado {
+        font-size: 4rem;
+    }
+}

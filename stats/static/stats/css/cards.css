@@ -1,0 +1,186 @@
+
+
+/* Cards */
+.conteudo .cards-lista .cards{
+    width: 100%;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+}
+/* .conteudo .cards-lista .cards.c-alunos{
+    grid-template-columns: repeat(4, 1fr);
+}
+.conteudo .cards-lista .cards.c-modulos{
+    grid-template-columns: repeat(3, 1fr);
+} */
+
+.conteudo .cards-lista .cards .card{
+    padding: 20px;
+    background-color: white ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+    min-height: 280px;
+    border-radius: var(--borda-raio-padrao);
+    box-shadow: var(--sombra-1);
+    position: relative;
+    transition: transform .2s ease-in-out;
+    text-decoration: none !important;
+}
+.conteudo .cards-lista .cards .card:hover{
+    color: black;
+    /*top:-4px;*/
+    transform: translateY(-3px);
+    box-shadow: 0 .150rem .50rem rgba(0,0,0,.075);
+}
+
+/* Top opcoes */
+.conteudo .cards-lista .cards .card .c-top-options{
+    width: 100%;
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+/* Informações */
+.conteudo .cards-lista .cards .card .c-infos{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+}
+.conteudo .cards-lista .cards .card .c-infos .c-nome{
+    color: var(--cinza4);
+    font-weight: bold;
+    max-width: 200px;
+}
+.conteudo .cards-lista .cards .card .c-infos .c-desc{
+    color: var(--cinza3);
+    font-size: 14px;
+}
+
+.conteudo .cards-lista .cards .card .c-infos .foto{
+    position: relative;
+}
+.conteudo .cards-lista .cards .card .c-infos .foto img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+/* Ajuda */
+.conteudo .cards-lista .cards .card .ajuda{
+    width: fit-content;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    /* color: rgba(0, 0, 0, 0.15); */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #fff;
+    color: var(--cor-primaria) !important;
+    font-size: 1.2em;
+    font-weight: bold;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+}
+
+/* Caracteristicas */
+.conteudo .cards-lista .cards .card .caract{
+    width: fit-content;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    color: rgba(0, 0, 0, 0.15);
+    /* border: 1px solid rgba(0, 0, 0, 0.15); */
+    /* border-radius: 10px; */
+}
+.conteudo .cards-lista .cards .card .caract i{
+    font-size: .8em;
+    margin-right: 10px;
+}
+.conteudo .cards-lista .cards .card .caract i:last-child{
+    margin-right: 0;
+}
+
+
+/* Quantidade de... */
+.conteudo .cards-lista .cards .card .c-qtd{
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    color: white;
+    border-radius: var(--borda-raio-padrao);
+    /*background-color: rgba(245, 245, 245, 0.5);*/
+    background-color: #fff;
+}
+.conteudo .cards-lista .cards .card .c-qtd > div{
+    margin-left: 10px;
+    font-size: .9em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--borda-raio-padrao);
+}
+.conteudo .cards-lista .cards .card .c-qtd > div:first-child{
+    margin-left: 0px;
+}
+.conteudo .cards-lista .cards .card .c-qtd > div i{
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+
+/* Sem ranking */
+.sem-cards {
+    padding: 30px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.4);
+}
+.sem-cards img{
+    width: 180px;
+    margin-bottom: 15px;
+}
+
+
+
+@media(max-width: 1200px) {
+    .conteudo .cards-lista .cards{
+        /* grid-template-columns: repeat(3, 1fr) !important; */
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media(max-width: 992px) {
+    .conteudo .cards-lista .cards{
+        /* grid-template-columns: repeat(2, 1fr) !important; */
+    }
+}
+
+@media(max-width: 768px) {
+    .conteudo .cards-lista .cards{
+        grid-template-columns: repeat(1, 1fr) !important;
+    }
+}
+
+@media(max-width: 500px) {
+    .conteudo .cards-lista .cards{
+        /* grid-template-columns: repeat(1, 1fr) !important; */
+    }
+}

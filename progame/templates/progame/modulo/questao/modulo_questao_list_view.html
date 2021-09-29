@@ -1,0 +1,148 @@
+{% extends 'progame/layouts/modulo_base.html' %}
+{% load progame_tags %}
+{% load ausers_tags %}
+
+{% block title %}{{ object }} - {{ object.turma }}{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="_breadcrumbs">
+        <a href="{% url 'progame:professor_dashboard' %}">Turmas</a>
+        <span class="separador">></span>
+        <a href="{% url 'progame:turma_detail_view' object.turma.uuid %}">{{ object.turma }}</a>
+        <span class="separador">></span>
+        <span class="pagina-atual">{{ object }}</span>
+    </div>
+{% endblock %}
+
+{% block header %}
+    {% with turma=object.turma %}
+        {{ block.super }}
+    {% endwith%}
+{% endblock %}
+
+{% block content %}
+    {% if object.turma|check_professor:request %}
+        {% include '_modal.html' %}
+
+        <div class="d-flex justify-content-start justify-content-sm-end mb-4 mt-3 mt-sm-0">
+            <a href="{% url 'progame:modulo_questao_create_view' object.uuid %}" class="btn btn-sm
+            btn-primary">Adicionar questão</a>
+        </div>
+    {% endif %}
+
+    <div class="mb-5">
+        <div id="accordion" class="nivel-accordion">
+            {% for nivel, questoes in questoes_dict.items %}
+                <div class="card">
+                    <div class="card-header p-0">
+                        <button class="btn btn-accordion p-3" data-toggle="collapse" data-target="#n{{ nivel }}"
+                                aria-expanded="true">
+                            <span>
+                                {{ nivel }} - {{ nivel|get_verbose_nivel }}
+                            </span>
+
+                            <small class="text-muted ml-auto mr-4">
+                                {{ questoes|length }}
+                                {% if questoes|length == 1 %}
+                                    questão
+                                {% else %}
+                                    questões
+                                {% endif %}
+                            </small>
+                        </button>
+                    </div>
+
+                    <div id="n{{ nivel }}" class="collapse">
+                        <div class="card-body p-0">
+                            {% if questoes %}
+                                {% for questao in questoes %}
+                                    <div class="container-fluid">
+                                        <div class="row questao" id="q{{ questao.pk }}">
+                                            <div class="col-9 col-md-10">
+                                                <div class="header">
+                                                    {{ questao }}
+                                                </div>
+                                                <div class="body">
+                                                    {% for alternativa in questao.alternativas.all %}
+                                                        <div class="alternativa">
+                                                            {% if alternativa.is_correta %}
+                                                                <span class="text-success" title="Alternativa correta"
+                                                                >{{ alternativa }}</span>
+                                                            {% else %}
+                                                                <span class="text-muted">{{ alternativa }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            <div class="col-3 col-md-2 m-auto text-right">
+                                                <a class="edit-button btn btn-primary"
+                                                href="{% url 'progame:modulo_questao_update_view' questao.uuid %}">
+                                                   Editar
+                                                </a>
+                                                <button class="btn btn-sm btn-padrao-2 remover_questão" href="#">
+                                                    <i class="fas fa-trash-alt mr-1"></i>
+                                                    Remover
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <p class="text-muted mb-0">Nenhuma questão cadastrada para esse nível.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+    {% load static %}
+    <script src="{% static 'progame/js/detect_device.js' %}"></script>
+    <script src="{% static 'progame/js/utils.js' %}"></script>
+    <script src="{% static 'progame/js/cadastro_questao.js' %}"></script>
+    <script>
+        $('.card').click(function() {
+            let card = $(this);
+            if (card.find($('.show')).length <= 0) {
+                card.addClass('active')
+            } else {
+                card.removeClass('active')
+            }
+        });
+
+        $(window).resize(function() {
+            if (mobileAndTabletcheck()) {
+                $('.edit-button').css('opacity', '1')
+            }
+        });
+
+        if (mobileAndTabletcheck()) {
+            $('.edit-button').css('opacity', '1')
+        }
+
+        $(document).ready(function() {
+            let param_string = window.location.search;
+
+            // n = nivel, q = questao_pk
+            if(param_string) {
+                let params = new URLSearchParams(param_string);
+                let nivel_collapse = $('#n'+params.get('n'));
+                let questao = $('#q'+params.get('q'));
+
+                // TODO: Corrigir, pois não está funcionando corretamente
+                $([document.documentElement, document.body]).animate({
+                    scrollTop: nivel_collapse.parent().offset().top
+                }, 1000);
+
+                nivel_collapse.addClass('show');
+                nivel_collapse.parents('.card:first').addClass('active');
+                destacar_campo(questao)
+            }
+        });
+    </script>
+{% endblock %}

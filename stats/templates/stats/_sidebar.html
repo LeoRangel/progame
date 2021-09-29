@@ -1,0 +1,21 @@
+<div class="sidebar">
+    <div class="opcoes">
+{#        <a href="#">#}
+{#            <i class="fas fa-th fa-fw fa-lg"></i>#}
+{#            Turma#}
+{#        </a>#}
+{#        <a href="{% url 'progame:turma_detail_view' turma.uuid %}">#}
+{#            <i class="fas fa-arrow-left fa-fw fa-lg"></i>#}
+{#            Turma#}
+{#            Turma: {{ turma }}#}
+{#        </a>#}
+        <a class="{% if 'aluno' in active %}active{% endif %}" href="{% url 'stats:aluno_list_view' turma.uuid %}">
+            <i class="fas fa-users fa-fw fa-lg"></i>
+            Alunos
+        </a>
+        <a class="{% if 'modulo' in active %}active{% endif %}" href="{% url 'stats:modulo_list_view' turma.uuid %}">
+            <i class="fas fa-boxes fa-fw fa-lg"></i>
+            Módulos
+        </a>
+    </div>
+</div>

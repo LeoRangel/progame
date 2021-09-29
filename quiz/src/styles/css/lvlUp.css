@@ -1,0 +1,46 @@
+.swal2-popup {
+    padding: 2rem;
+}
+.line{
+    height:6px;
+    /* width:180px; */
+    width:152px;
+    background-color:#e0e0e0;
+    position:relative;
+    margin-top:13px;
+    /* float:left; */
+    margin-left:14px;
+    margin-right:14px;
+}
+.num-circle{
+    padding: 4px;
+    width:30px;
+    height:30px;
+    background-color:rgb(99, 32, 238);
+    color:white;
+    border-radius:50%;
+    text-align:center;
+    font-family:sans-serif;
+    font-size:20px;
+    float:right !important;
+}
+.target-lvl{
+    background-color:rgb(99, 32, 238, 0.5);
+}
+.progress{
+    position:absolute;
+    z-index:1;
+    background-color:rgb(99, 32, 238);
+    height:4px;
+    width:0;
+}
+.clear{
+    clear:both;
+}
+.lvl-animate{
+    transition:0.8s all;
+    background-color:rgb(99, 32, 238);
+    float:left;
+    transform:translateX(-105px) scale(2);
+    margin-top: 20px;
+}

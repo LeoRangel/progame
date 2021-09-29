@@ -1,0 +1,117 @@
+/* html, body {
+    height: 100%;
+}
+
+nav {
+    position: fixed !important;
+    width: 100%;
+} */
+
+.escolher-usuario{
+    width: 100%;
+    /*min-height: 100vh;    */
+    /*margin-top: var(--navbar-height);*/
+    /* min-height: calc(100vh - var(--navbar-height)); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 20px; */
+}
+.escolher-usuario .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.escolher-usuario .opcoes-escolha{
+    min-width:  200px;
+    min-height:  200px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.escolher-usuario .opcoes-escolha > div{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;   
+}
+
+.escolher-usuario .opcoes-escolha .tipo-usuario{
+    max-width:  300px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    border: var(--borda-1);
+    color: #666;
+    border-radius: var(--borda-raio-padrao);
+    transition: box-shadow .3s ease-out;
+    cursor: pointer;
+    /* box-shadow: var(--sombra-1); */
+}
+
+.escolher-usuario .opcoes-escolha .tipo-usuario.active {
+    /* border: var(--borda-2); */
+    box-shadow: var(--sombra-2) !important;
+}
+
+.escolher-usuario .opcoes-escolha .tipo-usuario .btn-padrao{
+    width: 100%;
+}
+
+
+.escolher-usuario .opcoes-escolha .tipo-usuario i{
+    margin-top: 15px;
+    margin-bottom: 10px;
+    transition: color .2s ease-in-out;
+}
+.escolher-usuario .opcoes-escolha .tipo-usuario i:before{
+    font-size: 80px;
+    margin-left: 0;
+    margin-bottom: 10px;
+}
+.escolher-usuario .opcoes-escolha .tipo-usuario h5{
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    transition: color .2s ease-in-out;
+}
+.escolher-usuario .opcoes-escolha .tipo-usuario.active h5,
+.escolher-usuario .opcoes-escolha .tipo-usuario.active i {
+    color: var(--cor-primaria);
+}
+.escolher-usuario .opcoes-escolha .tipo-usuario span{
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+@media(max-width: 768px) {
+    .escolher-usuario .opcoes-escolha > div{
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .escolher-usuario {
+        /*padding-right: 0 !important;*/
+        /*padding-left: 0 !important;*/
+        /* padding: 70px 0 !important; */
+    }
+    .opcoes-escolha {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+        /*padding: 70px 0 !important;*/
+    }
+
+    .tipo-usuario {
+        max-width: 100% !important;
+    }
+}

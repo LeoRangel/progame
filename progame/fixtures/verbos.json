@@ -1,0 +1,480 @@
+[
+  {
+    "model": "progame.Verbo",
+    "pk": 1,
+    "fields": {
+      "nivel": 1,
+      "verbo": "listar",
+      "palavra": "liste"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 2,
+    "fields": {
+      "nivel": 1,
+      "verbo": "relembrar",
+      "palavra": "relembre"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 3,
+    "fields": {
+      "nivel": 1,
+      "verbo": "reconhecer",
+      "palavra": "reconheça"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 4,
+    "fields": {
+      "nivel": 1,
+      "verbo": "identificar",
+      "palavra": "identifique"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 5,
+    "fields": {
+      "nivel": 1,
+      "verbo": "localizar",
+      "palavra": "localize"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 6,
+    "fields": {
+      "nivel": 1,
+      "verbo": "descrever",
+      "palavra": "descreva"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 7,
+    "fields": {
+      "nivel": 1,
+      "verbo": "citar",
+      "palavra": "cite"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 8,
+    "fields": {
+      "nivel": 1,
+      "verbo": "apontar",
+      "palavra": "aponte"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 9,
+    "fields": {
+      "nivel": 1,
+      "verbo": "definir",
+      "palavra": "defina"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 10,
+    "fields": {
+      "nivel": 1,
+      "verbo": "escrever",
+      "palavra": "escreva"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 11,
+    "fields": {
+      "nivel": 1,
+      "verbo": "nomear",
+      "palavra": "nomeie"
+    }
+  },
+
+
+  {
+    "model": "progame.Verbo",
+    "pk": 12,
+    "fields": {
+      "nivel": 2,
+      "verbo": "esquematizar",
+      "palavra": "esquematize"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 13,
+    "fields": {
+      "nivel": 2,
+      "verbo": "relacionar",
+      "palavra": "relacione"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 14,
+    "fields": {
+      "nivel": 2,
+      "verbo": "explicar",
+      "palavra": "explique"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 15,
+    "fields": {
+      "nivel": 2,
+      "verbo": "parafrasear",
+      "palavra": "parafraseie"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 16,
+    "fields": {
+      "nivel": 2,
+      "verbo": "associar",
+      "palavra": "associe"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 17,
+    "fields": {
+      "nivel": 2,
+      "verbo": "converter",
+      "palavra": "converta"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 18,
+    "fields": {
+      "nivel": 2,
+      "verbo": "exemplificar",
+      "palavra": "exemplifique"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 19,
+    "fields": {
+      "nivel": 2,
+      "verbo": "inferir",
+      "palavra": "infira"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 20,
+    "fields": {
+      "nivel": 2,
+      "verbo": "interpretar",
+      "palavra": "interprete"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 21,
+    "fields": {
+      "nivel": 2,
+      "verbo": "sumarizar",
+      "palavra": "sumarize"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 22,
+    "fields": {
+      "nivel": 2,
+      "verbo": "classificar",
+      "palavra": "classifique"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 23,
+    "fields": {
+      "nivel": 2,
+      "verbo": "comparar",
+      "palavra": "compare"
+    }
+  },
+
+
+  {
+    "model": "progame.Verbo",
+    "pk": 24,
+    "fields": {
+      "nivel": 3,
+      "verbo": "utilizar",
+      "palavra": "utilize"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 25,
+    "fields": {
+      "nivel": 3,
+      "verbo": "implementar",
+      "palavra": "implemente"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 26,
+    "fields": {
+      "nivel": 3,
+      "verbo": "modificar",
+      "palavra": "modifique"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 27,
+    "fields": {
+      "nivel": 3,
+      "verbo": "experimentar",
+      "palavra": "experimente"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 28,
+    "fields": {
+      "nivel": 3,
+      "verbo": "calcular",
+      "palavra": "calcule"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 29,
+    "fields": {
+      "nivel": 3,
+      "verbo": "demonstrar",
+      "palavra": "demonstre"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 30,
+    "fields": {
+      "nivel": 3,
+      "verbo": "computar",
+      "palavra": "compute"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 31,
+    "fields": {
+      "nivel": 3,
+      "verbo": "contruir",
+      "palavra": "construa"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 32,
+    "fields": {
+      "nivel": 3,
+      "verbo": "demonstrar",
+      "palavra": "demonstre"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 33,
+    "fields": {
+      "nivel": 3,
+      "verbo": "executar",
+      "palavra": "execute"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 34,
+    "fields": {
+      "nivel": 3,
+      "verbo": "resolver",
+      "palavra": "resolva"
+    }
+  },
+
+
+  {
+    "model": "progame.Verbo",
+    "pk": 35,
+    "fields": {
+      "nivel": 4,
+      "verbo": "atribuir",
+      "palavra": "atribua"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 36,
+    "fields": {
+      "nivel": 4,
+      "verbo": "categorizar",
+      "palavra": "categorize"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 37,
+    "fields": {
+      "nivel": 4,
+      "verbo": "contrastar",
+      "palavra": "contraste"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 38,
+    "fields": {
+      "nivel": 4,
+      "verbo": "diferenciar",
+      "palavra": "diferencie"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 39,
+    "fields": {
+      "nivel": 4,
+      "verbo": "organizar",
+      "palavra": "organize"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 40,
+    "fields": {
+      "nivel": 4,
+      "verbo": "separar",
+      "palavra": "separe"
+    }
+  },
+
+
+  {
+    "model": "progame.Verbo",
+    "pk": 41,
+    "fields": {
+      "nivel": 5,
+      "verbo": "apreciar",
+      "palavra": "aprecie"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 42,
+    "fields": {
+      "nivel": 5,
+      "verbo": "criticar",
+      "palavra": "critique"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 43,
+    "fields": {
+      "nivel": 5,
+      "verbo": "julgar",
+      "palavra": "julgue"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 44,
+    "fields": {
+      "nivel": 5,
+      "verbo": "justificar",
+      "palavra": "justifique"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 45,
+    "fields": {
+      "nivel": 5,
+      "verbo": "ponderar",
+      "palavra": "pondere"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 46,
+    "fields": {
+      "nivel": 5,
+      "verbo": "recomendar",
+      "palavra": "recomende"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 47,
+    "fields": {
+      "nivel": 5,
+      "verbo": "verificar",
+      "palavra": "verifique"
+    }
+  },
+
+
+  {
+    "model": "progame.Verbo",
+    "pk": 48,
+    "fields": {
+      "nivel": 6,
+      "verbo": "desenvolver",
+      "palavra": "desenvolva"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 49,
+    "fields": {
+      "nivel": 6,
+      "verbo": "gerar",
+      "palavra": "gere"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 50,
+    "fields": {
+      "nivel": 6,
+      "verbo": "inventar",
+      "palavra": "invente"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 51,
+    "fields": {
+      "nivel": 6,
+      "verbo": "planejar",
+      "palavra": "planeje"
+    }
+  },
+  {
+    "model": "progame.Verbo",
+    "pk": 52,
+    "fields": {
+      "nivel": 6,
+      "verbo": "produzir",
+      "palavra": "produza"
+    }
+  }
+]

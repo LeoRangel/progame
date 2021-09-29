@@ -1,0 +1,130 @@
+{% extends 'progame/layouts/ajuda_base.html' %}
+{% load static %}
+
+{% block css %}
+{% endblock %}
+
+{% block header %}
+<h4 class="subtitulos">Rankings</h4>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row flex-wrap-reverse">
+
+        <div class="col-md-9">
+            <div class="conteudo-ajuda" data-spy="scroll" data-target="#navbar-ajuda">
+
+                <!-- O que são rankings -->
+                <div class="secao">
+                    <a href="#item-1">
+                        <h3 class="titulos" id="item-1">
+                            O que são rankings
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Os rankings são um modo de classificação baseado em pontuação que fazem parte das
+                            <a href="{% url 'progame:turmas_e_alunos' %}">turmas</a>
+                            do ProGame e são usados como forma de competição entre os alunos de uma turma.
+                        </p>
+
+                        <p>
+                            No ProGame existem dois tipos de ranking com critérios de classificação diferente: O
+                            <a href="#item-2">Ranking da turma</a> e o
+                            <a href="#item-2">Ranking dos módulos</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Ranking da turma -->
+                <div class="secao">
+                    <a href="#item-2">
+                        <h3 class="titulos" id="item-2">
+                            Ranking da turma
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            O <strong>Ranking da turma</strong> classifica os alunos de acordo com a sua pontuação geral
+                            na turma, ou seja, considerando os pontos de todos os módulos feitos pelo aluno. Dessa
+                            forma, é o ranking de maior importância da turma e que tende a ser mais difícil de ser
+                            alcançado.
+                        </p>
+
+                        <p>
+                            Este ranking é exibido na página <strong>Mural</strong> da turma e mostra os alunos de
+                            acordo com suas classificações, com destaque para os 1º, 2º e 3º lugar.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Ranking do módulo -->
+                <div class="secao">
+                    <a href="#item-3">
+                        <h3 class="titulos" id="item-3">
+                            Ranking do módulo
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            O <strong>Ranking do módulo</strong> é um ranking que classifica os alunos de acordo com a
+                            sua pontuação dentro de um módulo, ou seja, considerando apenas os pontos feitos pelo aluno
+                            em um módulo específico. Isso significa que, para cada módulo dentro do sistema existe um
+                            ranking associado a ele onde os alunos poderão competir com os seus colegas de turma pelas
+                            melhores colocações.
+                        </p>
+
+                        <p>
+                            Esses rankings são exibidos nas páginas dos módulos cadastrados na turma, podendo serem
+                            vistos ao clicar na opção “Ranking” dessas páginas. Eles mostram os alunos de acordo com
+                            suas classificações, com destaque para os 1º, 2º e 3º lugar.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ajuda-prox-ant">
+                <a href="{% url 'progame:quizzes' %}">
+                    <i class="mr-2 fas fa-chevron-left"></i>
+                    Quizzess, Pontuações e Conquistas
+                </a>
+                <a href="{% url 'progame:estatisticas' %}">
+                    Estatisticas da turma (professor)
+                    <i class="ml-2 fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <nav id="navbar-ajuda" class="sticky-top nav nav-pills flex-column">
+                <a class="nav-link" href="#item-1">
+                    O que são rankings
+                </a>
+                <a class="nav-link" href="#item-2">
+                    Ranking da turma
+                </a>
+                <a class="nav-link" href="#item-3">
+                    Ranking do módulo
+                </a>
+
+            </nav>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+
+{% block footer %}{% endblock %}
+
+
+{% block scripts %}
+{% endblock %}

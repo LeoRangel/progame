@@ -1,0 +1,703 @@
+
+
+.card-pagina-modulo{
+    background-color: white;
+    border: var(--borda-1);
+    border-radius: var(--borda-raio-padrao);
+    box-shadow: var(--sombra-1);
+    padding: 30px !important;
+}
+
+.aluno-nivel-6 .card-pagina-modulo{
+    border: 3px solid var(--cor-nivel-6);
+}
+
+/* Header página do modulo */
+.header-oa{
+    /* padding: 75px 0 100px 0; */
+    padding: 75px 25px 100px 25px;
+    margin-bottom: 25px;
+    width: 100%;
+    /* min-height: 390px; */
+    position: relative;
+    border-bottom: var(--borda-2);
+    /* border: var(--borda-2);
+    border-left: 0;
+    border-right: 0; */
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    /* text-align: center; */
+}
+/* .header-oa, */
+.header-oa.bg-nivel-0,
+.header-oa.bg-nivel- {
+    /* background-color: var(--cor-secundaria-1) !important; */
+    /* background-color: var(--cor-primaria); */
+    background-color: whitesmoke;
+}
+
+/* Top opções página */
+.card-pagina-modulo .p-top-options{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-bottom: 1rem;
+    /* margin-bottom: 1rem; */
+    /* border-bottom: var(--borda-2); */
+}
+.card-pagina-modulo .p-top-options .titulos{
+    margin-bottom: 0;
+}
+.card-pagina-modulo .p-top-options > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card-pagina-modulo .p-top-options .opcoes-dropdown,
+.card-pagina-modulo .p-top-options .btn-voltar{
+    width: 100%;
+    color: darkgray;
+    font-size: 1rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    /* font-weight: 500; */
+    text-decoration: none;
+    word-break: break-word;
+}
+.card-pagina-modulo .p-top-options .opcoes-dropdown:hover,
+.card-pagina-modulo .p-top-options .btn-voltar:hover{
+    color: gray !important;
+}
+.card-pagina-modulo .p-top-options .opcoes-dropdown.active,
+.card-pagina-modulo .p-top-options .btn-voltar.active{
+    color: #525252 !important;
+}
+.card-pagina-modulo .p-top-options .botoes{
+    display: block !important;
+}
+.card-pagina-modulo .p-top-options .botoes-dropdown{
+    display: none !important;
+}
+
+.card-pagina-modulo .m-concluido{
+    color: var(--cor-nivel-6);
+    display: none;
+}
+.aluno-nivel-6 .card-pagina-modulo .m-concluido{
+    display: block !important;
+}
+
+.header-oa-infos{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    /* text-align: center; */
+    flex: 0 0 70%;
+    /* margin-bottom: 30px; */
+    /* color: #fff; */
+    /* color: rgba(0, 0, 0, 0.7); */
+
+}
+.header-oa-infos .span-modulo{
+    /* border-radius: 50px; */
+    padding: 1px 10px;
+    color: white;
+    background-color: var(--cor-primaria);
+    font-weight: 500 !important;
+}
+.aluno-nivel-0 .header-oa-infos .span-modulo{
+    color: rgba(0, 0, 0, 0.7);
+}
+.header-oa-infos .titulo{
+    /* color: #fff; */
+    color: rgba(0, 0, 0, 0.7);
+}
+.header-oa-infos .descricao{
+    /* color: rgba(255, 255, 255, 0.7); */
+    color: rgba(0, 0, 0, 0.4);
+}
+
+/* Estatistica do modulo para o professor */
+.header-oa-estatisticas{
+    /* width: 115px;
+    height: 115px; */
+    /* background-color: var(--cor-primaria); */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+
+
+
+/* Nivel do modulo para o aluno */
+.header-oa-nivel{
+    width: 150px;
+    height: 150px;
+    /* border: 5px solid rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.85); */
+    border: 5px solid rgba(0, 0, 0, 0.7);
+    color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    text-transform: uppercase;
+}
+.header-oa-nivel > div{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.header-oa-nivel .numero{
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 3em;
+    letter-spacing: 4px;
+    /* font-weight: bold; */
+}
+.header-oa-nivel .nome{
+    font-size: 10px;
+    margin-bottom: 10px;
+    /* font-weight: bold; */
+    font-weight: 600;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+/* Fim Header página do modulo */
+
+
+
+
+
+.oa-opcoes{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+
+
+/* Níveis */
+/* Accordion */
+.oa-opcoes #accordion{
+    width: 100%;
+    background-color: transparent !important;
+    border: var(--borda-1) !important;
+    /* box-shadow: var(--sombra-1) !important; */
+    border-radius: var(--borda-raio-padrao) !important;
+    overflow:hidden !important;
+}
+.oa-opcoes #accordion .card {
+    padding: 0 !important;    
+    border: transparent !important;
+    border-radius: 0 !important;
+}
+
+.oa-opcoes #accordion .card-header {
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: rgb(252, 252, 252) !important;
+    border-bottom: var(--borda-2) !important;
+    border-radius: 0 !important;
+    
+}
+
+/* Opçoes do accordion */
+.oa-opcoes #accordion .card .card-header .btn-link {
+    height: 100%;
+    width: 100%;
+    /* padding: 0 !important; */
+    padding: 15px 20px !important;
+    /* border-radius: 0 !important; */
+    border: hidden !important;
+    color: black !important;
+    text-decoration: none !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease 0s;
+}
+.oa-opcoes #accordion .card .card-header .btn-link:hover {
+    text-decoration: none;
+}
+
+/* Opção do accordion quando concluida */
+.oa-opcoes #accordion .card.concluido .btn-link{
+    /*pointer-events: none;*/
+    /*cursor: default;*/
+}
+/* Opção do accordion quando bloqueada */
+.oa-opcoes #accordion .card.bloqueado .btn-link{
+    background-color: rgb(252, 252, 252) !important;
+    color: var(--botao-bloqueado-cor) !important;
+    pointer-events: none;
+    cursor: default;
+}
+
+.lista-questoes {
+    margin-bottom: 0;
+}
+
+.lista-questoes li:not(:last-of-type) {
+    margin-bottom: 10px;
+}
+
+/* numero do nivel da opcao do accordion */
+.oa-opcoes #accordion .btn-link .numero{
+    font-size: 1.7em;
+    /* font-weight: bold; */
+    font-weight: 500;
+    position: relative;
+    padding: 23px !important;
+    margin-right: 10px;
+    /* padding: 20px 35px; */
+    /* clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%); */
+    /* color: rgba(255, 255, 255, 0.85); */
+    color: rgba(0, 0, 0, 0.85);
+    border-color: black;
+    border-radius: 50%;
+}
+.oa-opcoes #accordion .btn-link .numero span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.oa-opcoes #accordion .card.bloqueado .btn-link .numero{
+    /* background-color: rgb(252, 252, 252) !important; */
+}
+
+.oa-opcoes #accordion .card .btn-link.collapsed:not(.questao-list) .numero{
+    /* background-color: var(--cor-secundaria-2) !important; */
+    border-color: var(--cor-secundaria-2) !important;
+}
+.oa-opcoes #accordion .card.bloqueado .btn-link.collapsed .numero{
+    /* background-color: rgba(128, 128, 128, 0.3) !important; */
+    border-color: rgba(128, 128, 128, 0.3) !important;
+    color: rgba(128, 128, 128, 0.3) !important;
+}
+.oa-opcoes #accordion .card.bloqueado .btn-link .nome{
+    color: rgba(128, 128, 128, 0.3) !important;
+    /* color: var(--botao-bloqueado-cor) !important; */
+}
+
+/* Parte do meio do accordion: nome do nível */
+.oa-opcoes #accordion .btn-link .infos{
+    width: 100%;
+    height: 100%;
+    padding: 0 25px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+
+.oa-opcoes #accordion .btn-link .infos .titulo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+.oa-opcoes #accordion .btn-link .infos .titulo .nome{
+    font-weight: bold;
+    margin-bottom: 0;
+    color: rgba(0, 0, 0, 0.7);
+    margin-right: 10px;
+}
+
+
+
+/* Icones completo e bloqueado das opçoes do accordion */
+.link-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 37px;
+    height: 37px;
+    border-radius: 50% !important;
+    color: rgba(0,0,0,0.8);
+}
+
+.link-icon:not(:last-of-type) {
+    margin-right: 20px;
+}
+
+.link-icon:hover,
+.link-icon:active {
+    border: 1px solid rgba(0,0,0,0.3);
+}
+
+#links-estudo-modal .modal-footer {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.links-estudo-list {
+    padding: 0;
+    margin: 0;
+}
+
+.links-estudo-list li {
+    list-style-type: none;
+    width: 100%;
+    height: 80px;
+}
+
+.links-estudo-list li:not(:last-of-type) {
+    margin-bottom: 10px;
+}
+
+.links-estudo-list li a {
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    height: inherit;
+}
+
+.links-estudo-list li a .imagem {
+    width: 20%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.links-estudo-list li a .info {
+    width: 80%;
+    padding: 10px;
+    font-size: .9em;
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.links-estudo-list li a .info * {
+    overflow-wrap: break-word;
+}
+
+.links-estudo-list li:hover a .info {
+    background-color: rgba(0,0,0,0.04);
+}
+
+.links-estudo-list li a .info span {
+    color: rgba(0,0,0,0.4);
+}
+
+.oa-opcoes #accordion .card .btn-link .infos .icone{
+    width: 30px;
+    height: 30px;
+    position: relative;
+    font-size: .8em;
+    font-weight: bold;
+    color: white;
+    border-radius: 50%;
+    font-family: "Font Awesome 5 Free";
+}
+.oa-opcoes #accordion .card .btn-link .infos .icone span{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.oa-opcoes #accordion .card.concluido .btn-link .infos .icone{
+}
+.oa-opcoes #accordion .card.concluido .btn-link .infos .icone span::before {
+    content: "\f00c";
+}
+.oa-opcoes #accordion .card.bloqueado .btn-link .infos .icone{
+    background-color: rgba(128, 128, 128, 0.3) !important;
+}
+.oa-opcoes #accordion .card.bloqueado .btn-link .infos .icone span::before {
+    content: "\f023";
+}
+/* Fim Icones completo e bloqueado */
+
+
+.coluna-conteudo-nav-pill .card .infos .icones-card {
+    opacity: .3;
+    transition-property: opacity;
+    transition-duration: .2s;
+    transition-timing-function: ease;
+    font-size: 1.15em;
+}
+
+.coluna-conteudo-nav-pill .card:focus .infos .icones-card,
+.coluna-conteudo-nav-pill .card:active .infos .icones-card,
+.coluna-conteudo-nav-pill .card:hover .infos .icones-card {
+    opacity: 1;
+}
+
+
+/* Conteudo do collapse */
+.oa-opcoes #accordion .collapse-conteudo{
+    border-bottom: var(--borda-2) !important;
+}
+.oa-opcoes #accordion .card:last-child .collapse-conteudo{
+    /* border-radius: 0 0 .3rem .3rem !important; */
+    border-radius: 0 0 var(--borda-raio-padrao) var(--borda-raio-padrao) !important;
+    border-bottom: none !important;
+    border-top: var(--borda-2) !important;
+}
+.oa-opcoes #accordion .card-body {
+    width: 100%;
+    height: 100%;
+    /*padding: 25px !important;*/
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+/* Conteudo para estudar */
+.oa-opcoes #accordion .card-body .estudar{
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 1.25rem 1.25rem 0 2rem;
+}
+/* Botao para quiz */
+.oa-opcoes #accordion .card-body .btn-quiz {
+    color: #fff;
+    border-radius: var(--botao-borda-raio);
+    /*font-weight: bold;*/
+    padding: 8px 18px;
+    font-size: 1em;
+    margin: 0 1.25rem 1.25rem 2rem;
+}
+.oa-opcoes #accordion .card-body .btn-quiz:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
+.oa-opcoes .card.concluido .btn-link .infos .icone {
+    background-color: var(--cor-nivel-1);
+}
+.aluno-nivel-1 .oa-opcoes .card.concluido .btn-link .infos .icone {
+    background-color: var(--cor-nivel-1) !important;
+}
+.aluno-nivel-2 .oa-opcoes .card.concluido .btn-link .infos .icone {
+    background-color: var(--cor-nivel-2) !important;
+}
+.aluno-nivel-3 .oa-opcoes .card.concluido .btn-link .infos .icone {
+    background-color: var(--cor-nivel-3) !important;
+}
+.aluno-nivel-4 .oa-opcoes .card.concluido .btn-link .infos .icone {
+    background-color: var(--cor-nivel-4) !important;
+}
+.aluno-nivel-5 .oa-opcoes .card.concluido .btn-link .infos .icone {
+    background-color: var(--cor-nivel-5) !important;
+}
+.aluno-nivel-6 .oa-opcoes .card.concluido .btn-link .infos .icone {
+    background-color: var(--cor-nivel-6) !important;
+}
+
+
+.aluno-nivel-0 .header-oa-nivel{
+    border: 5px solid var(--cor-nivel-0);
+}
+.aluno-nivel-1 .header-oa-nivel{
+    border: 5px solid var(--cor-nivel-1);
+}
+.aluno-nivel-2 .header-oa-nivel{
+    border: 5px solid var(--cor-nivel-2);
+}
+.aluno-nivel-3 .header-oa-nivel{
+    border: 5px solid var(--cor-nivel-3);
+}
+.aluno-nivel-4 .header-oa-nivel{
+    border: 5px solid var(--cor-nivel-4);
+}
+.aluno-nivel-5 .header-oa-nivel{
+    border: 5px solid var(--cor-nivel-5);
+}
+.aluno-nivel-6 .header-oa-nivel{
+    border: 5px solid var(--cor-nivel-6);
+}
+
+
+/* Mudar cores das objetos para a do nivel correspondente */
+.oa-opcoes #accordion .card:nth-child(1) .btn-link .numero,
+.oa-opcoes #accordion .card.ativo:nth-child(1) .btn-link:hover .numero{
+    border: 2px solid var(--cor-nivel-1);
+}
+.oa-opcoes #accordion .card:nth-child(2) .btn-link .numero,
+.oa-opcoes #accordion .card.ativo:nth-child(2) .btn-link:hover .numero{
+    border: 2px solid var(--cor-nivel-2);
+}
+.oa-opcoes #accordion .card:nth-child(3) .btn-link .numero,
+.oa-opcoes #accordion .card.ativo:nth-child(3) .btn-link:hover .numero{
+    border: 2px solid var(--cor-nivel-3);
+}
+.oa-opcoes #accordion .card:nth-child(4) .btn-link .numero,
+.oa-opcoes #accordion .card.ativo:nth-child(4) .btn-link:hover .numero{
+    border: 2px solid var(--cor-nivel-4);
+}
+.oa-opcoes #accordion .card:nth-child(5) .btn-link .numero,
+.oa-opcoes #accordion .card.ativo:nth-child(5) .btn-link:hover .numero{
+    border: 2px solid var(--cor-nivel-5);
+}
+.oa-opcoes #accordion .card:nth-child(6) .btn-link .numero,
+.oa-opcoes #accordion .card.ativo:nth-child(6) .btn-link:hover .numero{
+    border: 2px solid var(--cor-nivel-6);
+}
+
+
+.oa-opcoes #accordion .card:nth-child(1) .collapse-conteudo .btn-quiz{
+    background-color: var(--cor-nivel-1);
+}
+.oa-opcoes #accordion .card:nth-child(2) .collapse-conteudo .btn-quiz{
+    background-color: var(--cor-nivel-2);
+}
+.oa-opcoes #accordion .card:nth-child(3) .collapse-conteudo .btn-quiz{
+    background-color: var(--cor-nivel-3);
+}
+.oa-opcoes #accordion .card:nth-child(4) .collapse-conteudo .btn-quiz{
+    background-color: var(--cor-nivel-4);
+}
+.oa-opcoes #accordion .card:nth-child(5) .collapse-conteudo .btn-quiz{
+    background-color: var(--cor-nivel-5);
+}
+.oa-opcoes #accordion .card:nth-child(6) .collapse-conteudo .btn-quiz{
+    background-color: var(--cor-nivel-6);
+}
+
+    /* INFORMAÇÕES DO MÓDULO */
+.informacoes-oa{
+    background-color: white;
+    width: 100%;
+    /* border: var(--borda-1); */
+    /* border: transparent !important; */
+    /* box-shadow: var(--sombra-1) !important; */
+    border-radius: var(--borda-raio-padrao) !important;
+    padding: 20px;
+}
+.informacoes-oa .info-table{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.informacoes-oa .info-table td{
+    /* padding-right: 50px; */
+    padding-right: 10px;
+}
+
+
+
+@media(min-width: 768px) {
+    .header-oa.bg-nivel-1{
+        background-size: cover;
+        background-position: center;
+    }
+}
+@media(max-width: 768px) {
+    
+    .card-pagina-modulo{
+        padding: 15px !important;
+    }
+    .card-pagina-modulo .p-top-options .botoes{
+        display: none !important;
+    }
+    .card-pagina-modulo .p-top-options .botoes-dropdown{
+        display: block !important;
+    }
+
+    .header-oa {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border: none !important;
+    }
+    .header-oa-infos{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex: 0 0 100%;
+        margin-bottom: 25px;
+    }
+    .header-oa-estatisticas{
+        margin-top: 25px;
+    }
+
+    .oa-opcoes #accordion .card .card-header .btn-link {
+        padding: 8px 13px !important;
+    }
+    .oa-opcoes #accordion .btn-link .infos{
+        padding: 0 10px;
+    }
+    .oa-opcoes #accordion .header-oa-infos .numero{
+        font-size: 1.8em;
+    }
+    .oa-opcoes #accordion .header-oa-nivel {
+        width: 100px;
+        height: 100px;
+    }
+    .oa-opcoes #accordion .header-oa-nivel .numero{
+        font-size: 2.3em;
+    }
+    .oa-opcoes #accordion .header-oa-nivel .nome{
+        font-size: .6em;
+    }
+    .link-icon {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px !important;
+    }
+}
+
+@media(max-width: 540px) {
+    .informacoes-oa {
+        padding: 20px;
+    }
+}
+
+@media(max-width: 447px) {
+    .links-estudo-list li {
+        height: 120px;
+    }
+    .links-estudo-list li a .info {
+        font-size: .8em !important;
+    }
+    .links-estudo-list li a .imagem {
+        width: 30% !important;
+    }
+    .links-estudo-list li a .info {
+        width: 70% !important;
+    }
+}
+
+@media(max-width: 440px) {
+    .oa-opcoes #accordion .btn-link .infos {
+        /* flex-direction: column; */
+        /* align-items: flex-start; */
+    }
+    .oa-opcoes #accordion .btn-link .infos .titulo {
+        margin-bottom: 10px;
+    }
+}

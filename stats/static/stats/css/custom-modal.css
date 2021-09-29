@@ -1,0 +1,128 @@
+
+
+.modal-content{
+    border-radius: var(--borda-raio-padrao) !important;
+    overflow: hidden;
+}
+
+.modal-header{
+    /* background-color: #313a47; */
+    background-color: var(--cor-secundaria-1);
+    color: white;
+    min-height: 300px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+.modal-header .m-infos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.modal-header .m-infos .titulos{
+    color: rgba(255, 255, 255, 1);
+}
+.modal-header .m-infos .subtitulos{
+    color: rgba(255, 255, 255, 0.8);
+}
+.modal-header .m-infos .subtitulos-2{
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.modal-header .close{
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: white;
+}
+.modal-header .close:focus{
+    outline: transparent;
+}
+.modal-header .modal-title{
+    margin-top: 10px;
+    
+}
+
+.modal-header .nivel-modulo{
+    margin-top: 40px;
+    width: 100px;
+    height: 100px;
+    padding: 30px;
+    border: 5px solid white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.modal-header .nivel-modulo h1{
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0;
+}
+.modal-header .nivel-modulo span{
+    font-size: .7em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.modal-content{
+    background-color: transparent;
+    border-color: transparent;
+}
+.modal-body{
+    background-color: white;
+    padding: 0;
+    border-radius: .3em;
+    /* padding: 25px; */
+}
+
+/* Tabelas */
+.modal-body .m-header{
+    background-color: whitesmoke;
+    font-weight: bold;
+    font-size: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 25px;
+    color: rgba(0, 0, 0, 0.5);
+    /* border-bottom: var(--borda-2); */
+}
+.tabela{
+    margin: 20px 0;
+    padding: 10px 25px;
+    /* background-color: whitesmoke;
+    padding: 10px 20px;
+    border-radius: var(--borda-raio-padrao); */
+}
+.tabela .t-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 10px;
+    /* margin: 10px 0; */
+    font-weight: bold;
+    /* border-top: var(--borda-2); */
+    /* border-bottom: var(--borda-2); */
+}
+.tabela .table{
+    color: rgba(0, 0, 0, 0.5);
+}
+.tabela .table .thead{
+    color: rgba(0, 0, 0, 1);
+}
+
+.tabela.tabela-historico-respostas tbody th {
+    width: 40%;
+}
+
+.tabela.tabela-historico-respostas tbody td {
+    text-align: center;
+}
+

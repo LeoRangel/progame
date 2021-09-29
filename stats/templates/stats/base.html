@@ -1,0 +1,87 @@
+{% load static %}
+<!doctype html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="imagem/jpg" href="{% static 'progame/img/logo-small.jpg' %}" />
+    <title>Estatísticas - ProGame</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/751e4bd21d.js" crossorigin="anonymous"></script>
+    <!-- Icones Google -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+
+    {% include "core/_metatags.html" %}
+
+    {% include '_styles.html' %}
+    <link rel="stylesheet" href="{% static 'stats/css/pagina-card.css' %}">
+    <link rel="stylesheet" href="{% static 'stats/css/estatisticas.css' %}">
+    <link rel="stylesheet" href="{% static 'stats/css/cards.css' %}">
+    {% block css %}{% endblock %}
+</head>
+<body>
+    {% include '_navbar.html' %}
+    {% block modal %}{% endblock %}
+
+    <div class="conteudo">
+        {% include 'stats/_sidebar.html' %}
+        <div class="pagina">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    {% include '_scripts.html' %}
+    <script>
+
+        // Tour pela página
+        var passos = {
+            steps: [
+                {
+                    element: '.sidebar',
+                    title: 'Telas de estatísticas',
+                    content: 'Você está na área de estatísticas da turma. Use este menu de opções para navegar entre as telas de estatíticas. A opção referente a tela atual deve estar destacada.',
+                    path: '/diagnostico/turma/' + "{{ turma.uuid }}" + '/alunos/',
+                },
+
+                {
+                    element: '#cards-alunos',
+                    title: 'Alunos da turma',
+                    content: 'Aqui são listados todos os alunos da turma. Os cartões contém algumas informações como nome e pontuação dos alunos e se o aluno está precisando de ajuda (<i class="fas fa-exclamation"></i>). Clique em um cartão para ver as estatísticas desse aluno.',
+                    path: '/diagnostico/turma/' + "{{ turma.uuid }}" + '/alunos/',
+                },
+                // {
+                //     element: $("#cards-alunos").children().eq(0).children('.c-qtd'),
+                //     title: 'Informações do aluno',
+                //     content: 'Aqui você pode vizualizar de forma rápida as quantidades de módulos, respectivamente, concluídos, em andamento e não iniciados pelo aluno.',
+                //     path: '/diagnostico/turma/' + "{{ turma.uuid }}" + '/alunos/',
+                // },
+                
+                {
+                    element: '#cards-modulos',
+                    title: 'Módulos cadastrados',
+                    content: 'Aqui são listados todos os módulos da turma. Os cartões contém algumas informações como nome e data de criação dos módulos e se há alunos precisando de ajuda no módulo (<i class="fas fa-exclamation"></i>). Clique em um cartão para ver as estatísticas desse módulo.',
+                    path: '/diagnostico/turma/' + "{{ turma.uuid }}" + '/modulos/',
+                },
+                // {
+                //     element: $("#cards-modulos").children().eq(0).children('.c-qtd'),
+                //     title: 'Informações do módulo',
+                //     content: 'Aqui você pode vizualizar de forma rápida as quantidades de alunos, respectivamente, que concluíram, que estão em andamento e que não iniciaram o módulo.',
+                //     path: '/diagnostico/turma/' + "{{ turma.uuid }}" + '/modulos/',
+                // },
+                
+            ]
+        };
+        site_tour(passos, 'estatisticas_tour');
+        // Fim do Tour pela página
+
+    </script>
+    {% block scripts %}{% endblock %}
+    {% include 'core/_messages.html' %}
+</body>
+</html>

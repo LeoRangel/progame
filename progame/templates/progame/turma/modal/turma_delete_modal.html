@@ -1,0 +1,26 @@
+<div class="modal fade" id="turma-delete-modal" tabindex="-1" role="dialog" aria-labelledby="turma-delete-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="turma-delete-modal-label">Remover turma</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Ao clicar em "Remover", todos os dados dessa turma serão apagados permanentemente.</p>
+
+                <p>Você realmente deseja fazer isso?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                <form class="prevent-multi-submits" action="{% url 'progame:turma_delete_view' turma.uuid %}"
+                      method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Remover</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

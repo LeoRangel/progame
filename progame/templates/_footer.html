@@ -1,0 +1,113 @@
+{% load static %}
+<!-- Footer -->
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4 d-flex flex-column">
+                <div class="footer-logo">
+                    <img class="logo-site mr-2" src="{% static 'progame/img/logo.png' %}" alt="progame">
+                </div>
+                <div class="mb-3">
+                    <span>
+                        O <strong>ProGame</strong> é uma plataforma
+                        desenvolvida como parte dos trabalhos de
+                        conclusão de curso dos alunos de bacharel
+                        em ciência da computação <a target="_blank" href="https://github.com/xavierigor">Igor Xavier</a>
+                        e <a target="_blank" href="https://github.com/LeoRangel">Leandro Rangel</a>.
+                    </span>
+                </div>
+            </div>
+            <div class="col-5 col-md-2">
+                <div class="">
+                    <h6 class="titulos">Plataforma</h6>
+                    <div>
+                        <ul>
+                            <li>
+                                <a href="{% url 'progame:ajuda' %}">
+                                    Sobre a plataforma
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'progame:ajuda' %}">
+                                    Central de ajuda
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'ausers:login' %}">
+                                    Login
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'ausers:cadastro' %}">
+                                    Cadastro
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-7 col-md-3">
+                <h6 class="titulos">Links Úteis</h6>
+                <div class="cursos-links">
+                    <ul>
+                        <li>
+                            <a href="{% url 'progame:primeiros_passos' %}#item-1">
+                                Primeiros passos no programe
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'progame:primeiros_passos' %}#item-2">
+                                Como criar a minha conta?
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'progame:primeiros_passos' %}#item-3">
+                                Como escolher o tipo de usuario?
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'progame:primeiros_passos' %}#item-4">
+                                Como fazer login na minha conta?
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <h6 class="titulos">Atribuições</h6>
+                <ul>
+                    <li>
+                        <a href="https://stories.freepik.com/" target="_blank">Illustrations by Stories by Freepik</a>
+                    </li>
+                    <li>
+                        <a href="https://freesound.org/s/337049/" target="_blank">Sound by Andy Rhode</a>
+                    </li>
+                    <li>
+                        <a href="https://freesound.org/s/253886/" target="_blank">Sound by Themusicalnomad</a>
+                    </li>
+                    <li>
+                        <a href="https://freesound.org/s/391540/" target="_blank">Sound by Mativve</a>
+                    </li>
+                    <li>
+                        <a href="https://freesound.org/s/325805/" target="_blank">Sound by Wagna</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <hr>
+        <div class="rodape">
+            <div class="mb-3">
+                <span>
+                    © 2020 ProGame
+                    <!-- <a href="https://stories.freepik.com/">Illustrations by Stories by Freepik</a> -->
+                </span>
+            </div>
+            <a href="#minha-navbar" class="mb-3 botao-topo btn btn-padrao-2">
+                Topo
+                <i class="fas fa-arrow-up ml-1"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- Fim Footer -->

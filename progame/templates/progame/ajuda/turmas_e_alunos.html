@@ -1,0 +1,356 @@
+{% extends 'progame/layouts/ajuda_base.html' %}
+{% load static %}
+
+{% block css %}
+{% endblock %}
+
+{% block header %}
+<h4 class="subtitulos">Turmas e alunos</h4>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row flex-wrap-reverse">
+
+        <div class="col-md-9">
+            <div class="conteudo-ajuda" data-spy="scroll" data-target="#navbar-ajuda">
+
+                <!-- Turmas e Alunos -->
+                <div class="secao">
+                    <a href="#item-1">
+                        <h3 class="titulos" id="item-1">
+                            Turmas e Alunos
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+
+                        <p>
+                            Se você já fez os seus
+                            <a href="{% url 'progame:primeiros_passos' %}">primeiros passos</a>
+                            no ProGame, agora, você já pode começar a
+                            <a href="#item-2">criar turmas</a>
+                            se for um usuário do tipo <strong>Professor</strong> e
+                            <a href="#item-7">participar de turmas</a>
+                            se for um usuário do tipo <strong>Aluno</strong>.
+                        </p>
+
+                        <p>
+                            As turmas são a principal função do ProGame. Nelas, os professores podem
+                            <a href="#item-5">adicionar alunos</a>,
+                            <a href="{% url 'progame:modulos' %}">cadastrar módulos</a> de estudo
+                            e acompanhar o desempenho dos alunos por meio das telas de
+                            <a href="{% url 'progame:estatisticas' %}">estatísticas da turma</a>.
+                            Os alunos, por sua vez, podem responder os
+                            <a href="{% url 'progame:quizzes' %}">quizzes</a>
+                            dos módulos cadastrados pelo professor dono da turma, competir nos
+                            <a href="{% url 'progame:rankings' %}">rankings</a>
+                            e desbloquear
+                            <a href="{% url 'progame:quizzes' %}">conquistas</a> legais.
+                        </p>
+
+                        <p>
+                            Todas as turmas são listadas na página inicial do usuário <strong>Minhas turmas</strong>,
+                            que pode ser acessada clicando no logo do site localizado na barra de navegação ou clicando
+                            na opção da barra de navegação que contém a foto e nome do usuário logado e escolhendo
+                            <strong>Minhas turmas</strong> em seguida.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Cadastro -->
+                <div class="secao">
+                    <a href="#item-2">
+                        <h3 class="titulos" id="item-2">
+                            Criar turma (professor)
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Se você é um usuário do tipo <strong>Professor</strong> e está
+                            <a href="{% url 'progame:primeiros_passos' %}#item-4">logado</a>
+                            na sua conta do ProGame, você pode começar a criar turmas. Veja como é simples:
+                        </p>
+
+                        <br>
+                        <p>
+                            1 - Vá para a página <strong>Minhas Turmas</strong>.
+                        </p>
+                        <p>
+                            2 - Na página <strong>Minhas Turmas</strong>, clique no botão flutuante com símbolo de
+                            <strong>+</strong> localizado na base da página e do lado direito. Uma janela modal com um
+                            formulário de cadastro deve aparecer na tela.
+                        </p>
+                        <p>
+                            3 - Preencha o formulário de cadastro com os dados da turma (obs: apenas o nome da turma é
+                            obrigatório).
+                        </p>
+                        <p>
+                            4 - Clique no botão <strong>Criar</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Página da turma -->
+                <div class="secao">
+                    <a href="#item-3">
+                        <h3 class="titulos" id="item-3">
+                            Página da turma
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            As turmas do ProGame são acessadas quando o usuário clica em um dos cartões de turma
+                            listados na página Minhas turmas. Ao acessar uma turma, a barra de navegação do usuário
+                            passará a ter algumas opções a mais, que são exatamente: <strong>Mural</strong>,
+                            <strong>Fórum</strong> e <strong>Estatísticas</strong>. Sendo esta última disponível apenas
+                            para o usuário Professor. Todas estas opções são utilizadas para navegar entre as áreas da
+                            turma.
+                        </p>
+
+                        <p>
+                            A tela <strong>Mural</strong> é a área principal da turma, nela estão um cabeçalho com as
+                            informações sobre a turma, tais como título, professor da turma, sala, seção, código da
+                            turma, quantidade de módulos e quantidade de alunos. Assim como também é por onde são
+                            acessados todos os
+                            <a href="{% url 'progame:modulos' %}">módulos</a>
+                            cadastrados pelo professor, o
+                            <a href="{% url 'progame:rankings' %}#item-2">ranking da turma</a>
+                            e as notícias da turma.
+                        </p>
+
+                        <p>
+                            A tela <strong>Fórum</strong> deverá conter um fórum simples onde os alunos podem tirar
+                            dúvidas e ajudar outros colegas da turma.
+                        </p>
+
+                        <p>
+                            Por fim, em
+                            <strong><a href="{% url 'progame:estatisticas' %}">Estatísticas</a></strong>
+                            é onde o professor pode acompanhar detalhadamente o desempenho dos alunos na turma, bem como
+                            as estatísticas sobre os módulos do sistema.
+                        </p>
+
+                        <p>
+                            Saiba sobre os
+                            <a href="{% url 'progame:modulos' %}">Módulos</a>
+                            da turma e os
+                            <a href="{% url 'progame:rankings' %}">Rankings</a>
+                            em seus respectivos tópicos.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Editar infos -->
+                <div class="secao">
+                    <a href="#item-4">
+                        <h3 class="titulos" id="item-4">
+                            Editar informações da turma (professor)
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Se você é um usuário do tipo <strong>Professor</strong>, você pode editar as informações de
+                            suas turmas da seguinte forma:
+                        </p>
+
+                        <br>
+                        <p>
+                            1 - Abra a <a href="#item-3"><strong>Turma</strong></a>.
+                        </p>
+                        <p>
+                            2 - Clique no botão <strong>Editar</strong> localizado no cabeçalho da página
+                            <strong>Mural</strong> da turma.
+                        </p>
+                        <p>
+                            3 - Faça as alterações necessárias na janela flutuante que surgir na tela.
+                        </p>
+                        <p>
+                            4 - Clique no botão <strong>Salvar</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Codigo da turma -->
+                <div class="secao">
+                    <a href="#item-5">
+                        <h3 class="titulos" id="item-5">
+                            Código da turma
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            O código da turma é um pequeno código automaticamente gerado durante o cadastro da turma e é
+                            usado pelos alunos para
+                            <a href="#item-7">participar da turma</a>.
+                            Para ver e copiar o código da turma realize os seguintes passos:
+                        </p>
+
+                        <br>
+                        <p>
+                            1 - Abra a <a href="#item-3">página da turma</a>.
+                        </p>
+                        <p>
+                            2 - Na tela <strong>Mural</strong> da turma, localize o código abaixo do nome da turma.
+                        </p>
+                        <p>
+                            3 - Clique no código para copiá-lo para a área de transferência.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Adicionar alunos -->
+                <div class="secao">
+                    <a href="#item-6">
+                        <h3 class="titulos" id="item-6">
+                            Adicionar alunos em uma turma (professor)
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Com uma turma criada, você precisa agora adicionar os alunos, certo? Para fazer isso é
+                            simples, você precisa apenas
+                            <a href="#item-5">copiar o código</a>
+                            automaticamente gerado para a turma e enviar para os seus alunos para que eles possam
+                            <a href="#item-7">participar</a>
+                            dela. Você pode ver como copiar o código no tópico anterior a este.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Participar -->
+                <div class="secao">
+                    <a href="#item-7">
+                        <h3 class="titulos" id="item-7">
+                            Participar de uma turma (aluno)
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Se você é um usuário do tipo <strong>Aluno</strong> e está
+                            <a href="{% url 'progame:primeiros_passos' %}#item-3">logado</a>
+                            na sua conta do ProGame, você pode começar a participar de turmas, mas, para isso, você
+                            precisa do código de cada uma das turmas que deseja entrar. Esse código deve ser fornecido
+                            pelo professor dono da turma. Se você já tem esse código, você pode participar da turma da
+                            seguinte maneira:
+                        </p>
+
+                        <br>
+                        <p>
+                            1 - Vá para a página <strong>Minhas Turmas</strong>.
+                        </p>
+                        <p>
+                            2 - Na página <strong>Minhas Turmas</strong>, clique no botão flutuante com símbolo de
+                            <strong>+</strong> localizado na base da página e do lado direito. Uma janela flutuante com
+                            um campo para inserir o código da turma deve aparecer na tela.
+                        </p>
+                        <p>
+                            3 - Digite o
+                            <strong><a href="#item-5">Código da turma</a></strong>
+                            no campo de texto da janela flutuante.
+                        </p>
+                        <p>
+                            4 - Clique no botão <strong>Entrar</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Adicionar links do Github e Discord à turma (professor) -->
+                <div class="secao">
+                    <a href="#item-8">
+                        <h3 class="titulos" id="item-8">
+                            Adicionar links do Github e Discord à turma (professor)
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Se você deseja adicionar um link para o discord ou github que fique visível na turma para os
+                            seus alunos, você pode fazer isso da seguinte maneira:
+                        </p>
+
+                        <br>
+                        <p>
+                            1 - Abra a <a href="#item-3"><strong>Turma</strong></a>.
+                        </p>
+                        <p>
+                            2 - Clique no botão <strong>Editar</strong> localizado no cabeçalho da página
+                            <strong>Mural</strong> da turma.
+                        </p>
+                        <p>
+                            3 - Preencha os campo “Canal do Discord” ou “Repositório no GitHub”.
+                        </p>
+                        <p>
+                            4 - Clique no botão <strong>Salvar</strong>.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ajuda-prox-ant">
+                <a href="{% url 'progame:primeiros_passos' %}">
+                    <i class="mr-2 fas fa-chevron-left"></i>
+                    Primeiros passos
+                </a>
+                <a href="{% url 'progame:modulos' %}">
+                    Modulos
+                    <i class="ml-2 fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <nav id="navbar-ajuda" class="sticky-top nav nav-pills flex-column">
+
+                <a class="nav-link" href="#item-1">
+                    Turmas e Alunos
+                </a>
+                <a class="nav-link" href="#item-2">
+                    Criar turma (professor)
+                </a>
+                <a class="nav-link" href="#item-3">
+                    Página da turma
+                </a>
+                <a class="nav-link" href="#item-4">
+                    Editar informações da turma (professor)
+                </a>
+                <a class="nav-link" href="#item-5">
+                    Código da turma
+                </a>
+                <a class="nav-link" href="#item-6">
+                    Adicionar alunos em uma turma (professor)
+                </a>
+                <a class="nav-link" href="#item-7">
+                    Participar de uma turma (aluno)
+                </a>
+                <a class="nav-link" href="#item-8">
+                    Adicionar links do Github e Discord à turma (professor)
+                </a>
+            </nav>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+
+{% block footer %}{% endblock %}
+
+
+{% block scripts %}
+{% endblock %}

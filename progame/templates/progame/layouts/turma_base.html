@@ -1,0 +1,193 @@
+<!doctype html>
+{% load static %}
+{% load ausers_tags %}
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+    <link rel="icon" type="imagem/jpg" href="{% static 'progame/img/logo-small.jpg' %}" />
+    <title>{% block title %}ProGame{% endblock %}</title>
+
+    {% include "core/_metatags.html" %}
+
+    <!-- Styles -->
+    {% include '_styles.html' %}
+    <link rel="stylesheet" href="{% static 'progame/css/turma.css' %}">
+    <link rel="stylesheet" href="{% static 'progame/css/ranking.css' %}">
+    <link rel="stylesheet" href="{% static 'progame/css/novidades-turma.css' %}">
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+    {% include '_navbar.html' %}
+
+    {% block header %}
+        {% if turma|check_professor:request %}
+            {% include 'progame/turma/modal/turma_delete_modal.html' with turma=turma %}
+            {% include 'progame/includes/codigo_modal.html' %}
+        {% endif %}
+
+        <div class="header-turma" id="header" data-uuid="{{ turma.uuid }}"
+        data-usuario="{% if request.user.is_aluno %}aluno{% else %}professor{% endif %}"
+        {% if turma.imagem %}
+            style="background-image: linear-gradient(rgba(250, 250, 250, 0.9), rgba(250, 250, 250, 1)),
+            url('{{ turma.imagem.url }}');"
+        {% else %}
+            style="background-image: linear-gradient(rgba(250, 250, 250, 0.9), rgba(250, 250, 250, 1)),
+            url('{% static 'progame/img/turma-img.jpg' %}');"
+        {% endif %}
+        >
+
+        <div class="container">
+            <div class="turma-infos">
+                    <!-- {% block breadcrumbs %}
+                        <div class="_breadcrumbs">
+                            <a href="{% url 'progame:get_dashboard' %}">Turmas</a>
+                            <span class="separador">></span>
+                            <span class="pagina-atual">{{ turma }}</span>
+                        </div>
+                    {% endblock %} -->
+
+                    <div class="imagem-turma"
+                    {% if turma.imagem %}
+                        style="background-image: url('{{ turma.imagem.url }}');"
+                    {% else %}
+                        style="background-image:
+                        url('{% static 'progame/img/turma-img.jpg' %}');"
+                    {% endif %}
+                    ></div>
+                    
+                    <div class="infos">
+                        <h1 class="titulos">
+                            {{ turma }}
+                        </h1>
+
+                        <div class="turma-professor ">
+                            <div class="professor">
+                                {% if turma.professor.imagem %}
+                                    <img src="{{ turma.professor.imagem.url }}" alt="{{ turma.professor }}">
+                                {% else %}
+                                    <img src="{% static 'progame/img/user.png' %}" alt="{{ turma.professor }}">
+                                {% endif %}
+                                <span>{{ turma.professor }}</span>
+                            </div>
+                            {% if turma.get_info %}
+                                <span class="mx-1 mx-sm-3 dot-separator">&#183;</span>
+                                <span>{{ turma.get_info }}</span>
+                            {% endif %}
+                            {% if turma|check_professor:request %}
+                                <span class="mx-1 mx-sm-3 dot-separator">&#183;</span>
+                                <div class="codigo-container">
+                                    <span data-clipboard-text="{{ turma.codigo }}" data-toggle="tooltip" data-placement="top"
+                                        title="Copiar" class="codigo copiar">
+                                            {{ turma.codigo }}
+                                    </span>
+                                    <i data-toggle="tooltip" data-placement="top" title="Mostrar" class="mostrar-codigo
+                                    fas fa-expand fa-fw fa-lg"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="sociais-turma mt-4">
+                            {% if turma and turma.discord or turma.github %}
+                                <span class="mr-2">
+                                    Links:
+                                </span>
+                            {% endif %}
+                            {% if turma and turma.discord %}
+                                <a href="{{ turma.discord }}" target="_blank" class="nav-item">
+                                    <i style="font-size: 2rem;" class="fab fa-discord fa-fw"></i>
+                                </a>
+                            {% endif %}
+                            {% if turma and turma.github %}
+                                <a href="{{ turma.github }}" target="_blank" class="nav-item">
+                                    <i style="font-size: 2rem;" class="fab fa-github fa-fw"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        {% if turma|check_professor:request %}
+                            <div class="mt-5">
+                                <button class="btn btn-sm btn-padrao-2 editar_turma mr-1" href="#">
+                                    <i class="fas fa-pencil-alt mr-1"></i>
+                                    Editar
+                                </button>
+                                <button class="btn btn-sm btn-padrao-2" data-toggle="modal"
+                                        data-target="#turma-delete-modal">
+                                    <i class="fas fa-trash-alt mr-1"></i>
+                                    Remover
+                                </button>
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+
+                <div class="dados">
+                    <div class="qtd">
+                        <div>
+                            <h1 class="num">
+                                {{ turma.modulos.count }}
+                            </h1>
+                            <label class="desc">
+                                {% if turma.modulos.count == 1 %}
+                                    Módulo
+                                {% else %}
+                                    Módulos
+                                {% endif %}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="separador"></div>
+                    <div class="qtd">
+                        <div>
+                            <h1 class="num">
+                                {{ turma.alunos.count }}
+                            </h1>
+                            <label class="desc">
+                                {% if turma.alunos.count == 1 %}
+                                    Aluno(a)
+                                {% else %}
+                                    Alunos
+                                {% endif %}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    {% endblock %}
+
+
+    <main class="container main-container py-5">
+        {% block content %}{% endblock %}
+    </main>
+
+
+    <!-- Scripts -->
+    {% include '_scripts.html' %}
+    {% include 'core/_messages.html' %}
+    {% block scripts %}{% endblock %}
+    <script src="{% static 'progame/js/distr/set_text_color.js' %}"></script>
+
+    <script>
+        $(document).ready(function() {
+            let uuid = $('#header').data('uuid');
+            $('.editar_turma').modalForm({
+                {#formURL: "{% url 'progame:turma_update_view' object.pk %}",#}
+                formURL: '/turma/' + uuid + '/atualizar/',
+                modalID: "#modal",
+                modalContent: ".modal-form-content"
+            })
+        });
+
+        $('.mostrar-codigo').click(function() {
+            $('#codigo-modal').modal('show')
+        })
+    </script>
+</body>
+</html>

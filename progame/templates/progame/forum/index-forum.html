@@ -1,0 +1,37 @@
+<!doctype html>
+{% load static %}
+{% load ausers_tags %}
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+    <title>{% block title %}Fórum - ProGame{% endblock %}</title>
+
+    {% include "core/_metatags.html" %}
+
+    <!-- Styles -->
+    {% include '_styles.html' %}
+    <link rel="stylesheet" href="{% static 'progame/css/turma.css' %}">
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+    {% include '_navbar.html' %}
+
+    <main style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+        <img src="{% static 'progame/img/ilust/forum-cinza.png' %}" alt="">
+        <span class="subtitulos">
+            Em breve...
+        </span>
+    </main>
+
+    <!-- Scripts -->
+    {% include '_scripts.html' %}
+    {% include 'core/_messages.html' %}
+    {% block scripts %}{% endblock %}
+</body>
+</html>

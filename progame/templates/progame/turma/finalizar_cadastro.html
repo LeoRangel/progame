@@ -1,0 +1,29 @@
+{% extends 'progame/layouts/professor_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <div class="bg-white p-3 p-md-4 shadow-sm">
+        <div class="mb-5">
+            <h4 class="card-title">Comece cadastrando um módulo para sua turma</h4>
+            <p class="card-subtitle text-muted mb-4">Informe a título e a descrição</p>
+        </div>
+        <section>
+            <form data-modulo="{{ modulo.uuid }}" action="#" method="post" id="form-cadastrar-questao">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+        </section>
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+    <script>
+        $("#id_descricao").on('keyup', function(){
+            $("#hint_id_descricao").text((130 - $(this).val().length) + ' restantes');
+        });
+    </script>
+{% endblock %}

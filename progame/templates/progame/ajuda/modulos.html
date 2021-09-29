@@ -1,0 +1,437 @@
+{% extends 'progame/layouts/ajuda_base.html' %}
+{% load static %}
+
+{% block css %}
+{% endblock %}
+
+{% block header %}
+<h4 class="subtitulos">Módulos</h4>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row flex-wrap-reverse">
+
+        <div class="col-md-9">
+            <div class="conteudo-ajuda" data-spy="scroll" data-target="#navbar-ajuda">
+
+                <!-- O que são módulos-->
+                <div class="secao">
+                    <a href="#item-1">
+                        <h3 class="titulos" id="item-1">
+                            O que são módulos
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Após ter uma turma no ProGame, o próximo passo é começar a criar módulos de estudo se você
+                            for um usuário professor e responder módulos se você for um usuário aluno.
+                        </p>
+
+                        <p>
+                            Os módulos de estudo são uma funcionalidade do ProGame que permite os professores
+                            conseguirem avaliar e melhorar o desempenho dos alunos de uma turma em um determinado
+                            assunto.
+                        </p>
+
+                        <p>
+                            Cada turma pode ter diversos módulos cadastrados e cada um desses módulos deve ser referente
+                            a um assunto em que os alunos precisam ser avaliados. Por exemplo, para uma turma de
+                            Estruturas de Dados, alguns possíveis módulos seriam Tipos de dados, Tabelas, Busca,
+                            Ordenação, Árvores, entre outros. Todos os módulos cadastrados em uma turma são listados e
+                            podem ser acessados a partir da tela <strong>Mural</strong> da turma.
+                        </p>
+
+                        <p>
+                            A principal característica dos módulos de estudo é os níveis de aprendizado. Cada módulo é
+                            dividido em 6 níveis, cada um desses, com um nome, uma cor e um número associados e um quiz
+                            de perguntas e respostas onde o alunos vão testar o seu conhecimento a respeito do assunto.
+                        </p>
+
+                        <p>
+                            Mais informações sobre os níveis de aprendizado, quizzes e também outras características dos
+                            módulos como o ranking do módulo, serão abordados nas próximas tópicos e páginas.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Acessar um módulo -->
+                <div class="secao">
+                    <a href="#item-2">
+                        <h3 class="titulos" id="item-2">
+                            Acessar um módulo
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Para acessar um módulo de estudo cadastrado na turma, você deve ir até a página inicial da
+                            turma: <strong>Mural</strong>. Nesta página, estão listados todos os módulos cadastrados em
+                            cartões com o nome e descrição do módulo, o líder do ranking do módulo (os rankings serão
+                            explicados mais à frente) e se você for um usuário do tipo aluno, também serão mostrados a
+                            cor e número associados ao seu nível atual no módulo.
+                        </p>
+                        <p>
+                            Clique sobre um dos módulos para acessá-lo.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Criar um módulo (professor) -->
+                <div class="secao">
+                    <a href="#item-3">
+                        <h3 class="titulos" id="item-3">
+                            Criar um módulo (professor)
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Para criar um módulo é simples:
+                        </p>
+
+                        <br>
+                        <p>
+                            1 - Na tela <strong>Mural</strong> da turma, localize a seção “Módulos” e clique na opção
+                            <strong>Adicionar módulo</strong>. Uma janela flutuante será aberta com um formulário de
+                            cadastro de módulos.
+                        </p>
+                        <p>
+                            2 - Preencha o formulário com <strong>Nome</strong> e <strong>Descrição</strong> (opcional)
+                            do módulo.
+                        </p>
+                        <p>
+                            3 - Clique no botão <strong>Adicionar</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Página do módulo -->
+                <div class="secao">
+                    <a href="#item-4">
+                        <h3 class="titulos" id="item-4">
+                            Página do módulo
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            A página do módulo é onde os professores e alunos podem realizar todas as ações
+                            correspondentes a um determinado módulo da turma. Nessa página, pode ser encontrado um
+                            cabeçalho com todas as informações a respeito do módulo, assim como podem ser acessados os
+                            níveis de aprendizado do módulo e o ranking do módulo.
+                        </p>
+
+                        <p>
+                            Se você for um usuário do tipo aluno, o seu nível atual do módulo será exibido no cabeçalho
+                            da página, ao lado do nome e descrição do módulo.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Níveis do módulo e a taxonomia de bloom -->
+                <div class="secao">
+                    <a href="#item-5">
+                        <h3 class="titulos" id="item-5">
+                            Níveis do módulo e a taxonomia de bloom
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            A <strong>Taxonomia de Bloom</strong> é um sistema de classificação de aprendizado que leva
+                            em consideração os seis principais níveis do sistema cognitivo:
+                            <strong>Conhecimento</strong>, <strong>Compreensão</strong>, <strong>Aplicação</strong>,
+                            <strong>Análise</strong>, <strong>Síntese</strong> e <strong>Avaliação</strong>. Onde cada
+                            um dos níveis é pré-requisito para o próximo mais complexo.
+                        </p>
+
+                        <p>
+                            A Taxonomia é utilizada no ProGame com o objetivo de categorizar o aprendizado do aluno em
+                            um assunto específico, proporcionando um feedback qualitativo para o docente.
+                        </p>
+
+                        <p>
+                            Cada categoria da taxonomia possui verbos que representam o que o aprendiz é capaz de
+                            executar caso esteja naquele nível. No ProGame utiliza-se os seguintes verbos:
+                        </p>
+
+                        <br>
+                        <img class="w-100" src="{% static 'progame/img/tabela-taxonomia.png' %}" alt="">
+                        <br>
+                        <br>
+                        <br>
+
+                        <p>
+                            Por padrão, o aluno é categorizado no módulo como <strong>nível 0</strong>. Neste nível, o
+                            aluno pode tentar responder o <strong>Quiz do nível 1</strong> (se estiver desbloqueado),
+                            caso ele seja aprovado, avançará para este nível, tornando-se apto para responder o
+                            <strong>Quiz do nível 2</strong>, e assim por diante.
+                        </p>
+
+                        <p>
+                            Para ser aprovado em um Quiz, é necessário que o aluno acerte pelo menos <strong>70% das
+                                questões</strong> propostas.
+                        </p>
+
+                        <p>
+                            Além disso, não existem limites de tentativas nos Quizzes, sendo possível respondê-los
+                            quantas vezes precisar até conseguir concluí-los. Contudo, é recomendado que o aluno tente
+                            responder somente após estudar o conteúdo do nível, pois ele pode deixar de ganhar pontos
+                            caso tente responder um Quiz muitas vezes sem sucesso, como será mostrado no tópico de
+                            pontuação.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Cadastrar links de estudo (professor) -->
+                <div class="secao">
+                    <a href="#item-6">
+                        <h3 class="titulos" id="item-6">
+                            Cadastrar links de estudo (professor)
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Cada nível de um módulo pode ter vários links de estudos cadastrados pelo professor. Estes
+                            links serão úteis para os alunos que precisarem revisar e tirar dúvidas sobre o assunto do
+                            módulo, antes ou mesmo depois de fazer os quizzes.
+                        </p>
+
+                        <p>
+                            Para cadastrar um link de estudo realize os seguintes procedimentos:
+                        </p>
+
+                        <br>
+                        <p>
+                            1 - Na página do módulo, localize o nível a que você deseja cadastrar um novo link de estudo
+                            e em seguida, nas opções localizadas no lado direito do nível, clique na opção referente à
+                            links de estudo. Será aberta uma janela flutuante com um formulário de cadastro de links de
+                            estudo.
+                        </p>
+                        <p>
+                            2 - Preencha o fomulário com um <strong>Nome</strong> e uma <strong>Url</strong> para o
+                            link.
+                        </p>
+                        <p>
+                            3 - Clique no botão <strong>Adicionar</strong>.
+                        </p>
+
+                        <p>
+                            Pronto, o novo link de estudo foi cadastrado e deve aparecer para os alunos quando eles
+                            acessarem este nível do módulo.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Bloquear e desbloquear quiz (professor) -->
+                <div class="secao">
+                    <a href="#item-7">
+                        <h3 class="titulos" id="item-7">
+                            Bloquear e desbloquear quiz (professor)
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Por padrão, após cadastrar uma pergunta em um nível de um módulo, o quiz desse nível é
+                            automaticamente desbloqueado para que os alunos possam respondê-lo, mas, é possível fazer
+                            com que um quiz do módulo fique bloqueado até achar o momento ideal de liberá-lo para os
+                            alunos responderem. Para bloquear ou desbloquear o quiz, basta clicar na opção com um ícone
+                            de cadeado, localizado ao lado direito de cada um dos níveis do módulo. Se a opção estiver
+                            com o ícone de um cadeado aberto, significa que o quiz está desbloqueado e pode ser acessado
+                            pelos alunos. Se a opção estiver com o ícone de um cadeado fechado, significa que o quiz
+                            está bloqueado e não pode ser acessado pelos alunos.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Adicionar questões (professor) -->
+                <div class="secao">
+                    <a href="#item-8">
+                        <h3 class="titulos" id="item-8">
+                            Adicionar questões (professor)
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Para cadastrar questões em um nível do módulo, realize os seguintes passos:
+                        </p>
+
+                        <br>
+                        <p>
+                            1 - Localize o nível do módulo a que você deseja cadastrar uma questão e em seguida clique
+                            na opção com o ícone de <strong>+</strong>, localizada ao lado direito do nível e referente
+                            a adicionar questões. Você será levado a página de cadastro de questões.
+                        </p>
+                        <p>
+                            2 - Na página de cadastro de questões, preencha o formulário com os dados da questão:
+                            <strong>Sentença</strong>, <strong>Tempo de resposta</strong> (que o aluno tem para
+                            pontuar), <strong>Verbos</strong> e <strong>Descrição</strong> (opcional).
+                        </p>
+                        <p>
+                            3 - Agora adicione as alternativas da questão. Para isso, você deve preencher o campo de
+                            texto da alternativa e clicar no botão com o ícone de <strong>+</strong>. Faça isso para
+                            cada uma das alternativas da questão.
+                        </p>
+                        <p>
+                            4 - Tendo criado as alternativas, agora você precisa marcar quais delas são corretas. Para
+                            isso, dê um clique sobre os balões com as alternativas que são corretas. Elas devem ficar
+                            destacadas com a cor verde.
+                        </p>
+                        <p>
+                            5 - Clique no botão <strong>Cadastrar</strong>.
+                        </p>
+
+                        <p>
+                            Pronto, a sua nova questão foi cadastrada e já deve aparecer para os alunos respondê-la
+                            quando o quiz do módulo estiver desbloqueado.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Importar questões (professor) -->
+                <div class="secao">
+                    <a href="#item-9">
+                        <h3 class="titulos" id="item-9">
+                            Importar questões (professor)
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Além de cadastrar questões, os professores também podem importar para os seus quizzes
+                            questões prontas cadastradas por outros professores. Para isso, siga os seguintes passos:
+                        </p>
+
+                        <br>
+                        <p>
+                            1 - Localize o nível do módulo a que você deseja importar uma questão e em seguida clique na
+                            opção localizada ao lado direito do nível referente a adicionar questões (posicione o cursor
+                            sobre as opções para ver o que cada uma significa). Você será levado a página de cadastro de
+                            questões.
+                        </p>
+                        <p>
+                            2 - Na página de importar questões, busque por questões que você deseja importar. Você pode
+                            pesquisar por palavras chaves e filtrar pelo verbo da questão.
+                        </p>
+                        <p>
+                            3 - Localizada uma questão que deseja importar, clique sobre ela para que a mesma fique
+                            selecionada.
+                        </p>
+                        <p>
+                            4 - Agora que já tem a questão selecionada, clique no botão flutuante na base e lado direito
+                            da página para importá-la.
+                        </p>
+
+                        <p>
+                            Pronto, a sua questão foi importada para o quiz e já está listada junto com as outras
+                            questões do nível, assim, os alunos já podem respondê-la se este quiz estiver desbloqueado.
+                            Você também pode editar questões importadas caso precise fazer alguma alteração.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Editar uma questão (professor)  -->
+                <div class="secao">
+                    <a href="#item-10">
+                        <h3 class="titulos" id="item-10">
+                            Editar uma questão (professor)
+                            <span class="hashtag">#</span>
+                        </h3>
+                        <hr>
+                    </a>
+                    <div>
+                        <p>
+                            Para editar uma questão cadastrada, siga os seguintes passos:
+                        </p>
+
+                        <br>
+                        <p>
+                            1 - Na página do módulo, localize o nível em que está a questão que precisa ser editada e
+                            clique sobre ele.
+                        </p>
+                        <p>
+                            3 - Todas as questão cadastradas neste nível serão listadas. Localize a questão que precisa
+                            ser editada e clique no botão Editar da questão.
+                        </p>
+                        <p>
+                            4 - Na página de edição de questão, faça as alterações necessárias.
+                        </p>
+                        <p>
+                            5 - Clique no botão <strong>Salvar</strong> para finalizar.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ajuda-prox-ant">
+                <a href="{% url 'progame:turmas_e_alunos' %}">
+                    <i class="mr-2 fas fa-chevron-left"></i>
+                    Turmas e Alunos
+                </a>
+                <a href="{% url 'progame:quizzes' %}">
+                    Quizzes, Pontuações e Conquistas
+                    <i class="ml-2 fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <nav id="navbar-ajuda" class="sticky-top nav nav-pills flex-column">
+                <a class="nav-link" href="#item-1">
+                    O que são módulos
+                </a>
+                <a class="nav-link" href="#item-2">
+                    Acessar um módulo
+                </a>
+                <a class="nav-link" href="#item-3">
+                    Criar um módulo (professor)
+                </a>
+                <a class="nav-link" href="#item-4">
+                    Página do módulo
+                </a>
+                <a class="nav-link" href="#item-5">
+                    Níveis do módulo e a taxonomia de bloom
+                </a>
+                <a class="nav-link" href="#item-6">
+                    Cadastrar links de estudo (professor)
+                </a>
+                <a class="nav-link" href="#item-7">
+                    Bloquear e desbloquear quiz (professor)
+                </a>
+                <a class="nav-link" href="#item-8">
+                    Adicionar questões (professor)
+                </a>
+                <a class="nav-link" href="#item-9">
+                    Importar questões (professor)
+                </a>
+                <a class="nav-link" href="#item-10">
+                    Editar uma questão (professor)
+                </a>
+            </nav>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+
+{% block footer %}{% endblock %}
+
+
+{% block scripts %}
+{% endblock %}

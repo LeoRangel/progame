@@ -1,0 +1,122 @@
+{% extends 'stats/base.html' %}
+{% load static %}
+{% load progame_tags %}
+{% load stats_tags %}
+
+{% block content %}
+    <div class="cards-lista">
+        <div class="p-top-options">
+            <h4 class="titulos">
+                Alunos
+                <small class="text-muted">( {{ object_list.count }} )</small>
+            </h4>
+            <div>
+                <form class="form-inline">
+                    <!-- <div class="input-group input-group-sm">
+                        <select class="custom-select custom-select-sm">
+                            <option value="todos">Todos</option>
+                            <option value="completos">Completos</option>
+                            <option value="emandamento">Em andamento</option>
+                            <option value="pendentes">Pendentes</option>
+                        </select>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" placeholder="Pesquisar aluno" aria-label="Pesquisar aluno">
+                        <div class="input-group-append">
+                            <button class="btn btn-filters-out" type="button">
+                                <i class="fas fa-search fa-fw ml-1"></i>
+                            </button>
+                        </div>
+                    </div> -->
+                </form>
+            </div>
+        </div>
+
+        {% if object_list.count > 0 %}
+            <div id="cards-alunos" class="cards c-alunos">
+                {% for aluno in object_list %}
+                <a class="card" href="{% url 'stats:aluno_detail_view' uuid=turma.uuid pk=aluno.pk %}">
+
+                    <!-- Opcoes top -->
+                    <div class="c-top-options">
+                        <!-- <div data-toggle="tooltip" data-placement="top" title="Precisa de ajuda"  class="ajuda">
+                            <i class="far fa-exclamation"></i>
+                        </div> -->
+
+                        <div class="dropdown options-dropdown">
+                            <div class="" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-fw ml-1"></i>
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                                <button data-href="{% url 'stats:aluno_detail_view' turma.uuid aluno.pk %}"
+                                        class="dropdown-card-link dropdown-item" type="button">Abrir</button>
+    {#                            <button data-href="{% url 'stats:aluno_detail_view' aluno.pk %}" #}
+    {#                                    class="dropdown-card-link dropdown-item" type="button">Ir para perfil do aluno</button>#}
+{#                                <button data-href="#"#}
+{#                                        class="dropdown-card-link dropdown-item" type="button">Remover</button>#}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="c-infos">
+                        <div class="foto">
+                            {% if aluno.imagem %}
+                                <img src="{{ aluno.imagem.url }}" alt="{{ aluno }}">
+                            {% else %}
+                                <img src="{% static 'progame/img/user.png' %}" alt="{{ aluno }}">
+                            {% endif %}
+{#                            <div class="ajuda" data-toggle="tooltip" data-placement="top" title="Precisa de ajuda">#}
+{#                                <!-- <i class="far fa-exclamation"></i> -->#}
+{#                                <i class="fas fa-exclamation"></i>#}
+{#                            </div>#}
+                        </div>
+                        <h6 class="c-nome d-inline-block text-truncate">
+                            {{ aluno }}
+                        </h6>
+                        <span class="c-desc">
+                            {{ aluno|get_pontuacao_na_turma:turma }} pontos
+                        </span>
+                    </div>
+
+                    <!-- Qtd modulos -->
+                    <div class="c-qtd">
+                        <div class="finalizados text-success" data-toggle="tooltip" data-placement="top"
+                            title="Módulos finalizados (nível 6)">
+                            <i class="fas fa-check-circle fa-lg"></i>
+                            <span>{{ aluno|get_qtd_modulos_finalizados:turma }}</span>
+                        </div>
+                        <div class="em-progresso text-warning-darker" data-toggle="tooltip" data-placement="top"
+                            title="Módulos em andamento (níveis 0-5)">
+                            <i class="fas fa-clock fa-lg"></i>
+                            <span>{{ aluno|get_qtd_modulos_em_andamento:turma }}</span>
+                        </div>
+                        <div class="pendentes text-danger" data-toggle="tooltip" data-placement="top"
+                            title="Módulos não iniciados (nível 0)">
+                            <i class="fas fa-exclamation-circle fa-lg"></i>
+                            <span>{{ aluno|get_qtd_modulos_pendentes:turma }}</span>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div id="cards-alunos" class="sem-cards">
+                <img src="{% static 'progame/img/ilust/turma-cinza.png' %}">
+
+                <span class="">
+                    Ainda não há nenhum aluno na turma.
+                </span>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+    <script>
+        $('.dropdown-card-link').click(function(e) {
+            e.preventDefault()
+            window.location.href = $(this).data('href')
+        })
+    </script>
+{% endblock %}

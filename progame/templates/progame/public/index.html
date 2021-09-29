@@ -1,0 +1,130 @@
+{% extends 'progame/layouts/public_base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'progame/css/home.css' %}">
+{% endblock %}
+
+{% block header %}
+<div class="header-home" id="header-home">
+    <!-- <img class="detalhe" src="{% static 'progame/img/ilust/mancha.svg' %}" alt=""> -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-7 home-titulo">
+                <!-- <h5 class="titulos">Bem vindo ao seu novo</h5> -->
+                <h1 class="titulos">
+                    Seja bem vindo ao <span>ProGame</span>!
+                    <!-- AVA para disciplinas de programação -->
+                    <!-- Ambiente virtual de aprendizagem de programação -->
+                </h1>
+                <h5 class="mt-3 subtitulos-2">
+                    Faça login ou começe agora mesmo no seu novo ambiente virtual de aprendizagem de programação.
+                    <!-- Faça login na sua conta do ProGame ou
+                        comece agora mesmo e venha conhecer uma
+                        forma inovadora de ensinar -->
+                </h5>
+                <div class="botoes mt-4">
+                    <a href="{% url 'ausers:cadastro' %}" class="btn btn-lg btn-padrao">
+                        Começar agora
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="{% url 'ausers:login' %}" class="btn btn-lg btn-padrao-2">
+                        Fazer login
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-5 home-ilust">
+                <!-- <img src="{% static 'progame/img/ilust/home5.png' %}" alt=""> -->
+                <img src="{% static 'progame/img/ilust/home4.svg' %}" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="sobre-home">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-4 desc">
+                <h6 class="titulos mt-4">SOBRE</h6>
+                <h2 class="titulo titulos">O que é o ProGame?</h2>
+                <span>
+                    O ProGame é uma plataforma virtual gamificada
+                    e gratuita, que baseia-se na Taxonomia de Bloom
+                    para auxiliar professores a avaliar e
+                    melhorar o desempenho individual de alunos
+                    em disciplinas de programação.
+                </span>
+            </div>
+            <div class="col-md-12 col-lg-6 passos">
+                <div class="passo">
+                    <div class="icone">
+                        <!-- <span>1º</span> -->
+                        <!-- <i class="flaticon-meeting"></i> -->
+                        <img src="{% static 'progame/img/ilust/turma.png' %}" alt="">
+                    </div>
+                    <h5 class="titulo">Crie uma turma</h5>
+                    <span>
+                        Ter uma turma é o ponto de partida no ProGame. Não se esqueça de mandar o código da turma para
+                        seus alunos!
+                    </span>
+                </div>
+                <div class="passo">
+                    <div class="icone">
+                        <!-- <span>2º</span> -->
+                        <!-- <i class="flaticon-box"></i> -->
+                        <img src="{% static 'progame/img/ilust/quiz.png' %}" alt="">
+                    </div>
+                    <h5 class="titulo">Cadastre módulos</h5>
+                    <span>
+                        Os módulos de estudo são usados para avaliar o nível de aprendizado dos alunos sobre um
+                        determinado assunto
+                    </span>
+                </div>
+                <div class="passo">
+                    <div class="icone">
+                        <!-- <span>3º</span> -->
+                        <!-- <i class="flaticon-esports"></i> -->
+                        <img src="{% static 'progame/img/ilust/ranking.png' %}" alt="">
+                    </div>
+                    <h5 class="titulo">Motive seus alunos</h5>
+                    <span>
+                        Os quizzes, rankings, conquistas, entre outros elementos do ProGame vão tornar as atividades
+                        mais divertidas para eles
+                    </span>
+                </div>
+                <div class="passo">
+                    <div class="icone">
+                        <!-- <span>4º</span> -->
+                        <!-- <i class="flaticon-winner"></i> -->
+                        <img src="{% static 'progame/img/ilust/estatisticas.png' %}" alt="">
+                    </div>
+                    <h5 class="titulo">Ajude-os a evoluir</h5>
+                    <span>
+                        Acompanhe o desempenho e nível de aprendizagem individual de cada um dos alunos e ajude-os a
+                        superar barreiras
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cadastro-home">
+    <h2 class="titulos">
+        Crie agora mesmo a sua conta!
+    </h2>
+    <a href="{% url 'ausers:cadastro' %}" class="btn btn-lg">
+        Registrar-se no Programe
+    </a>
+</div>
+{% endblock %}
+
+
+{% block content %}
+{% endblock %}
+
+
+{% block scripts %}
+
+{% endblock %}

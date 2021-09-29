@@ -1,0 +1,23 @@
+<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    <a class="nav-link {% if active == 'info' %}active{% endif %}" id="info" href=
+            "{% url 'progame:modulo_detail_view' object.uuid %}" role="tab" aria-controls="info">
+        <i class="fas fa-info-circle fa-fw mr-2"></i>
+        Informações
+    </a>
+    <a class="nav-link {% if active == 'questoes' %}active{% endif %}" id="questoes"
+       href="{% url 'progame:modulo_questao_list_view' object.uuid %}" role="tab" aria-controls="questoes">
+        <i class="fas fa-tasks fa-fw mr-2"></i>
+        Questões
+    </a>
+    <a class="nav-link {% if active == 'ranking' %}active{% endif %}" id="ranking" href=
+            "{% url 'progame:modulo_ranking_detail_view' object.uuid %}" role="tab"
+       aria-controls="ranking" >
+        <i class="fas fa-trophy fa-fw mr-2"></i>
+        Ranking
+    </a>
+    <a class="nav-link {% if active == 'meu_nivel' %}active{% endif %}" id="meu_nivel" href="#" role="tab"
+       aria-controls="meu_nivel">
+        <i class="fas fa-boxes fa-fw mr-2"></i>
+        Meu Nível
+    </a>
+</div>

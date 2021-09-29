@@ -1,0 +1,133 @@
+{% extends 'stats/base.html' %}
+{% load static %}
+
+
+{% block modal %}
+    {% include '_modal.html' %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="cards-lista">
+        <div class="p-top-options">
+            <h4 class="titulos">
+                Módulos
+                <small class="text-muted">( {{ object_list.count }} )</small>
+            </h4>
+            <div>
+                <form class="form-inline">
+                    <!-- <div class="input-group input-group-sm">
+                        <select class="custom-select custom-select-sm">
+                            <option value="todos">Todos</option>
+                            <option value="completos">Completos</option>
+                            <option value="emandamento">Em andamento</option>
+                            <option value="pendentes">Pendentes</option>
+                        </select>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" placeholder="Pesquisar módulo" aria-label="Pesquisar módulo">
+                        <div class="input-group-append">
+                            <button class="btn btn-filters-out" type="button">
+                                <i class="fas fa-search fa-fw ml-1"></i>
+                            </button>
+                        </div>
+                    </div> -->
+                    <div class="input-group input-group-sm">
+                        <a href="#" class="adicionar-modulo btn btn-sm btn-success">
+                            <i class="fas fa-plus fa-fw ml-1"></i>
+                            Adicionar novo
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% if object_list.count > 0 %}
+            <div id="cards-modulos" class="cards c-modulos">
+                {% for modulo in object_list %}
+                    <a href="{% url 'stats:modulo_detail_view' modulo.uuid %}" class="card">
+                        <div class="c-top-options">
+                            <!-- {# Precisa de ajuda #} -->
+                            <!-- <div class="ajuda">
+    {#                            <i class="far fa-exclamation"></i>#}
+                            </div> -->
+
+                            <div class="dropdown options-dropdown">
+                                <div class="" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v fa-fw ml-1"></i>
+                                </div>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                                    <button data-href="{% url 'stats:modulo_detail_view' modulo.uuid %}"
+                                            class="dropdown-card-link dropdown-item" type="button">Abrir</button>
+                                    <button data-href="{% url 'progame:questao_list_view' modulo.uuid %}"
+                                            class="dropdown-card-link dropdown-item" type="button">Ir para página do módulo</button>
+{#                                    <button data-href="#"#}
+{#                                            class="dropdown-card-link dropdown-item" type="button">Remover</button>#}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="c-infos">
+                            <div class="foto">
+                                <img src="{% static 'stats/img/module.png' %}" alt="modulo">
+{#                                <div class="ajuda text-info" data-toggle="tooltip" data-placement="top" title="Alguém precisa de ajuda">#}
+{#                                    <!-- <i class="far fa-exclamation"></i> -->#}
+{#                                    <i class="fas fa-exclamation"></i>#}
+{#                                </div>#}
+                            </div>
+                            <h6 class="c-nome d-inline-block text-truncate">
+                                {{ modulo }}
+                            </h6>
+                            <span class="c-desc">
+                                <!-- {{ modulo.descricao }} -->
+                                Cadastrado em {{ modulo.criado_em|date:"d/m/Y" }}
+                            </span>
+                        </div>
+
+                        <div class="c-qtd">
+                            <div class="finalizados text-success" data-toggle="tooltip" data-placement="top"
+                                title="Alunos que finalizaram">
+                                <i class="fas fa-check-circle fa-lg"></i>
+                                <span>{{ modulo.qtd_alunos_finalizados }}</span>
+                            </div>
+                            <div class="em-progresso text-warning-darker" data-toggle="tooltip" data-placement="top"
+                                title="Alunos em andamento">
+                                <i class="fas fa-clock fa-lg"></i>
+                                <span>{{ modulo.qtd_alunos_em_andamento }}</span>
+                            </div>
+                            <div class="pendentes text-danger" data-toggle="tooltip" data-placement="top"
+                                title="Alunos que não iniciaram">
+                                <i class="fas fa-exclamation-circle fa-lg"></i>
+                                <span>{{ modulo.qtd_alunos_pendentes }}</span>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div id="cards-modulos" class="sem-cards">
+                <img src="{% static 'progame/img/ilust/quiz-cinza.png' %}">
+
+                <span class="">
+                    Ainda não há nenhum módulo cadastrado na turma.
+                </span>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+    <script>
+        $('.adicionar-modulo').modalForm({
+            formURL: "{% url 'progame:modulo_create_view' turma.uuid %}",
+            modalID: "#modal",
+            modalContent: ".modal-form-content"
+        })
+
+        $('.dropdown-card-link').click(function(e) {
+            e.preventDefault()
+            window.location.href = $(this).data('href')
+        })
+    </script>
+{% endblock %}

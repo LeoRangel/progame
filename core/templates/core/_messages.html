@@ -1,0 +1,40 @@
+{% load static %}
+{% load core_tags %}
+<script>
+    const audio = document.getElementById('som-conquista');
+    let conquistas = []
+    {% for message in messages %}
+        {% if message.tags == 'info' %}
+
+            // Tocar som de conquista
+            
+            {# messages tipo INFO são conquistas #}
+            {# e seu atributo `message` é a pk da conquista #}
+            {% with conquista=message.message|get_conquista %}
+                audio.play();
+                confetti.start(1000, 80);
+                conquistas.push({
+                    title: '{{ conquista.item_conquista.nome }}',
+                    text: '{{ conquista.item_conquista.descricao }}',
+                    {% with path='progame/img/badges/'|add:conquista.item_conquista.slug|add:".png" %}
+                        imageUrl: '{% static path %}',
+                        imageHeight: 88,
+                        imageWidth: 88,
+                    {% endwith %}
+                })
+            {% endwith %}
+        {% else %}
+            tata.{{ message.tags }}('{{ message.tags|translate_message_tag }}', '{{ message }}', {
+                position: 'bl',
+                duration: 3800,
+                progress: true,
+                closeBtn: true,
+                animate: 'slide',
+            });
+        {% endif %}
+    {% endfor %}
+
+    if (conquistas.length > 0) {
+        Swal.queue(conquistas)
+    }
+</script>
