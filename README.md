@@ -1,12 +1,11 @@
 <p align="center">
   <img alt="Tela inicial do projeto" src="progame/static/progame/img/logo.png" width="250px"/>
 </p>
-<br>
 
 <p align="center">
   Ambiente Virtual de Aprendizagem Gamificado para disciplinas de programação
   <br>
-  <span>Obs.: Este é um repositório de demonstração do projeto.</span>
+  <span>(Repositório de demonstração do projeto)</span>
 </p>
 <br>
 
@@ -43,4 +42,5 @@ Abaixo uma pequena demonstração de uso da plataforma por um usuário do tipo A
 
 ## :speech_balloon: Mais informações
 
-Para saber mais sobre o projeto, entre em contato com os desenvolvedores.
+- Este é um repositório de demonstração do projeto. O repositório principal é privado.
+- Para saber mais sobre o projeto, entre em contato com os desenvolvedores.
